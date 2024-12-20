@@ -1,6 +1,6 @@
 ############################################################################
 #
-#   Copyright (c) 2025 PX4 Development Team. All rights reserved.
+#   Copyright (c) 2024 PX4 Development Team. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -31,18 +31,9 @@
 #
 ############################################################################
 
-add_subdirectory(AckermannRateControl)
-
-px4_add_module(
-	MODULE modules__rover_ackermann
-	MAIN rover_ackermann
-	SRCS
-		RoverAckermann.cpp
-		RoverAckermann.hpp
-	DEPENDS
-		AckermannRateControl
-		px4_work_queue
-		rover_control
-	MODULE_CONFIG
-		module.yaml
+px4_add_library(rover_control
+	RoverControl.cpp
+	RoverControl.hpp
 )
+
+set_property(GLOBAL APPEND PROPERTY PX4_MODULE_CONFIG_FILES ${CMAKE_CURRENT_SOURCE_DIR}/module.yaml)

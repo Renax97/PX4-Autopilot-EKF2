@@ -1,6 +1,6 @@
 /****************************************************************************
  *
- *   Copyright (c) 2025 PX4 Development Team. All rights reserved.
+ *   Copyright (c) 2024 PX4 Development Team. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -33,7 +33,7 @@
 
 #pragma once
 
-// PX4 includes TODO: Check which ones are actually necessary
+// PX4 includes
 #include <px4_platform_common/px4_config.h>
 #include <px4_platform_common/defines.h>
 #include <px4_platform_common/module.h>
@@ -42,19 +42,32 @@
 #include <lib/pure_pursuit/PurePursuit.hpp>
 
 // uORB includes
-#include <uORB/Subscription.hpp>
 #include <uORB/Publication.hpp>
-#include <uORB/PublicationMulti.hpp>
-#include <uORB/topics/parameter_update.h>
-#include <uORB/topics/actuator_motors.h>
-#include <uORB/topics/actuator_servos.h>
-#include <uORB/topics/rover_steering_setpoint.h>
-#include <uORB/topics/rover_throttle_setpoint.h>
-#include <uORB/topics/vehicle_control_mode.h>
+#include <uORB/Subscription.hpp>
 #include <uORB/topics/manual_control_setpoint.h>
+#include <uORB/topics/parameter_update.h>
+#include <uORB/topics/vehicle_status.h>
+#include <uORB/topics/rover_ackermann_setpoint.h>
+#include <uORB/topics/vehicle_local_position.h>
+#include <uORB/topics/vehicle_attitude.h>
+
+
+// Standard library includes
+#include <math.h>
+#include <matrix/matrix/math.hpp>
+#include <lib/mathlib/math/filter/AlphaFilter.hpp>
 
 // Local includes
-#include "AckermannRateControl/AckermannRateControl.hpp"
+#include "RoverAckermannGuidance/RoverAckermannGuidance.hpp"
+#include "RoverAckermannControl/RoverAckermannControl.hpp"
+
+using namespace time_literals;
+
+// Constants
+static constexpr float STICK_DEADZONE =
+	0.1f; // [0, 1] Percentage of stick input range that will be interpreted as zero around the stick centered value
+static constexpr float SPEED_THRESHOLD =
+	0.1f; // [m/s] The minimum threshold for the speed measurement not to be interpreted as zero
 
 class RoverAckermann : public ModuleBase<RoverAckermann>, public ModuleParams,
 	public px4::ScheduledWorkItem
@@ -77,39 +90,56 @@ public:
 
 	bool init();
 
+
+protected:
+	void updateParams() override;
+
 private:
 	void Run() override;
 
 	/**
-	 * @brief Generate steering setpoint from manual or offboard and publish it as steering setpoint.
+	 * @brief Update uORB subscriptions.
 	 */
-	void generateSteeringSetpoint();
-
-	/**
-	 * @brief Turn throttle and steering setpoint into motor and servo setpoints and publish
-	 * as ActuatorMotors and ActuatorServos.
-	 */
-	void generateActuatorSetpoint();
+	void updateSubscriptions();
 
 	// uORB subscriptions
-	uORB::Subscription _parameter_update_sub{ORB_ID(parameter_update)};
-	uORB::Subscription _rover_steering_setpoint_sub{ORB_ID(rover_steering_setpoint)};
-	uORB::Subscription _rover_throttle_setpoint_sub{ORB_ID(rover_throttle_setpoint)};
-	uORB::Subscription _vehicle_control_mode_sub{ORB_ID(vehicle_control_mode)};
 	uORB::Subscription _manual_control_setpoint_sub{ORB_ID(manual_control_setpoint)};
-	vehicle_control_mode_s _vehicle_control_mode{};
+	uORB::Subscription _parameter_update_sub{ORB_ID(parameter_update)};
+	uORB::Subscription _vehicle_status_sub{ORB_ID(vehicle_status)};
+	uORB::Subscription _vehicle_local_position_sub{ORB_ID(vehicle_local_position)};
+	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
 
 	// uORB publications
-	uORB::PublicationMulti<actuator_motors_s> _actuator_motors_pub{ORB_ID(actuator_motors)};
-	uORB::Publication<actuator_servos_s> _actuator_servos_pub{ORB_ID(actuator_servos)};
-	uORB::Publication<rover_throttle_setpoint_s> _rover_throttle_setpoint_pub{ORB_ID(rover_throttle_setpoint)};
-	uORB::Publication<rover_steering_setpoint_s> _rover_steering_setpoint_pub{ORB_ID(rover_steering_setpoint)};
+	uORB::Publication<rover_ackermann_setpoint_s> _rover_ackermann_setpoint_pub{ORB_ID(rover_ackermann_setpoint)};
 
 	// Class instances
-	AckermannRateControl _ackermann_rate_control{this};
+	RoverAckermannGuidance _ackermann_guidance{this};
+	RoverAckermannControl _ackermann_control{this};
+	PurePursuit _posctl_pure_pursuit{this}; // Pure pursuit library
+
+	// Variables
+	matrix::Quatf _vehicle_attitude_quaternion{};
+	int _nav_state{0};
+	float _vehicle_forward_speed{0.f};
+	float _vehicle_yaw{0.f};
+	bool _armed{false};
+	bool _course_control{false};
+	Vector2f _pos_ctl_course_direction{};
+	Vector2f _pos_ctl_start_position_ned{};
+	Vector2f _curr_pos_ned{};
+	float _vehicle_lateral_acceleration{0.f};
+	AlphaFilter<float> _ax_filter;
+	AlphaFilter<float> _ay_filter;
+	AlphaFilter<float> _az_filter;
 
 	// Parameters
 	DEFINE_PARAMETERS(
-		(ParamInt<px4::params::CA_R_REV>) _param_r_rev
+		(ParamFloat<px4::params::RA_WHEEL_BASE>) _param_ra_wheel_base,
+		(ParamFloat<px4::params::RA_MAX_STR_ANG>) _param_ra_max_steer_angle,
+		(ParamFloat<px4::params::RA_MAX_SPEED>) _param_ra_max_speed,
+		(ParamFloat<px4::params::RA_MAX_LAT_ACCEL>) _param_ra_max_lat_accel,
+		(ParamFloat<px4::params::PP_LOOKAHD_MAX>) _param_pp_lookahd_max
+
 	)
+
 };

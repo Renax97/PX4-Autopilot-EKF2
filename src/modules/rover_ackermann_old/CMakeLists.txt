@@ -1,6 +1,6 @@
 ############################################################################
 #
-#   Copyright (c) 2025 PX4 Development Team. All rights reserved.
+#   Copyright (c) 2024 PX4 Development Team. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -31,7 +31,8 @@
 #
 ############################################################################
 
-add_subdirectory(AckermannRateControl)
+add_subdirectory(RoverAckermannGuidance)
+add_subdirectory(RoverAckermannControl)
 
 px4_add_module(
 	MODULE modules__rover_ackermann
@@ -40,9 +41,11 @@ px4_add_module(
 		RoverAckermann.cpp
 		RoverAckermann.hpp
 	DEPENDS
-		AckermannRateControl
+		RoverAckermannGuidance
+		RoverAckermannControl
 		px4_work_queue
-		rover_control
+		SlewRate
+		pure_pursuit
 	MODULE_CONFIG
 		module.yaml
 )

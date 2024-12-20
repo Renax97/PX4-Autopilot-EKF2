@@ -1,0 +1,200 @@
+module_name: Rover Control
+
+parameters:
+    - group: Rover Control
+      definitions:
+        RO_MAX_THR_SPEED:
+          description:
+            short: Speed the rover drives at maximum throttle
+            long: |
+              This parameter is used to calculate the feedforward term of the closed loop speed control which linearly
+              maps desired speeds to normalized motor commands [-1. 1].
+              A good starting point is the observed ground speed when the rover drives at maximum throttle in manual mode.
+              Increase this parameter if the rover is faster than the setpoint, and decrease if the rover is slower.
+          type: float
+          unit: m/s
+          min: -1
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: -1
+
+        RO_MAX_ACCEL:
+          description:
+            short: Maximum acceleration for the rover
+            long: |
+              This is used for the acceleration slew rate.
+          type: float
+          unit: m/s^2
+          min: -1
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: -1
+
+        RO_MAX_DECEL:
+          description:
+            short: Maximum deceleration for the rover
+            long: |
+              This is used for the deceleration slew rate, the feed-forward term
+              for the speed controller during missions and the corner slow down effect.
+              Note: For the corner slow down effect RA_MAX_JERK also has to be set.
+          type: float
+          unit: m/s^2
+          min: -1
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: -1
+
+        RO_MAX_JERK:
+          description:
+            short: Maximum jerk
+            long: |
+              Limit for forwards acc/deceleration change.
+              This is used for the corner slow down effect.
+              Note: RA_MAX_DECEL also has to be set for this to be enabled.
+          type: float
+          unit: m/s^3
+          min: -1
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: -1
+
+    - group: Rover Rate Control
+      definitions:
+        RO_YAW_RATE_P:
+          description:
+            short: Proportional gain for closed loop yaw rate controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 3
+          default: 1
+
+        RO_YAW_RATE_I:
+          description:
+            short: Integral gain for closed loop yaw rate controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 3
+          default: 0
+
+        RO_MAX_YAW_RATE:
+          description:
+            short: Maximum allowed yaw rate for the rover
+            long: |
+              This parameter is used to cap desired yaw rates and map controller inputs to desired yaw rates
+              in Acro,Stabilized and Position mode.
+          type: float
+          unit: deg/s
+          min: 0.01
+          max: 1000
+          increment: 0.01
+          decimal: 2
+          default: 90
+
+        RO_MAX_YAW_ACCEL:
+          description:
+            short: Maximum allowed yaw acceleration for the rover
+            long: |
+              This parameter is used to cap desired yaw acceleration. This is used to adjust incoming yaw rate setpoints
+              to a feasible yaw rate setpoint based on the physical limitation on how fast the yaw rate can change.
+              This leads to a smooth setpoint trajectory for the closed loop yaw rate controller to track.
+              Set to -1 to disable.
+          type: float
+          unit: deg/s^2
+          min: -1
+          max: 1000
+          increment: 0.01
+          decimal: 2
+          default: -1
+
+        RO_MAX_THR_YAW_R:
+          description:
+            short: Yaw rate turning left/right wheels at max speed in opposite directions
+            long: |
+              This parameter is used to calculate the feedforward term of the closed loop yaw rate control.
+              The controller first calculates the required speed difference between the left and right motor to achieve the desired yaw rate.
+              This desired speed difference is then linearly mapped to normalized motor commands.
+              A good starting point is twice the speed the rover drives at maximum throttle (RD_MAX_THR_SPD)).
+              Increase this parameter if the rover turns faster than the setpoint, and decrease if the rover turns slower.
+          type: float
+          unit: m/s
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: 2
+
+        RO_YAW_RATE_TH:
+          description:
+            short: The minimum threshold for the yaw rate measurement not to be interpreted as zero
+          type: float
+          unit: deg/s
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: 10
+
+    - group: Rover Attitude Control
+      definitions:
+        RO_YAW_P:
+          description:
+            short: Proportional gain for closed loop yaw controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 3
+          default: 1
+
+        RO_YAW_I:
+          description:
+              short: Integral gain for closed loop yaw controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 3
+          default: 0
+    - group: Rover Position Control
+      definitions:
+        RO_SPEED_P:
+          description:
+            short: Proportional gain for ground speed controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: 1
+
+        RO_SPEED_I:
+          description:
+            short: Integral gain for ground speed controller
+          type: float
+          min: 0
+          max: 100
+          increment: 0.001
+          decimal: 3
+          default: 1
+
+        RO_MAX_SPEED:
+          description:
+            short: Maximum allowed speed
+            long: |
+              This is the maximum allowed speed setpoint when driving in a mode that uses
+              closed loop speed control.
+          type: float
+          unit: m/s
+          min: -1
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: -1

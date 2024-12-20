@@ -171,6 +171,10 @@ set(msg_files
 	RateCtrlStatus.msg
 	RcChannels.msg
 	RcParameterMap.msg
+	RoverRateSetpoint.msg
+	RoverRateStatus.msg
+	RoverSteeringSetpoint.msg
+	RoverThrottleSetpoint.msg
 	RoverAckermannGuidanceStatus.msg
 	RoverAckermannSetpoint.msg
 	RoverAckermannStatus.msg
