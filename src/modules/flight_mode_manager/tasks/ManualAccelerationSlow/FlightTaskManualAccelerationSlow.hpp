@@ -42,6 +42,7 @@
 
 #include "FlightTaskManualAcceleration.hpp"
 #include "StickAccelerationXY.hpp"
+#include "Gimbal.hpp"
 
 #include <lib/weather_vane/WeatherVane.hpp>
 #include <uORB/Subscription.hpp>
@@ -65,7 +66,18 @@ private:
 	 */
 	float getInputFromSanitizedAuxParameterIndex(int parameter_value);
 
+	/**
+	 * Input shaping of yaw stick input for gimbal setpoint
+	 * @param stick_yaw raw calibrated yaw stick value [-1, 1]
+	 * @param maximum_yawrate yaw rate [rad/s] with maximum stick deflection
+	 * @return gimbal yaw rate setpoint [rad/s] positive clockwise
+	 */
+	float shapeYawStickToGimbalRate(float stick_yaw, float maximum_yawrate);
+
 	bool _velocity_limits_received_before{false};
+
+	// Gimbal control
+	Gimbal _gimbal{this};
 
 	uORB::Subscription _velocity_limits_sub{ORB_ID(velocity_limits)};
 	velocity_limits_s _velocity_limits{};
@@ -83,6 +95,7 @@ private:
 					(ParamFloat<px4::params::MPC_VEL_MANUAL>) _param_mpc_vel_manual,
 					(ParamFloat<px4::params::MPC_Z_VEL_MAX_UP>) _param_mpc_z_vel_max_up,
 					(ParamFloat<px4::params::MPC_Z_VEL_MAX_DN>) _param_mpc_z_vel_max_dn,
-					(ParamFloat<px4::params::MPC_MAN_Y_MAX>) _param_mpc_man_y_max
+					(ParamFloat<px4::params::MPC_MAN_Y_MAX>) _param_mpc_man_y_max,
+					(ParamInt<px4::params::MC_SLOW_MAP_PTCH>) _param_mc_slow_map_pitch
 				       )
 };
