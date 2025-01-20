@@ -74,7 +74,7 @@ public:
 private:
 	void Run() override;
 
-	void AirTemperatureUpdate();
+	void AirTemperatureUpdate(float &temperature);
 	void CheckFailover(const hrt_abstime &time_now_us);
 	bool ParametersUpdate(bool force = false);
 	void UpdateStatus();
@@ -120,8 +120,6 @@ private:
 	uint8_t _priority[MAX_SENSOR_COUNT] {};
 
 	int8_t _selected_sensor_sub_index{-1};
-
-	float _air_temperature_celsius{20.f}; // initialize with typical 20degC ambient temperature
 
 	DEFINE_PARAMETERS(
 		(ParamFloat<px4::params::SENS_BARO_QNH>) _param_sens_baro_qnh,
