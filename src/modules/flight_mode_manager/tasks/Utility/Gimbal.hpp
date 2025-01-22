@@ -57,8 +57,8 @@ public:
 
 	bool checkForTelemetry(const hrt_abstime now);
 	void publishGimbalManagerSetAttitude(const uint16_t gimbal_flags,
-					     const matrix::Quatf q_gimbal_setpoint,
-					     const matrix::Vector3f gimbal_rates);
+					     const matrix::Quatf &q_gimbal_setpoint,
+					     const matrix::Vector3f &gimbal_rates);
 	void acquireGimbalControlIfNeeded();
 	void releaseGimbalControlIfNeeded();
 	float getTelemetryYaw() { return _telemetry_yaw; }

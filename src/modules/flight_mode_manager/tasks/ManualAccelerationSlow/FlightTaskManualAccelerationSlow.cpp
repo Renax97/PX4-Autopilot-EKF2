@@ -135,7 +135,7 @@ bool FlightTaskManualAccelerationSlow::update()
 	if (_gimbal.checkForTelemetry(_time_stamp_current)) {
 		_gimbal.acquireGimbalControlIfNeeded();
 
-		float pitchrate_gimbal = getInputFromSanitizedAuxParameterIndex(_param_mc_slow_map_pitch.get()) * yaw_rate;
+		const float pitchrate_gimbal = getInputFromSanitizedAuxParameterIndex(_param_mc_slow_map_pitch.get()) * yaw_rate;
 		_yawspeed_setpoint = shapeYawStickToGimbalRate(_sticks.getYaw(), yaw_rate);
 
 		_gimbal.publishGimbalManagerSetAttitude(Gimbal::FLAGS_ALL_AXES_LOCKED, Quatf(NAN, NAN, NAN, NAN),

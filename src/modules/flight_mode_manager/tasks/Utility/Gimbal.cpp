@@ -110,8 +110,8 @@ void Gimbal::releaseGimbalControlIfNeeded()
 }
 
 void Gimbal::publishGimbalManagerSetAttitude(const uint16_t gimbal_flags,
-		const matrix::Quatf q_gimbal_setpoint,
-		const matrix::Vector3f gimbal_rates)
+		const matrix::Quatf &q_gimbal_setpoint,
+		const matrix::Vector3f &gimbal_rates)
 {
 	gimbal_manager_set_attitude_s gimbal_setpoint{};
 	gimbal_setpoint.origin_sysid = _param_mav_sys_id.get();
