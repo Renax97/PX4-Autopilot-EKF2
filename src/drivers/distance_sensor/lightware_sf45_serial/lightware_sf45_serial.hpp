@@ -140,6 +140,7 @@ private:
 	uint8_t				_parsed_state{0};
 	bool				_sop_valid{false};
 	uint16_t			_calc_crc{0};
+	uint16_t			_sf45_fov{0};
 	int32_t				_yaw_cfg{0};
 	int32_t				_orient_cfg{0};
 	uint8_t				_previous_bin{0};
