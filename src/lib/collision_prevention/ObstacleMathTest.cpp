@@ -89,5 +89,72 @@ TEST(ObstacleMathTest, ProjectDistanceOnHorizontalPlane)
 	expected_distance  = 1.0f * expected_scale;
 
 	EXPECT_NEAR(distance, expected_distance, 1e-5);
+}
 
+TEST(ObstacleMathTest, GetBinAtAngle)
+{
+	uint16_t start_bin = 0;
+	float bin_width = 5.0f;
+
+	// GIVEN: a start bin, bin width, and angle
+	float angle = 0.0f;
+
+	// WHEN: we calculate the bin index at the angle
+	uint16_t bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+
+	// THEN: the bin index should be correct
+	EXPECT_EQ(bin_index, 0);
+
+	// GIVEN: a start bin, bin width, and angle
+	angle = 90.0f;
+
+	// WHEN: we calculate the bin index at the angle
+	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+
+	// THEN: the bin index should be correct
+	EXPECT_EQ(bin_index, 18);
+
+	// GIVEN: a start bin, bin width, and angle
+	angle = -90.0f;
+
+	// WHEN: we calculate the bin index at the angle
+	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+
+	// THEN: the bin index should be correct
+	EXPECT_EQ(bin_index, 54);
+
+	// GIVEN: a start bin, bin width, and angle
+	angle = 450.0f;
+
+	// WHEN: we calculate the bin index at the angle
+	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+
+	// THEN: the bin index should be correct
+	EXPECT_EQ(bin_index, 18);
+}
+
+
+TEST(ObstacleMathTest, OffsetBinIndex)
+{
+	// GIVEN: a bin index, bin width, and angle offset
+	uint16_t bin = 0;
+	float bin_width = 5.0f;
+	float angle_offset = -120.0f;
+
+	// WHEN: we offset the bin index
+	uint16_t new_bin_index = ObstacleMath::get_offset_bin_index(bin, bin_width, angle_offset);
+
+	// THEN: the new bin index should be correct
+	EXPECT_EQ(new_bin_index, 24);
+
+	// GIVEN: a bin index, bin width, and angle offset
+	bin = 24;
+	bin_width = 5.0f;
+	angle_offset = 120.0f;
+
+	// WHEN: we offset the bin index
+	new_bin_index = ObstacleMath::get_offset_bin_index(bin, bin_width, angle_offset);
+
+	// THEN: the new bin index should be correct
+	EXPECT_EQ(new_bin_index, 0);
 }
