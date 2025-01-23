@@ -132,16 +132,18 @@ bool FlightTaskManualAccelerationSlow::update()
 	bool ret = FlightTaskManualAcceleration::update();
 
 	// Optimize input-to-video latency gimbal control
-	if (_gimbal.checkForTelemetry(_time_stamp_current)) {
+	if (_gimbal.checkForTelemetry(_time_stamp_current) && haveTakenOff()) {
 		_gimbal.acquireGimbalControlIfNeeded();
 
-		const float pitchrate_gimbal = getInputFromSanitizedAuxParameterIndex(_param_mc_slow_map_pitch.get()) * yaw_rate;
-		_yawspeed_setpoint = shapeYawStickToGimbalRate(_sticks.getYaw(), yaw_rate);
+		// the exact same _yawspeed_setpoint is setpoint for the gimbal and vehicle feed-forward
+		const float pitchrate_gimbal = shapeUnitlessStickToGimbalRate(_gimbal.getPitch(_time_stamp_current), yaw_rate);
+		_yawspeed_setpoint = shapeUnitlessStickToGimbalRate(_sticks.getYaw(), yaw_rate);
 
 		_gimbal.publishGimbalManagerSetAttitude(Gimbal::FLAGS_ALL_AXES_LOCKED, Quatf(NAN, NAN, NAN, NAN),
 							Vector3f(NAN, pitchrate_gimbal, _yawspeed_setpoint));
 
 		if (_gimbal.allAxesLockedConfirmed()) {
+			// but the vehicle makes sure it stays alligned with the gimbal absolute yaw
 			_yaw_setpoint = _gimbal.getTelemetryYaw();
 		}
 
@@ -158,7 +160,15 @@ float FlightTaskManualAccelerationSlow::getInputFromSanitizedAuxParameterIndex(i
 	return _sticks.getAux()(sanitized_index);
 }
 
-float FlightTaskManualAccelerationSlow::shapeYawStickToGimbalRate(float stick_yaw, float maximum_yawrate)
+float FlightTaskManualAccelerationSlow::shapeUnitlessStickToGimbalRate(float stick_input, float maximum_rate)
 {
-	return stick_yaw * maximum_yawrate;
+	return stick_input * maximum_rate;
+}
+
+bool FlightTaskManualAccelerationSlow::haveTakenOff()
+{
+	takeoff_status_s takeoff_status{};
+	_takeoff_status_sub.copy(&takeoff_status);
+
+	return takeoff_status.takeoff_state == takeoff_status_s::TAKEOFF_STATE_FLIGHT;
 }

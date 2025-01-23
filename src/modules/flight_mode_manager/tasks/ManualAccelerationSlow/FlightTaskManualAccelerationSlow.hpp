@@ -67,12 +67,12 @@ private:
 	float getInputFromSanitizedAuxParameterIndex(int parameter_value);
 
 	/**
-	 * Input shaping of yaw stick input for gimbal setpoint
-	 * @param stick_yaw raw calibrated yaw stick value [-1, 1]
-	 * @param maximum_yawrate yaw rate [rad/s] with maximum stick deflection
-	 * @return gimbal yaw rate setpoint [rad/s] positive clockwise
+	 * Input shaping of unitless stick input for gimbal setpoint
+	 * @param stick_input raw calibrated stick value [-1, 1]
+	 * @param maximum_rate rate [rad/s] with maximum stick deflection
+	 * @return gimbal rate setpoint [rad/s] positive clockwise
 	 */
-	float shapeYawStickToGimbalRate(float stick_yaw, float maximum_yawrate);
+	float shapeUnitlessStickToGimbalRate(float stick_input, float maximum_rate);
 
 	bool _velocity_limits_received_before{false};
 
@@ -81,6 +81,9 @@ private:
 
 	uORB::Subscription _velocity_limits_sub{ORB_ID(velocity_limits)};
 	velocity_limits_s _velocity_limits{};
+
+	uORB::Subscription _takeoff_status_sub{ORB_ID(takeoff_status)};
+	bool haveTakenOff();
 
 	DEFINE_PARAMETERS_CUSTOM_PARENT(FlightTaskManualAcceleration,
 					(ParamInt<px4::params::MC_SLOW_MAP_HVEL>) _param_mc_slow_map_hvel,
@@ -95,7 +98,6 @@ private:
 					(ParamFloat<px4::params::MPC_VEL_MANUAL>) _param_mpc_vel_manual,
 					(ParamFloat<px4::params::MPC_Z_VEL_MAX_UP>) _param_mpc_z_vel_max_up,
 					(ParamFloat<px4::params::MPC_Z_VEL_MAX_DN>) _param_mpc_z_vel_max_dn,
-					(ParamFloat<px4::params::MPC_MAN_Y_MAX>) _param_mpc_man_y_max,
-					(ParamInt<px4::params::MC_SLOW_MAP_PTCH>) _param_mc_slow_map_pitch
+					(ParamFloat<px4::params::MPC_MAN_Y_MAX>) _param_mpc_man_y_max
 				       )
 };

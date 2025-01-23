@@ -45,9 +45,11 @@
 #include <uORB/Subscription.hpp>
 #include <uORB/topics/gimbal_manager_set_attitude.h>
 #include <uORB/topics/gimbal_device_attitude_status.h>
+#include <uORB/topics/gimbal_manager_set_manual_control.h>
 #include <uORB/topics/vehicle_command.h>
 
 #include "Sticks.hpp"
+
 
 class Gimbal : public ModuleParams
 {
@@ -64,6 +66,15 @@ public:
 	float getTelemetryYaw() { return _telemetry_yaw; }
 	bool allAxesLockedConfirmed() { return _telemetry_flags == FLAGS_ALL_AXES_LOCKED; }
 
+	/**
+	 * Workaround to mix commands from the gcs which should be
+	 * ignored in gimbal manager
+	 * @param now: current time stamp in loop [ms]
+	 * @return raw calibrated stick value [-1, 1] if
+	 * last sample was within expected time, otherwise NAN.
+	 */
+	float getPitch(const hrt_abstime now);
+
 	static constexpr uint16_t FLAGS_ALL_AXES_LOCKED = gimbal_manager_set_attitude_s::GIMBAL_MANAGER_FLAGS_ROLL_LOCK
 			| gimbal_manager_set_attitude_s::GIMBAL_MANAGER_FLAGS_PITCH_LOCK
 			| gimbal_manager_set_attitude_s::GIMBAL_MANAGER_FLAGS_YAW_LOCK;
@@ -75,11 +86,14 @@ private:
 	bool _have_gimbal_control{false};
 
 	uORB::Subscription _gimbal_device_attitude_status_sub{ORB_ID(gimbal_device_attitude_status)};
-	uint16_t _telemetry_flags{};
 	hrt_abstime _telemtry_timestamp{};
+	uint16_t _telemetry_flags{};
 	float _telemetry_yaw{};
 
-	// Publications
+	uORB::Subscription _gimbal_manager_set_manual_control_sub{ORB_ID(gimbal_manager_set_manual_control)};
+	hrt_abstime _set_manual_control_timestamp{};
+	float _set_manual_control_pitchrate{};
+
 	uORB::Publication<gimbal_manager_set_attitude_s> _gimbal_manager_set_attitude_pub{ORB_ID(gimbal_manager_set_attitude)};
 	uORB::Publication<vehicle_command_s> _vehicle_command_pub{ORB_ID(vehicle_command)};
 

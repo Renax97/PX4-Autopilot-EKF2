@@ -124,3 +124,23 @@ void Gimbal::publishGimbalManagerSetAttitude(const uint16_t gimbal_flags,
 	gimbal_setpoint.timestamp = hrt_absolute_time();
 	_gimbal_manager_set_attitude_pub.publish(gimbal_setpoint);
 }
+
+float Gimbal::getPitch(const hrt_abstime now)
+{
+	if (_gimbal_manager_set_manual_control_sub.updated()) {
+		gimbal_manager_set_manual_control_s gimbal_manager_set_manual_control{};
+
+		if (_gimbal_manager_set_manual_control_sub.copy(&gimbal_manager_set_manual_control)
+		    && gimbal_manager_set_manual_control.origin_compid != _param_mav_comp_id.get()
+		    && gimbal_manager_set_manual_control.origin_sysid != _param_mav_sys_id.get()) {
+			_set_manual_control_timestamp = gimbal_manager_set_manual_control.timestamp;
+			_set_manual_control_pitchrate = gimbal_manager_set_manual_control.pitch_rate;
+		}
+	}
+
+	if (now > _set_manual_control_timestamp + 2_s) {
+		_set_manual_control_pitchrate = 0.f;
+	}
+
+	return _set_manual_control_pitchrate;
+}
