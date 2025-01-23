@@ -94,6 +94,10 @@ int SF45LaserSerial::init()
 	param_get(param_find("SF45_ORIENT_CFG"), &_orient_cfg);
 	param_get(param_find("SF45_YAW_CFG"), &_yaw_cfg);
 
+	// set the sensor orientation
+	float yaw_cfg_angle = ObstacleMath::sensor_orientation_to_yaw_offset(static_cast<ObstacleMath::SensorOrientation>(_yaw_cfg));
+	_obstacle_distance.angle_offset = math::degrees(matrix::wrap_2pi(yaw_cfg_angle));
+
 	start();
 	return PX4_OK;
 }
@@ -599,43 +603,16 @@ void SF45LaserSerial::sf45_process_replies()
 			int16_t scaled_yaw = 0;
 
 			// The sensor scans from 0 to -160, so extract negative angle from int16 and represent as if a float
-			if (raw_yaw > 32000) {
-				raw_yaw = raw_yaw - 65535;
-			}
+			raw_yaw = raw_yaw > 32000 ? raw_yaw - 65535 : raw_yaw;
 
 			// The sensor is facing downward, so the sensor is flipped about it's x-axis -inverse of each yaw angle
-			if (_orient_cfg == ROTATION_DOWNWARD_FACING) {
-				raw_yaw = raw_yaw * -1;
-			}
+			raw_yaw = _orient_cfg == ROTATION_RIGHT_FACING ? raw_yaw * -1 : raw_yaw;
 
 			// SF45/B product guide {Data output bit: 8 Description: "Yaw angle [1/100 deg] size: int16}"
 			scaled_yaw = raw_yaw * SF45_SCALE_FACTOR;
 
-			switch (_yaw_cfg) {
-			case ROTATION_FORWARD_FACING:
-				break;
-
-			case ROTATION_BACKWARD_FACING:
-				if (scaled_yaw > 180) {
-					scaled_yaw = scaled_yaw - 180;
-
-				} else {
-					scaled_yaw = scaled_yaw + 180; // rotation facing aft
-				}
-
-				break;
-
-			case ROTATION_RIGHT_FACING:
-				scaled_yaw = scaled_yaw + 90; // rotation facing right
-				break;
-
-			case ROTATION_LEFT_FACING:
-				scaled_yaw = scaled_yaw - 90; // rotation facing left
-				break;
-
-			default:
-				break;
-			}
+			// Adjust for sensor orientation
+			scaled_yaw = sf45_wrap_360(scaled_yaw + _obstacle_distance.angle_offset);
 
 			// Convert to meters for the debug message
 			float distance_m = raw_distance * SF45_SCALE_FACTOR;
