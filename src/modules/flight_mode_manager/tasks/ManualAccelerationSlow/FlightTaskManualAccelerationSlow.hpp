@@ -67,12 +67,13 @@ private:
 	float getInputFromSanitizedAuxParameterIndex(int parameter_value);
 
 	/**
-	 * Input shaping of unitless stick input for gimbal setpoint
+	 * Input shaping of unit length raw stick input for gimbal setpoint
 	 * @param stick_input raw calibrated stick value [-1, 1]
 	 * @param maximum_rate rate [rad/s] with maximum stick deflection
 	 * @return gimbal rate setpoint [rad/s] positive clockwise
 	 */
-	float shapeUnitlessStickToGimbalRate(float stick_input, float maximum_rate);
+	float shapePitchStickToGimbalRate(float stick_input, float maximum_rate);
+	float shapeYawStickToGimbalRate(float stick_input, float maximum_rate);
 
 	bool _velocity_limits_received_before{false};
 

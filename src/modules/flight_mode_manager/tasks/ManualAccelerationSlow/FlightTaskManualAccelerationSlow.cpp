@@ -47,6 +47,7 @@ bool FlightTaskManualAccelerationSlow::update()
 	bool velocity_horizontal_limited = false;
 	bool velocity_vertical_limited = false;
 	bool yaw_rate_limited = false;
+	bool gimbal_pitch_rate_limited = false;
 
 	// Limits which can only slow down from the nominal configuration we initialize with here
 	// This is ensured by the executing classes
@@ -54,6 +55,7 @@ bool FlightTaskManualAccelerationSlow::update()
 	float velocity_up = _param_mpc_z_vel_max_up.get();
 	float velocity_down = _param_mpc_z_vel_max_dn.get();
 	float yaw_rate = math::radians(_param_mpc_man_y_max.get());
+	float gimbal_pitch_rate = yaw_rate;
 
 	// MAVLink commanded limits
 	if (_velocity_limits_sub.update(&_velocity_limits)) {
@@ -75,6 +77,8 @@ bool FlightTaskManualAccelerationSlow::update()
 		if (PX4_ISFINITE(_velocity_limits.yaw_rate)) {
 			yaw_rate = fmaxf(_velocity_limits.yaw_rate, math::radians(_param_mc_slow_min_yawr.get()));
 			yaw_rate_limited = true;
+			gimbal_pitch_rate = yaw_rate;
+			gimbal_pitch_rate_limited = true;
 		}
 	}
 
@@ -123,6 +127,10 @@ bool FlightTaskManualAccelerationSlow::update()
 		yaw_rate = math::radians(_param_mc_slow_def_yawr.get());
 	}
 
+	if (!gimbal_pitch_rate_limited) {
+		gimbal_pitch_rate = math::radians(_param_mc_slow_def_yawr.get());
+	}
+
 	// Interface to set resulting velocity limits
 	FlightTaskManualAcceleration::_stick_acceleration_xy.setVelocityConstraint(velocity_horizontal);
 	FlightTaskManualAltitude::_velocity_constraint_up = velocity_up;
@@ -136,11 +144,11 @@ bool FlightTaskManualAccelerationSlow::update()
 		_gimbal.acquireGimbalControlIfNeeded();
 
 		// the exact same _yawspeed_setpoint is setpoint for the gimbal and vehicle feed-forward
-		const float pitchrate_gimbal = shapeUnitlessStickToGimbalRate(_gimbal.getPitch(_time_stamp_current), yaw_rate);
-		_yawspeed_setpoint = shapeUnitlessStickToGimbalRate(_sticks.getYaw(), yaw_rate);
+		const float pitchrate_setpoint = shapePitchStickToGimbalRate(_gimbal.getPitch(_time_stamp_current), gimbal_pitch_rate);
+		_yawspeed_setpoint = shapeYawStickToGimbalRate(_sticks.getYaw(), yaw_rate);
 
 		_gimbal.publishGimbalManagerSetAttitude(Gimbal::FLAGS_ALL_AXES_LOCKED, Quatf(NAN, NAN, NAN, NAN),
-							Vector3f(NAN, pitchrate_gimbal, _yawspeed_setpoint));
+							Vector3f(NAN, pitchrate_setpoint, _yawspeed_setpoint));
 
 		if (_gimbal.allAxesLockedConfirmed()) {
 			// but the vehicle makes sure it stays alligned with the gimbal absolute yaw
@@ -160,7 +168,12 @@ float FlightTaskManualAccelerationSlow::getInputFromSanitizedAuxParameterIndex(i
 	return _sticks.getAux()(sanitized_index);
 }
 
-float FlightTaskManualAccelerationSlow::shapeUnitlessStickToGimbalRate(float stick_input, float maximum_rate)
+float FlightTaskManualAccelerationSlow::shapePitchStickToGimbalRate(float stick_input, float maximum_rate)
+{
+	return stick_input * maximum_rate;
+}
+
+float FlightTaskManualAccelerationSlow::shapeYawStickToGimbalRate(float stick_input, float maximum_rate)
 {
 	return stick_input * maximum_rate;
 }
