@@ -101,7 +101,7 @@ TEST(ObstacleMathTest, GetBinAtAngle)
 	float angle = 0.0f;
 
 	// WHEN: we calculate the bin index at the angle
-	uint16_t bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+	uint16_t bin_index = ObstacleMath::get_bin_at_angle(bin_width, angle, start_bin);
 
 	// THEN: the bin index should be correct
 	EXPECT_EQ(bin_index, 0);
@@ -110,7 +110,7 @@ TEST(ObstacleMathTest, GetBinAtAngle)
 	angle = 90.0f;
 
 	// WHEN: we calculate the bin index at the angle
-	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+	bin_index = ObstacleMath::get_bin_at_angle(bin_width, angle, start_bin);
 
 	// THEN: the bin index should be correct
 	EXPECT_EQ(bin_index, 18);
@@ -119,7 +119,7 @@ TEST(ObstacleMathTest, GetBinAtAngle)
 	angle = -90.0f;
 
 	// WHEN: we calculate the bin index at the angle
-	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+	bin_index = ObstacleMath::get_bin_at_angle(bin_width, angle, start_bin);
 
 	// THEN: the bin index should be correct
 	EXPECT_EQ(bin_index, 54);
@@ -128,7 +128,7 @@ TEST(ObstacleMathTest, GetBinAtAngle)
 	angle = 450.0f;
 
 	// WHEN: we calculate the bin index at the angle
-	bin_index = ObstacleMath::get_bin_at_angle(start_bin, bin_width, angle);
+	bin_index = ObstacleMath::get_bin_at_angle(bin_width, angle, start_bin);
 
 	// THEN: the bin index should be correct
 	EXPECT_EQ(bin_index, 18);
@@ -160,6 +160,50 @@ TEST(ObstacleMathTest, OffsetBinIndex)
 	EXPECT_EQ(new_bin_index, 0);
 }
 
+
+TEST(ObstacleMathTest, WrapBin)
+{
+	// GIVEN: a bin index and the number of bins
+	int bin = 0;
+	int bin_count = 72;
+
+	// WHEN: we wrap the bin index
+	int wrapped_bin = ObstacleMath::wrap_bin(bin, bin_count);
+
+	// THEN: the wrapped bin index should be correct
+	EXPECT_EQ(wrapped_bin, 0);
+
+	// GIVEN: a bin index and the number of bins
+	bin = 72;
+	bin_count = 72;
+
+	// WHEN: we wrap the bin index
+	wrapped_bin = ObstacleMath::wrap_bin(bin, bin_count);
+
+	// THEN: the wrapped bin index should be correct
+	EXPECT_EQ(wrapped_bin, 0);
+
+	// GIVEN: a bin index and the number of bins
+	bin = 73;
+	bin_count = 72;
+
+	// WHEN: we wrap the bin index
+	wrapped_bin = ObstacleMath::wrap_bin(bin, bin_count);
+
+	// THEN: the wrapped bin index should be correct
+	EXPECT_EQ(wrapped_bin, 1);
+
+	// GIVEN: a bin index and the number of bins
+	bin = -1;
+	bin_count = 72;
+
+	// WHEN: we wrap the bin index
+	wrapped_bin = ObstacleMath::wrap_bin(bin, bin_count);
+
+	// THEN: the wrapped bin index should be correct
+	EXPECT_EQ(wrapped_bin, 71);
+}
+
 TEST(ObstacleMathTest, HandleMissedBins)
 {
 	// GIVEN: measurements, current bin, previous bin, bin width, and field of view offset
@@ -167,14 +211,15 @@ TEST(ObstacleMathTest, HandleMissedBins)
 	int   current_bin     = 2;
 	int   previous_bin    = 5;
 	int   bin_width       = 45.0f;
+	float angle_offset    = 0.0f;
 	float fov             = 270.0f;
 	float fov_offset      = 360.0f - fov / 2;
 
 	float measurement     = measurements[current_bin];
 
 	// WHEN: we handle missed bins
-	int current_bin_offset  = ObstacleMath::get_offset_bin_index(current_bin, bin_width, fov_offset);
-	int previous_bin_offset = ObstacleMath::get_offset_bin_index(previous_bin, bin_width, fov_offset);
+	int current_bin_offset  = ObstacleMath::get_offset_bin_index(current_bin,  bin_width, fov_offset + angle_offset);
+	int previous_bin_offset = ObstacleMath::get_offset_bin_index(previous_bin, bin_width, fov_offset + angle_offset);
 
 	int start = math::min(current_bin_offset, previous_bin_offset) + 1;
 	int end   = math::max(current_bin_offset, previous_bin_offset);
