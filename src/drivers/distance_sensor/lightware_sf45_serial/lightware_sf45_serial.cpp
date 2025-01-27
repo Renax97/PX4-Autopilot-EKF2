@@ -95,7 +95,8 @@ int SF45LaserSerial::init()
 	param_get(param_find("SF45_YAW_CFG"), &_yaw_cfg);
 
 	// set the sensor orientation
-	float yaw_cfg_angle = ObstacleMath::sensor_orientation_to_yaw_offset(static_cast<ObstacleMath::SensorOrientation>(_yaw_cfg));
+	float yaw_cfg_angle = ObstacleMath::sensor_orientation_to_yaw_offset(static_cast<ObstacleMath::SensorOrientation>
+			      (_yaw_cfg));
 	_obstacle_distance.angle_offset = math::degrees(matrix::wrap_2pi(yaw_cfg_angle));
 
 	start();
@@ -683,8 +684,10 @@ void SF45LaserSerial::_handle_missed_bins(uint8_t current_bin, uint8_t previous_
 
 	// Shift bin indices such that we can never have the wrap-around case.
 	float    fov_offset_angle    = 360.0f - _sf45_fov / 2;
-	uint16_t current_bin_offset  = ObstacleMath::get_offset_bin_index(current_bin,  _obstacle_distance.increment, fov_offset_angle);
-	uint16_t previous_bin_offset = ObstacleMath::get_offset_bin_index(previous_bin, _obstacle_distance.increment, fov_offset_angle);
+	uint16_t current_bin_offset  = ObstacleMath::get_offset_bin_index(current_bin,  _obstacle_distance.increment,
+				       fov_offset_angle);
+	uint16_t previous_bin_offset = ObstacleMath::get_offset_bin_index(previous_bin, _obstacle_distance.increment,
+				       fov_offset_angle);
 
 	uint16_t start = math::min(current_bin_offset, previous_bin_offset) + 1;
 	uint16_t end   = math::max(current_bin_offset, previous_bin_offset);
@@ -702,7 +705,7 @@ uint8_t SF45LaserSerial::sf45_convert_angle(const int16_t yaw)
 {
 	uint8_t mapped_sector = 0;
 	float adjusted_yaw = sf45_wrap_360(yaw - _obstacle_distance.angle_offset);
-	mapped_sector = round(adjusted_yaw / _obstacle_distance.increment);
+	mapped_sector = floor(adjusted_yaw / _obstacle_distance.increment);
 
 	return mapped_sector;
 }
