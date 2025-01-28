@@ -54,19 +54,16 @@ void project_distance_on_horizontal_plane(float &distance, const float yaw, cons
 int get_bin_at_angle(float bin_width, float angle, int start_bin)
 {
 	int bin_at_angle = start_bin + (int)round(matrix::wrap(angle, 0.f, 360.f) / bin_width);
-
 	return wrap_bin(bin_at_angle, 360 / bin_width);
 }
 
 int get_offset_bin_index(int bin, float bin_width, float angle_offset)
 {
 	int offset = get_bin_at_angle(bin_width, angle_offset);
-
-	return wrap_bin(bin - offset, 360 / bin_width);;
+	return wrap_bin(bin - offset, 360 / bin_width);
 }
 
 float sensor_orientation_to_yaw_offset(const SensorOrientation orientation)
-
 {
 	float offset = 0.0f;
 

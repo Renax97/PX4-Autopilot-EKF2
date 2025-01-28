@@ -68,7 +68,7 @@ void project_distance_on_horizontal_plane(float &distance, const float yaw, cons
 
 /**
  * Returns bin index at a given angle from a start bin
- * @param start_bin index from which bin is found
+ * @param start_bin bin index from which angle is measured
  * @param bin_width width of a bin in degrees
  * @param angle clockwise angle from start bin in degrees
  */

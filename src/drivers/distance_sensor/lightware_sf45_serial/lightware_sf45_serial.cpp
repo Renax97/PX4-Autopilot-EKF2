@@ -65,8 +65,6 @@ SF45LaserSerial::SF45LaserSerial(const char *port) :
 		device_id.devid_s.bus = bus_num;
 	}
 
-	_sf45_fov = 320.0f; // degrees
-
 	// populate obstacle map members
 	_obstacle_distance.frame = obstacle_distance_s::MAV_FRAME_BODY_FRD;
 	_obstacle_distance.sensor_type = obstacle_distance_s::MAV_DISTANCE_SENSOR_LASER;
@@ -604,10 +602,14 @@ void SF45LaserSerial::sf45_process_replies()
 			int16_t scaled_yaw = 0;
 
 			// The sensor scans from 0 to -160, so extract negative angle from int16 and represent as if a float
-			raw_yaw = raw_yaw > 32000 ? raw_yaw - 65535 : raw_yaw;
+			if (raw_yaw > 32000) {
+				raw_yaw = raw_yaw - 65535;
+			}
 
 			// The sensor is facing downward, so the sensor is flipped about it's x-axis -inverse of each yaw angle
-			raw_yaw = _orient_cfg == ROTATION_RIGHT_FACING ? raw_yaw * -1 : raw_yaw;
+			if (_orient_cfg == ROTATION_DOWNWARD_FACING) {
+				raw_yaw = raw_yaw * -1;
+			}
 
 			// SF45/B product guide {Data output bit: 8 Description: "Yaw angle [1/100 deg] size: int16}"
 			scaled_yaw = raw_yaw * SF45_SCALE_FACTOR;
@@ -683,7 +685,7 @@ void SF45LaserSerial::_handle_missed_bins(uint8_t current_bin, uint8_t previous_
 	// in this case we assume the measurement to be valid for all bins between the previous and the current bin.
 
 	// Shift bin indices such that we can never have the wrap-around case.
-	float    fov_offset_angle    = 360.0f - _sf45_fov / 2;
+	float    fov_offset_angle    = 360.0f - SF45_FIELDOF_VIEW / 2;
 	uint16_t current_bin_offset  = ObstacleMath::get_offset_bin_index(current_bin,  _obstacle_distance.increment,
 				       fov_offset_angle);
 	uint16_t previous_bin_offset = ObstacleMath::get_offset_bin_index(previous_bin, _obstacle_distance.increment,
