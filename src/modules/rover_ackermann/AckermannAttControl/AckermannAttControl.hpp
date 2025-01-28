@@ -37,7 +37,8 @@
 #include <px4_platform_common/module_params.h>
 #include <lib/rover_control/RoverControl.hpp>
 #include <lib/pid/PID.hpp>
-#include <lib/slew_rate/SlewRate.hpp>
+#include <lib/slew_rate/SlewRateYaw.hpp>
+#include <math.h>
 
 // uORB includes
 #include <uORB/Publication.hpp>
@@ -47,31 +48,28 @@
 #include <uORB/topics/vehicle_control_mode.h>
 #include <uORB/topics/manual_control_setpoint.h>
 #include <uORB/topics/trajectory_setpoint.h>
-#include <uORB/topics/vehicle_angular_velocity.h>
+#include <uORB/topics/vehicle_attitude.h>
 #include <uORB/topics/offboard_control_mode.h>
-#include <uORB/topics/rover_steering_setpoint.h>
-#include <uORB/topics/rover_rate_status.h>
-
-// Standard library includes
-#include <math.h>
+#include <uORB/topics/rover_attitude_status.h>
+#include <uORB/topics/rover_attitude_setpoint.h>
 
 /**
- * @brief Class for ackermann rate control.
+ * @brief Class for ackermann attitude control.
  */
-class AckermannRateControl : public ModuleParams
+class AckermannAttControl : public ModuleParams
 {
 public:
 	/**
-	 * @brief Constructor for AckermannRateControl.
+	 * @brief Constructor for AckermannAttControl.
 	 * @param parent The parent ModuleParams object.
 	 */
-	AckermannRateControl(ModuleParams *parent);
-	~AckermannRateControl() = default;
+	AckermannAttControl(ModuleParams *parent);
+	~AckermannAttControl() = default;
 
 	/**
-	 * @brief Update rate controller.
+	 * @brief Update attitude controller.
 	 */
-	void updateRateControl();
+	void updateAttControl();
 
 protected:
 	/**
@@ -80,44 +78,45 @@ protected:
 	void updateParams() override;
 
 private:
+	/**
+	 * @brief Generate attitude setpoint from manual or offboard and publish it as RoverAttitudeSetpoint.
+	 */
+	void generateAttitudeSetpoint();
 
 	/**
-	 * @brief Generate rate setpoint from manual or offboard and publish it as RoverRateSetpoint.
+	 * @brief Generate rate setpoint from attitude setpoint
 	 */
 	void generateRateSetpoint();
-
-	/**
-	 * @brief Turn rate setpoint into a normalized steering angle.
-	 */
-	void generateSteeringSetpoint();
 
 	// uORB subscriptions
 	uORB::Subscription _vehicle_control_mode_sub{ORB_ID(vehicle_control_mode)};
 	uORB::Subscription _manual_control_setpoint_sub{ORB_ID(manual_control_setpoint)};
-	uORB::Subscription _rover_rate_setpoint_sub{ORB_ID(rover_rate_setpoint)};
 	uORB::Subscription _trajectory_setpoint_sub{ORB_ID(trajectory_setpoint)};
 	uORB::Subscription _offboard_control_mode_sub{ORB_ID(offboard_control_mode)};
-	uORB::Subscription _vehicle_angular_velocity_sub{ORB_ID(vehicle_angular_velocity)};
+	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
 	uORB::Subscription _rover_throttle_setpoint_sub{ORB_ID(rover_throttle_setpoint)};
+	uORB::Subscription _rover_attitude_setpoint_sub{ORB_ID(rover_attitude_setpoint)};
 	vehicle_control_mode_s _vehicle_control_mode{};
 	offboard_control_mode_s _offboard_control_mode{};
 
 	// uORB publications
 	uORB::Publication<rover_rate_setpoint_s> _rover_rate_setpoint_pub{ORB_ID(rover_rate_setpoint)};
 	uORB::Publication<rover_throttle_setpoint_s> _rover_throttle_setpoint_pub{ORB_ID(rover_throttle_setpoint)};
-	uORB::Publication<rover_steering_setpoint_s> _rover_steering_setpoint_pub{ORB_ID(rover_steering_setpoint)};
-	uORB::Publication<rover_rate_status_s> _rover_rate_status_pub{ORB_ID(rover_rate_status)};
+	uORB::Publication<rover_attitude_setpoint_s> _rover_attitude_setpoint_pub{ORB_ID(rover_attitude_setpoint)};
+	uORB::Publication<rover_attitude_status_s> _rover_attitude_status_pub{ORB_ID(rover_attitude_status)};
 
 	// Variables
-	float _estimated_forward_speed{0.f};
-	float _max_yaw_rate{0.f};
-	float _vehicle_yaw_rate{0.f};
+	float _vehicle_yaw{0.f};
 	hrt_abstime _timestamp{0};
 	float _dt{0.f};
+	float _max_yaw_rate{0.f};
+	float _estimated_forward_speed{0.f};
+	bool _stab_yaw_ctl{false}; // Indicates if rover is doing yaw control in stab mode
+	float _stab_yaw_setpoint{0.f}; // Yaw setpoint if rover is doing yaw control in stab mode
 
 	// Controllers
-	PID _pid_yaw_rate;
-	SlewRate<float> _yaw_rate_with_accel_limit{0.f};
+	PID _pid_yaw;
+	SlewRateYaw<float> _yaw_with_yaw_rate_limit;
 
 	// Instance
 	RoverControl _rover_control{this};
@@ -128,9 +127,8 @@ private:
 		(ParamFloat<px4::params::RA_WHEEL_BASE>) _param_ra_wheel_base,
 		(ParamFloat<px4::params::RA_MAX_STR_ANG>) _param_ra_max_str_ang,
 		(ParamFloat<px4::params::RO_MAX_YAW_RATE>) _param_ro_max_yaw_rate,
-		(ParamFloat<px4::params::RO_YAW_RATE_TH>) _param_ro_yaw_rate_th,
-		(ParamFloat<px4::params::RO_YAW_RATE_P>) _param_ro_yaw_rate_p,
-		(ParamFloat<px4::params::RO_YAW_RATE_I>) _param_ro_yaw_rate_i,
-		(ParamFloat<px4::params::RO_MAX_YAW_ACCEL>) _param_ro_max_yaw_accel
+		(ParamFloat<px4::params::RO_YAW_P>) _param_ro_yaw_p,
+		(ParamFloat<px4::params::RO_YAW_I>) _param_ro_yaw_i,
+		(ParamFloat<px4::params::RO_YAW_STICK_DZ>) _param_ro_yaw_stick_dz
 	)
 };

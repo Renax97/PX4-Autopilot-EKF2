@@ -72,11 +72,6 @@ void AckermannRateControl::updateRateControl()
 	}
 
 	if (_vehicle_control_mode.flag_control_rates_enabled) {
-		if (!_rate_control_enabled) { // Initialize the slew rate when starting rate control
-			_yaw_rate_with_accel_limit.setForcedValue(_vehicle_yaw_rate);
-			_rate_control_enabled = true;
-		}
-
 		if (_vehicle_control_mode.flag_control_manual_enabled || _vehicle_control_mode.flag_control_offboard_enabled) {
 			generateRateSetpoint();
 		}
@@ -85,17 +80,16 @@ void AckermannRateControl::updateRateControl()
 			generateSteeringSetpoint();
 		}
 
-	} else { // Reset controller and slew rate when rate control not active
+	} else { // Reset controller and slew rate when rate control is not active
 		_pid_yaw_rate.resetIntegral();
 		_yaw_rate_with_accel_limit.setForcedValue(0.f);
-		_rate_control_enabled = false;
 	}
 
 	// Publish rate controller status (logging only)
 	rover_rate_status_s rover_rate_status;
 	rover_rate_status.timestamp = _timestamp;
 	rover_rate_status.measured_yaw_rate = _vehicle_yaw_rate;
-	rover_rate_status.adjusted_rate_setpoint = _yaw_rate_with_accel_limit.getState();
+	rover_rate_status.adjusted_yaw_rate_setpoint = _yaw_rate_with_accel_limit.getState();
 	rover_rate_status.pid_yaw_rate_integral = _pid_yaw_rate.getIntegral();
 	_rover_rate_status_pub.publish(rover_rate_status);
 
@@ -146,17 +140,6 @@ void AckermannRateControl::generateRateSetpoint()
 
 void AckermannRateControl::generateSteeringSetpoint()
 {
-	rover_rate_setpoint_s rover_rate_setpoint;
-	_rover_rate_setpoint_sub.update(&rover_rate_setpoint);
-
-	// Apply slew rate if configured
-	if (_param_ro_max_yaw_accel.get() > FLT_EPSILON) {
-		_yaw_rate_with_accel_limit.update(rover_rate_setpoint.yaw_rate_setpoint, _dt);
-
-	} else {
-		_yaw_rate_with_accel_limit.setForcedValue(rover_rate_setpoint.yaw_rate_setpoint);
-	}
-
 	// Estimate forward velocity based on throttle setpoint (Necessary for yaw rate -> Steering angle mapping)
 	if (_rover_throttle_setpoint_sub.updated()) {
 		rover_throttle_setpoint_s rover_throttle_setpoint;
@@ -164,6 +147,27 @@ void AckermannRateControl::generateSteeringSetpoint()
 		_estimated_forward_speed = _param_ro_max_thr_speed.get() > FLT_EPSILON ? math::interpolate<float>
 					   (rover_throttle_setpoint.throttle_body_x,
 					    -1.f, 1.f, -_param_ro_max_thr_speed.get(), _param_ro_max_thr_speed.get()) : 0.f;
+	}
+
+	// Set up feasible yaw rate setpoint
+	rover_rate_setpoint_s rover_rate_setpoint;
+	_rover_rate_setpoint_sub.update(&rover_rate_setpoint);
+	float max_possible_yaw_rate = _param_ra_wheel_base.get() > FLT_EPSILON ? fabsf(_estimated_forward_speed) * tanf(
+					      _param_ra_max_str_ang.get()) / _param_ra_wheel_base.get() :
+				      _max_yaw_rate; // Maximum possible yaw rate at current velocity
+	float yaw_rate_limit = math::min(max_possible_yaw_rate, _max_yaw_rate);
+	float constrained_yaw_rate = math::constrain(rover_rate_setpoint.yaw_rate_setpoint, -yaw_rate_limit, yaw_rate_limit);
+
+	if (_param_ro_max_yaw_accel.get() > FLT_EPSILON) { // Apply slew rate if configured
+		_yaw_rate_with_accel_limit.update(constrained_yaw_rate, _dt);
+
+		if (fabsf(_yaw_rate_with_accel_limit.getState() - _vehicle_yaw_rate) > fabsf(constrained_yaw_rate -
+				_vehicle_yaw_rate)) {
+			_yaw_rate_with_accel_limit.setForcedValue(_vehicle_yaw_rate);
+		}
+
+	} else {
+		_yaw_rate_with_accel_limit.setForcedValue(constrained_yaw_rate);
 	}
 
 	// Feed forward

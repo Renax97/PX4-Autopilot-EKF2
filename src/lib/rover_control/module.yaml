@@ -62,6 +62,27 @@ parameters:
           decimal: 2
           default: -1
 
+        RO_YAW_RATE_TH:
+          description:
+            short: The minimum threshold for the yaw rate measurement not to be interpreted as zero
+          type: float
+          unit: deg/s
+          min: 0
+          max: 100
+          increment: 0.01
+          decimal: 2
+          default: 10
+
+        RO_YAW_STICK_DZ:
+          description:
+            short: Percentage of stick input range that will be interpreted as zero around the stick centered value
+          type: float
+          min: 0
+          max: 1
+          increment: 0.01
+          decimal: 2
+          default: 0.1
+
     - group: Rover Rate Control
       definitions:
         RO_YAW_RATE_P:
@@ -114,34 +135,6 @@ parameters:
           decimal: 2
           default: -1
 
-        RO_MAX_THR_YAW_R:
-          description:
-            short: Yaw rate turning left/right wheels at max speed in opposite directions
-            long: |
-              This parameter is used to calculate the feedforward term of the closed loop yaw rate control.
-              The controller first calculates the required speed difference between the left and right motor to achieve the desired yaw rate.
-              This desired speed difference is then linearly mapped to normalized motor commands.
-              A good starting point is twice the speed the rover drives at maximum throttle (RD_MAX_THR_SPD)).
-              Increase this parameter if the rover turns faster than the setpoint, and decrease if the rover turns slower.
-          type: float
-          unit: m/s
-          min: 0
-          max: 100
-          increment: 0.01
-          decimal: 2
-          default: 2
-
-        RO_YAW_RATE_TH:
-          description:
-            short: The minimum threshold for the yaw rate measurement not to be interpreted as zero
-          type: float
-          unit: deg/s
-          min: 0
-          max: 100
-          increment: 0.01
-          decimal: 2
-          default: 10
-
     - group: Rover Attitude Control
       definitions:
         RO_YAW_P:
@@ -152,7 +145,7 @@ parameters:
           max: 100
           increment: 0.01
           decimal: 3
-          default: 1
+          default: 0
 
         RO_YAW_I:
           description:
@@ -163,6 +156,7 @@ parameters:
           increment: 0.01
           decimal: 3
           default: 0
+
     - group: Rover Position Control
       definitions:
         RO_SPEED_P:

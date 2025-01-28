@@ -33,6 +33,8 @@
 
 #include "RoverAckermann.hpp"
 
+using namespace time_literals;
+
 RoverAckermann::RoverAckermann() :
 	ModuleParams(nullptr),
 	ScheduledWorkItem(MODULE_NAME, px4::wq_configurations::rate_ctrl) // TODO: Which work queue ?
@@ -44,9 +46,17 @@ RoverAckermann::RoverAckermann() :
 
 bool RoverAckermann::init() // TODO: Is this necessary ?
 {
-	using namespace time_literals;
 	ScheduleOnInterval(10_ms); // 100 Hz
 	return true;
+}
+
+void RoverAckermann::updateParams()
+{
+	ModuleParams::updateParams();
+
+	if (_param_ra_max_str_rate.get() > FLT_EPSILON && _param_ra_max_str_ang.get() > FLT_EPSILON) {
+		_steering_with_rate_limit.setSlewRate((M_DEG_TO_RAD_F * _param_ra_max_str_rate.get()) / _param_ra_max_str_ang.get());
+	}
 }
 
 void RoverAckermann::Run()
@@ -55,6 +65,11 @@ void RoverAckermann::Run()
 		updateParams();
 	}
 
+	hrt_abstime timestamp_prev = _timestamp;
+	_timestamp = hrt_absolute_time();
+	_dt = math::constrain(_timestamp - timestamp_prev, 1_ms, 5000_ms) * 1e-6f;
+
+	_ackermann_att_control.updateAttControl();
 	_ackermann_rate_control.updateRateControl();
 
 	if (_vehicle_control_mode_sub.updated()) {
@@ -108,8 +123,17 @@ void RoverAckermann::generateActuatorSetpoint()
 	if (_rover_steering_setpoint_sub.updated()) { // Publish to servo
 		rover_steering_setpoint_s rover_steering_setpoint;
 		_rover_steering_setpoint_sub.update(&rover_steering_setpoint);
+
+		if (_param_ra_max_str_rate.get() > FLT_EPSILON
+		    && _param_ra_max_str_ang.get() > FLT_EPSILON) { // Apply slew rate if configured
+			_steering_with_rate_limit.update(rover_steering_setpoint.normalized_steering_angle, _dt);
+
+		} else {
+			_steering_with_rate_limit.setForcedValue(rover_steering_setpoint.normalized_steering_angle);
+		}
+
 		actuator_servos_s actuator_servos{};
-		actuator_servos.control[0] = rover_steering_setpoint.normalized_steering_angle;
+		actuator_servos.control[0] = _steering_with_rate_limit.getState();
 		actuator_servos.timestamp = hrt_absolute_time();
 		_actuator_servos_pub.publish(actuator_servos);
 	}

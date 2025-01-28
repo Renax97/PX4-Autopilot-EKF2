@@ -31,20 +31,9 @@
 #
 ############################################################################
 
-add_subdirectory(AckermannRateControl)
-add_subdirectory(AckermannAttControl)
-
-px4_add_module(
-	MODULE modules__rover_ackermann
-	MAIN rover_ackermann
-	SRCS
-		RoverAckermann.cpp
-		RoverAckermann.hpp
-	DEPENDS
-		AckermannRateControl
-		AckermannAttControl
-		px4_work_queue
-		rover_control
-	MODULE_CONFIG
-		module.yaml
+px4_add_library(AckermannAttControl
+	AckermannAttControl.cpp
 )
+
+target_link_libraries(AckermannAttControl PUBLIC PID)
+target_include_directories(AckermannAttControl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -40,6 +40,7 @@
 #include <px4_platform_common/module_params.h>
 #include <px4_platform_common/px4_work_queue/ScheduledWorkItem.hpp>
 #include <lib/pure_pursuit/PurePursuit.hpp>
+#include <lib/slew_rate/SlewRate.hpp>
 
 // uORB includes
 #include <uORB/Subscription.hpp>
@@ -55,6 +56,7 @@
 
 // Local includes
 #include "AckermannRateControl/AckermannRateControl.hpp"
+#include "AckermannAttControl/AckermannAttControl.hpp"
 
 class RoverAckermann : public ModuleBase<RoverAckermann>, public ModuleParams,
 	public px4::ScheduledWorkItem
@@ -76,6 +78,12 @@ public:
 	static int print_usage(const char *reason = nullptr);
 
 	bool init();
+
+protected:
+	/**
+	 * @brief Update the parameters of the module.
+	 */
+	void updateParams() override;
 
 private:
 	void Run() override;
@@ -107,9 +115,19 @@ private:
 
 	// Class instances
 	AckermannRateControl _ackermann_rate_control{this};
+	AckermannAttControl _ackermann_att_control{this};
+
+	// Variables
+	hrt_abstime _timestamp{0};
+	float _dt{0.f};
+
+	// Controllers
+	SlewRate<float> _steering_with_rate_limit{0.f};
 
 	// Parameters
 	DEFINE_PARAMETERS(
-		(ParamInt<px4::params::CA_R_REV>) _param_r_rev
+		(ParamInt<px4::params::CA_R_REV>) _param_r_rev,
+		(ParamFloat<px4::params::RA_MAX_STR_RATE>) _param_ra_max_str_rate,
+		(ParamFloat<px4::params::RA_MAX_STR_ANG>) _param_ra_max_str_ang
 	)
 };

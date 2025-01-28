@@ -26,3 +26,14 @@ parameters:
         increment: 0.01
         decimal: 2
         default: 0.5236
+
+      RA_MAX_STR_RATE:
+        description:
+          short: Maximum steering rate for the rover
+        type: float
+        unit: deg/s
+        min: -1
+        max: 1000
+        increment: 0.01
+        decimal: 2
+        default: -1
