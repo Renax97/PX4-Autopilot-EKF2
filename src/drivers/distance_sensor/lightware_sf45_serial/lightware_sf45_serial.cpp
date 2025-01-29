@@ -599,7 +599,6 @@ void SF45LaserSerial::sf45_process_replies()
 	case SF_DISTANCE_DATA_CM: {
 			const float raw_distance = (rx_field.data[0] << 0) | (rx_field.data[1] << 8);
 			int16_t raw_yaw = ((rx_field.data[2] << 0) | (rx_field.data[3] << 8));
-			int16_t scaled_yaw = 0;
 
 			// The sensor scans from 0 to -160, so extract negative angle from int16 and represent as if a float
 			if (raw_yaw > 32000) {
@@ -612,7 +611,7 @@ void SF45LaserSerial::sf45_process_replies()
 			}
 
 			// SF45/B product guide {Data output bit: 8 Description: "Yaw angle [1/100 deg] size: int16}"
-			scaled_yaw = raw_yaw * SF45_SCALE_FACTOR;
+			float scaled_yaw = raw_yaw * SF45_SCALE_FACTOR;
 
 			// Adjust for sensor orientation
 			scaled_yaw = sf45_wrap_360(scaled_yaw + _obstacle_distance.angle_offset);
@@ -624,7 +623,7 @@ void SF45LaserSerial::sf45_process_replies()
 			uint8_t current_bin = sf45_convert_angle(scaled_yaw);
 
 			if (current_bin != _previous_bin) {
-				PX4_DEBUG("scaled_yaw: \t %d, \t current_bin: \t %d, \t distance: \t %8.4f\n", scaled_yaw, current_bin,
+				PX4_DEBUG("scaled_yaw: \t %f, \t current_bin: \t %d, \t distance: \t %8.4f\n", (double)scaled_yaw, current_bin,
 					  (double)distance_m);
 
 				if (_vehicle_attitude_sub.updated()) {
