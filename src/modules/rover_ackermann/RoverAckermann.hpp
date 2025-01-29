@@ -105,6 +105,8 @@ private:
 	uORB::Subscription _rover_throttle_setpoint_sub{ORB_ID(rover_throttle_setpoint)};
 	uORB::Subscription _vehicle_control_mode_sub{ORB_ID(vehicle_control_mode)};
 	uORB::Subscription _manual_control_setpoint_sub{ORB_ID(manual_control_setpoint)};
+	uORB::Subscription _actuator_servos_sub{ORB_ID(actuator_servos)};
+	uORB::Subscription _actuator_motors_sub{ORB_ID(actuator_motors)};
 	vehicle_control_mode_s _vehicle_control_mode{};
 
 	// uORB publications
@@ -120,14 +122,20 @@ private:
 	// Variables
 	hrt_abstime _timestamp{0};
 	float _dt{0.f};
+	float _current_servo_setpoint{0.f};
+	float _current_motor_setpoint{0.f};
 
 	// Controllers
 	SlewRate<float> _steering_with_rate_limit{0.f};
+	SlewRate<float> _throttle_with_accel_limit{0.f};
 
 	// Parameters
 	DEFINE_PARAMETERS(
 		(ParamInt<px4::params::CA_R_REV>) _param_r_rev,
 		(ParamFloat<px4::params::RA_MAX_STR_RATE>) _param_ra_max_str_rate,
-		(ParamFloat<px4::params::RA_MAX_STR_ANG>) _param_ra_max_str_ang
+		(ParamFloat<px4::params::RA_MAX_STR_ANG>) _param_ra_max_str_ang,
+		(ParamFloat<px4::params::RO_MAX_ACCEL>) _param_ro_max_accel,
+		(ParamFloat<px4::params::RO_MAX_DECEL>) _param_ro_max_decel,
+		(ParamFloat<px4::params::RO_MAX_THR_SPEED>) _param_ro_max_thr_speed
 	)
 };

@@ -71,6 +71,14 @@ void AckermannRateControl::updateRateControl()
 				    vehicle_angular_velocity.xyz[2] : 0.f;
 	}
 
+	// Estimate forward speed based on throttle TODO: Use speed measurement if available
+	if (_actuator_motors_sub.updated()) {
+		actuator_motors_s actuator_motors;
+		_actuator_motors_sub.copy(&actuator_motors);
+		_estimated_forward_speed = _param_ro_max_thr_speed.get() > FLT_EPSILON ? math::interpolate<float>
+					   (actuator_motors.control[0], -1.f, 1.f, -_param_ro_max_thr_speed.get(), _param_ro_max_thr_speed.get()) : 0.f;
+	}
+
 	if (_vehicle_control_mode.flag_control_rates_enabled) {
 		if (_vehicle_control_mode.flag_control_manual_enabled || _vehicle_control_mode.flag_control_offboard_enabled) {
 			generateRateSetpoint();
@@ -105,17 +113,18 @@ void AckermannRateControl::generateRateSetpoint()
 
 		if (_manual_control_setpoint_sub.update(&manual_control_setpoint)) {
 			bool necessary_parameters_set = _max_yaw_rate > FLT_EPSILON &&  _param_ro_max_thr_speed.get() > FLT_EPSILON;
-			rover_rate_setpoint_s rover_rate_setpoint{};
-			rover_rate_setpoint.timestamp = _timestamp;
-			rover_rate_setpoint.yaw_rate_setpoint = necessary_parameters_set ? math::interpolate<float>
-								(manual_control_setpoint.roll,
-										-1.f, 1.f, -_max_yaw_rate, _max_yaw_rate) : 0.f;
-			_rover_rate_setpoint_pub.publish(rover_rate_setpoint);
 			rover_throttle_setpoint_s rover_throttle_setpoint{};
 			rover_throttle_setpoint.timestamp = _timestamp;
 			rover_throttle_setpoint.throttle_body_x = necessary_parameters_set ? manual_control_setpoint.throttle : 0.f;
 			rover_throttle_setpoint.throttle_body_y = 0.f;
 			_rover_throttle_setpoint_pub.publish(rover_throttle_setpoint);
+			rover_rate_setpoint_s rover_rate_setpoint{};
+			rover_rate_setpoint.timestamp = _timestamp;
+			rover_rate_setpoint.yaw_rate_setpoint = necessary_parameters_set ? matrix::sign(_estimated_forward_speed) *
+								math::interpolate<float>
+								(manual_control_setpoint.roll,
+										-1.f, 1.f, -_max_yaw_rate, _max_yaw_rate) : 0.f;
+			_rover_rate_setpoint_pub.publish(rover_rate_setpoint);
 		}
 
 	} else if (
@@ -140,15 +149,6 @@ void AckermannRateControl::generateRateSetpoint()
 
 void AckermannRateControl::generateSteeringSetpoint()
 {
-	// Estimate forward velocity based on throttle setpoint (Necessary for yaw rate -> Steering angle mapping)
-	if (_rover_throttle_setpoint_sub.updated()) {
-		rover_throttle_setpoint_s rover_throttle_setpoint;
-		_rover_throttle_setpoint_sub.copy(&rover_throttle_setpoint);
-		_estimated_forward_speed = _param_ro_max_thr_speed.get() > FLT_EPSILON ? math::interpolate<float>
-					   (rover_throttle_setpoint.throttle_body_x,
-					    -1.f, 1.f, -_param_ro_max_thr_speed.get(), _param_ro_max_thr_speed.get()) : 0.f;
-	}
-
 	// Set up feasible yaw rate setpoint
 	rover_rate_setpoint_s rover_rate_setpoint;
 	_rover_rate_setpoint_sub.update(&rover_rate_setpoint);

@@ -57,6 +57,10 @@ void RoverAckermann::updateParams()
 	if (_param_ra_max_str_rate.get() > FLT_EPSILON && _param_ra_max_str_ang.get() > FLT_EPSILON) {
 		_steering_with_rate_limit.setSlewRate((M_DEG_TO_RAD_F * _param_ra_max_str_rate.get()) / _param_ra_max_str_ang.get());
 	}
+
+	if (_param_ro_max_accel.get() > FLT_EPSILON && _param_ro_max_thr_speed.get() > FLT_EPSILON) {
+		_throttle_with_accel_limit.setSlewRate(_param_ro_max_accel.get() / _param_ro_max_thr_speed.get());
+	}
 }
 
 void RoverAckermann::Run()
@@ -109,24 +113,71 @@ void RoverAckermann::generateSteeringSetpoint()
 
 void RoverAckermann::generateActuatorSetpoint()
 {
-	if (_rover_throttle_setpoint_sub.updated()) { // Publish to motor
+	if (_rover_throttle_setpoint_sub.updated()) {
 		rover_throttle_setpoint_s rover_throttle_setpoint;
 		_rover_throttle_setpoint_sub.update(&rover_throttle_setpoint);
+
+		if (_actuator_motors_sub.updated()) {
+			actuator_motors_s actuator_motors{};
+			_actuator_motors_sub.copy(&actuator_motors);
+			_current_motor_setpoint = actuator_motors.control[0];
+		}
+
+		bool accelerating = fabsf(rover_throttle_setpoint.throttle_body_x) > fabsf(_current_motor_setpoint);
+
+		if (accelerating && _param_ro_max_accel.get() > FLT_EPSILON
+		    && _param_ro_max_thr_speed.get() > FLT_EPSILON) { // Acceleration slew rate
+			_throttle_with_accel_limit.setSlewRate(_param_ro_max_accel.get() / _param_ro_max_thr_speed.get());
+			_throttle_with_accel_limit.update(rover_throttle_setpoint.throttle_body_x, _dt);
+
+			if (fabsf(_throttle_with_accel_limit.getState() - _current_motor_setpoint) > fabsf(
+				    rover_throttle_setpoint.throttle_body_x -
+				    _current_motor_setpoint)) {
+				_throttle_with_accel_limit.setForcedValue(_current_motor_setpoint);
+			}
+
+		} else if (!accelerating && _param_ro_max_decel.get() > FLT_EPSILON
+			   && _param_ro_max_thr_speed.get() > FLT_EPSILON) { // Deceleration slew rate
+			_throttle_with_accel_limit.setSlewRate(_param_ro_max_decel.get() / _param_ro_max_thr_speed.get());
+			_throttle_with_accel_limit.update(rover_throttle_setpoint.throttle_body_x, _dt);
+
+			if (fabsf(_throttle_with_accel_limit.getState() - _current_motor_setpoint) > fabsf(
+				    rover_throttle_setpoint.throttle_body_x -
+				    _current_motor_setpoint)) {
+				_throttle_with_accel_limit.setForcedValue(_current_motor_setpoint);
+			}
+
+		} else {
+			_throttle_with_accel_limit.setForcedValue(rover_throttle_setpoint.throttle_body_x);
+		}
+
 		actuator_motors_s actuator_motors{};
 		actuator_motors.reversible_flags = _param_r_rev.get();
-		actuator_motors.control[0] = rover_throttle_setpoint.throttle_body_x;
+		actuator_motors.control[0] = _throttle_with_accel_limit.getState();
 		actuator_motors.timestamp = hrt_absolute_time();
 		_actuator_motors_pub.publish(actuator_motors);
 	}
 
 
-	if (_rover_steering_setpoint_sub.updated()) { // Publish to servo
+	if (_rover_steering_setpoint_sub.updated()) {
 		rover_steering_setpoint_s rover_steering_setpoint;
 		_rover_steering_setpoint_sub.update(&rover_steering_setpoint);
+
+		if (_actuator_servos_sub.updated()) {
+			actuator_servos_s actuator_servos{};
+			_actuator_servos_sub.copy(&actuator_servos);
+			_current_servo_setpoint = actuator_servos.control[0];
+		}
 
 		if (_param_ra_max_str_rate.get() > FLT_EPSILON
 		    && _param_ra_max_str_ang.get() > FLT_EPSILON) { // Apply slew rate if configured
 			_steering_with_rate_limit.update(rover_steering_setpoint.normalized_steering_angle, _dt);
+
+			if (fabsf(_steering_with_rate_limit.getState() - _current_servo_setpoint) > fabsf(
+				    rover_steering_setpoint.normalized_steering_angle -
+				    _current_servo_setpoint)) {
+				_steering_with_rate_limit.setForcedValue(_current_servo_setpoint);
+			}
 
 		} else {
 			_steering_with_rate_limit.setForcedValue(rover_steering_setpoint.normalized_steering_angle);

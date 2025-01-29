@@ -71,6 +71,14 @@ void AckermannAttControl::updateAttControl()
 		_vehicle_yaw = matrix::Eulerf(vehicle_attitude_quaternion).psi();
 	}
 
+	// Estimate forward speed based on throttle
+	if (_actuator_motors_sub.updated()) {
+		actuator_motors_s actuator_motors;
+		_actuator_motors_sub.copy(&actuator_motors);
+		_estimated_forward_speed = _param_ro_max_thr_speed.get() > FLT_EPSILON ? math::interpolate<float>
+					   (actuator_motors.control[0], -1.f, 1.f, -_param_ro_max_thr_speed.get(), _param_ro_max_thr_speed.get()) : 0.f;
+	}
+
 	if (_vehicle_control_mode.flag_control_attitude_enabled) {
 		if (_vehicle_control_mode.flag_control_manual_enabled || _vehicle_control_mode.flag_control_offboard_enabled) {
 			generateAttitudeSetpoint();
@@ -121,7 +129,8 @@ void AckermannAttControl::generateAttitudeSetpoint()
 				_yaw_with_yaw_rate_limit.setForcedValue(0.f);
 				rover_rate_setpoint_s rover_rate_setpoint{};
 				rover_rate_setpoint.timestamp = _timestamp;
-				rover_rate_setpoint.yaw_rate_setpoint = necessary_parameters_set ? yaw_rate_setpoint : 0.f;
+				rover_rate_setpoint.yaw_rate_setpoint = necessary_parameters_set ? matrix::sign(_estimated_forward_speed) *
+									yaw_rate_setpoint : 0.f;
 				_rover_rate_setpoint_pub.publish(rover_rate_setpoint);
 
 			} else { // Closed loop yaw control if the yaw rate input is zero (keep current yaw)
@@ -161,15 +170,6 @@ void AckermannAttControl::generateAttitudeSetpoint()
 
 void AckermannAttControl::generateRateSetpoint()
 {
-	// Estimate forward velocity based on throttle setpoint (Necessary for yaw slew rate)
-	if (_rover_throttle_setpoint_sub.updated()) {
-		rover_throttle_setpoint_s rover_throttle_setpoint;
-		_rover_throttle_setpoint_sub.copy(&rover_throttle_setpoint);
-		_estimated_forward_speed = _param_ro_max_thr_speed.get() > FLT_EPSILON ? math::interpolate<float>
-					   (rover_throttle_setpoint.throttle_body_x,
-					    -1.f, 1.f, -_param_ro_max_thr_speed.get(), _param_ro_max_thr_speed.get()) : 0.f;
-	}
-
 	rover_attitude_setpoint_s rover_attitude_setpoint;
 	_rover_attitude_setpoint_sub.update(&rover_attitude_setpoint);
 

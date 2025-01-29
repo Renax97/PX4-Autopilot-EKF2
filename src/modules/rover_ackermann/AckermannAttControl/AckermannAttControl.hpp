@@ -39,6 +39,7 @@
 #include <lib/pid/PID.hpp>
 #include <lib/slew_rate/SlewRateYaw.hpp>
 #include <math.h>
+#include <matrix/matrix/math.hpp>
 
 // uORB includes
 #include <uORB/Publication.hpp>
@@ -52,6 +53,7 @@
 #include <uORB/topics/offboard_control_mode.h>
 #include <uORB/topics/rover_attitude_status.h>
 #include <uORB/topics/rover_attitude_setpoint.h>
+#include <uORB/topics/actuator_motors.h>
 
 /**
  * @brief Class for ackermann attitude control.
@@ -94,7 +96,7 @@ private:
 	uORB::Subscription _trajectory_setpoint_sub{ORB_ID(trajectory_setpoint)};
 	uORB::Subscription _offboard_control_mode_sub{ORB_ID(offboard_control_mode)};
 	uORB::Subscription _vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
-	uORB::Subscription _rover_throttle_setpoint_sub{ORB_ID(rover_throttle_setpoint)};
+	uORB::Subscription _actuator_motors_sub{ORB_ID(actuator_motors)};
 	uORB::Subscription _rover_attitude_setpoint_sub{ORB_ID(rover_attitude_setpoint)};
 	vehicle_control_mode_s _vehicle_control_mode{};
 	offboard_control_mode_s _offboard_control_mode{};
