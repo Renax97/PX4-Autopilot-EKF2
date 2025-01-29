@@ -646,6 +646,7 @@ void SF45LaserSerial::sf45_process_replies()
 
 				hrt_abstime now = hrt_absolute_time();
 
+				_obstacle_distance.distances[current_bin] = _current_bin_dist;
 				_handle_missed_bins(current_bin, _previous_bin, _current_bin_dist, now);
 
 				_publish_obstacle_msg(now);
