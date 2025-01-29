@@ -75,55 +75,92 @@
       <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
     </scene>
-    <model name='ground_plane'>
-      <static>true</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>1 1</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode/>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
-      </link>
+    
+    
+    
+   <plugin name="gz::sim::systems::ApplyLinkWrench" filename="gz-sim7-apply-link-wrench-system">
+   </plugin>
+
+    
+    
+    
+  
+  <include>
+   <uri>model://PotatoChipChair</uri>
+   <pose>14 3 0 0 0 0</pose> 
+   </include>
+
+   <include>
+   <uri>model://VisitorKidSit</uri>
+   <pose>14 3 0 0 0 1.5708</pose> 
+   </include>
+
+
+
+   <include>
+   <uri>https://fuel.gazebosim.org/1.0/abmohit/models/Standing person</uri>
+   <pose>10 10 0 0 0 0</pose>
+   </include>
+
+
+    <include>
+    <uri>model://trellis</uri>
+    <pose>5 5 0 0 0 0</pose> 
+    </include>
+  
+    
+    
+   
+ <model name="grass_plane_with_mesh">
+  <static>true</static>
+  <link name="link">
+    <collision name="collision">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <plane>
+          <normal>0 0 1</normal>
+          <size>250 250</size>
+        </plane>
+      </geometry>
+      <surface>
+        <friction>
+          <ode/>
+        </friction>
+        <bounce/>
+        <contact/>
+      </surface>
+    </collision>
+    <visual name="grass_visual">
+      <pose>0 0 0 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <geometry>
+        <mesh>
+          <uri>file://grass_plane/meshes/grass_plane.dae</uri>
+        </mesh>
+      </geometry>
+    </visual>
+    <pose>0 0 0 0 -0 0</pose>
+    <inertial>
       <pose>0 0 0 0 -0 0</pose>
-      <self_collide>false</self_collide>
-    </model>
+      <mass>1</mass>
+      <inertia>
+        <ixx>1</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>1</iyy>
+        <iyz>0</iyz>
+        <izz>1</izz>
+      </inertia>
+    </inertial>
+    <enable_wind>false</enable_wind>
+  </link>
+  <pose>0 0 0 0 -0 0</pose>
+  <self_collide>false</self_collide>
+</model>
+
+    
+    
+    
     <light name='sunUTC' type='directional'>
       <pose>0 0 500 0 -0 0</pose>
       <cast_shadows>true</cast_shadows>

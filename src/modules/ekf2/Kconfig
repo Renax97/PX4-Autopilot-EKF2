@@ -27,7 +27,17 @@ depends on MODULES_EKF2
         default y
 	---help---
 		EKF2 auxiliary velocity fusion support.
-
+		
+		
+		
+menuconfig EKF2_LOAD_CELL
+depends on MODULES_EKF2
+		bool "load cell fusion support"
+		default y
+	---help---
+		EKF2 load cell fusion support.
+		
+		
 menuconfig EKF2_BARO_COMPENSATION
 depends on MODULES_EKF2
         bool "barometer compensation support"

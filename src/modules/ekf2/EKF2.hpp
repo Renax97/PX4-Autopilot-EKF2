@@ -91,6 +91,12 @@
 #include <uORB/topics/wind.h>
 #include <uORB/topics/yaw_estimator_status.h>
 
+
+//INCLUSIONE HEADER LOAD CELL
+#if defined(CONFIG_EKF2_LOAD_CELL)
+# include <uORB/topics/load_cell_data.h>
+#endif // CONFIG_EKF2_AUXVEL
+
 #if defined(CONFIG_EKF2_AIRSPEED)
 # include <uORB/topics/airspeed.h>
 # include <uORB/topics/airspeed_validated.h>
@@ -156,6 +162,7 @@ private:
 		DEPRECATED_ROTATE_EXT_VIS  = (1 << 6), ///< set to true to if the EV observations are in a non NED reference frame and need to be rotated before being used
 		DEPRECATED_USE_GPS_YAW     = (1 << 7), ///< set to true to use GPS yaw data if available (DEPRECATED, use gnss_ctrl)
 		DEPRECATED_USE_EXT_VIS_VEL = (1 << 8), ///< set to true to use external vision velocity data
+		DEPRECATED_USE_LOAD_CELL = (1 << 9), ///< set to true to use load cell data (future support)
 	};
 
 	static constexpr uint8_t MAX_NUM_IMUS = 4;
@@ -217,6 +224,10 @@ private:
 	void UpdateRangeSample(ekf2_timestamps_s &ekf2_timestamps);
 #endif // CONFIG_EKF2_RANGE_FINDER
 	void UpdateSystemFlagsSample(ekf2_timestamps_s &ekf2_timestamps);
+	
+#if defined(CONFIG_EKF2_LOAD_CELL)	
+	void UpdateLoadCellSample(ekf2_timestamps_s &ekf2_timestamps);
+#endif
 
 	// Used to check, save and use learned accel/gyro/mag biases
 	struct InFlightCalibration {
@@ -273,6 +284,7 @@ private:
 	perf_counter_t _msg_missed_gps_perf{nullptr};
 	perf_counter_t _msg_missed_magnetometer_perf{nullptr};
 	perf_counter_t _msg_missed_odometry_perf{nullptr};
+	perf_counter_t _msg_missed_load_cell_data_perf{nullptr};//LOAD CELL
 
 	// Used to control saving of mag declination to be used on next startup
 	bool _mag_decl_saved = false;	///< true when the magnetic declination has been saved
@@ -337,6 +349,12 @@ private:
 	hrt_abstime _status_mag_heading_pub_last{0};
 
 	hrt_abstime _status_gravity_pub_last{0};
+
+
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+    uORB::Subscription _load_cell_data_sub {ORB_ID(load_cell_data)}; //SUBSCRIBER LOAD CELL
+#endif
 
 #if defined(CONFIG_EKF2_AUXVEL)
 	uORB::Subscription _landing_target_pose_sub {ORB_ID(landing_target_pose)};
@@ -742,7 +760,19 @@ private:
 
 		// Used by EKF-GSF experimental yaw estimator
 		(ParamExtFloat<px4::params::EKF2_GSF_TAS>)
-		_param_ekf2_gsf_tas_default	///< default value of true airspeed assumed during fixed wing operation
+		_param_ekf2_gsf_tas_default,	///< default value of true airspeed assumed during fixed wing operation
+		
+//INCLUSIONE PARAMETRI CELLA DI CARICO
+#if defined(CONFIG_EKF2_LOAD_CELL)
+        	(ParamExtFloat<px4::params::EKF2_LC_DELAY>) _param_ekf2_load_cell_delay,
+        	(ParamExtFloat<px4::params::EKF2_LC_NOISE>) _param_ekf2_load_cell_noise,
+		(ParamExtFloat<px4::params::EKF2_LC_GATE>) _param_ekf2_load_cell_gate,
+		(ParamExtInt<px4::params::EKF2_LC_CTRL>) _param_ekf2_load_cell_ctrl,
+		(ParamExtFloat<px4::params::EKF2_LC_POS_X>) _param_ekf2_load_cell_pos_x,
+		(ParamExtFloat<px4::params::EKF2_LC_POS_Y>) _param_ekf2_load_cell_pos_y,
+		(ParamExtFloat<px4::params::EKF2_LC_POS_Z>) _param_ekf2_load_cell_pos_z,
+		(ParamExtFloat<px4::params::EKF2_LC_SCALE>) _param_ekf2_load_cell_scale
+#endif // CONFIG_EKF2_LOAD_CELL
 
 	)
 };

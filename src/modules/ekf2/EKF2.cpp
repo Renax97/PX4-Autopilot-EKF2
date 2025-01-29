@@ -191,7 +191,20 @@ EKF2::EKF2(bool multi_mode, const px4::wq_config_t &config, bool replay_mode):
 #endif // CONFIG_EKF2_BARO_COMPENSATION
 	_param_ekf2_mag_check(_params->check_mag_strength),
 	_param_ekf2_synthetic_mag_z(_params->synthesize_mag_z),
-	_param_ekf2_gsf_tas_default(_params->EKFGSF_tas_default)
+	_param_ekf2_gsf_tas_default(_params->EKFGSF_tas_default),
+	
+#if defined(CONFIG_EKF2_LOAD_CELL)
+    	_param_ekf2_load_cell_delay(_params->load_cell_delay),
+    	_param_ekf2_load_cell_noise(_params->load_cell_noise),
+    	_param_ekf2_load_cell_gate(_params->load_cell_gate),
+    	_param_ekf2_load_cell_ctrl(_params->load_cell_ctrl),
+    	_param_ekf2_load_cell_pos_x(_params->load_cell_pos_x),
+    	_param_ekf2_load_cell_pos_y(_params->load_cell_pos_y),
+    	_param_ekf2_load_cell_pos_z(_params->load_cell_pos_z),
+    	_param_ekf2_load_cell_scale(_params->load_cell_scale)
+#endif //LOAD CELL PARAMETERS
+	
+	
 {
 	// advertise expected minimal topic set immediately to ensure logging
 	_attitude_pub.advertise();
@@ -653,6 +666,7 @@ void EKF2::Run()
 			.vehicle_air_data_timestamp_rel = ekf2_timestamps_s::RELATIVE_TIMESTAMP_INVALID,
 			.vehicle_magnetometer_timestamp_rel = ekf2_timestamps_s::RELATIVE_TIMESTAMP_INVALID,
 			.visual_odometry_timestamp_rel = ekf2_timestamps_s::RELATIVE_TIMESTAMP_INVALID,
+			.load_cell_timestamp_rel = ekf2_timestamps_s::RELATIVE_TIMESTAMP_INVALID, //AGGIUNTA LOAD CELL 
 		};
 
 #if defined(CONFIG_EKF2_AIRSPEED)
@@ -674,6 +688,10 @@ void EKF2::Run()
 		UpdateRangeSample(ekf2_timestamps);
 #endif // CONFIG_EKF2_RANGE_FINDER
 		UpdateSystemFlagsSample(ekf2_timestamps);
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+	    	UpdateLoadCellSample(ekf2_timestamps);
+#endif
 
 		// run the EKF update and output
 		const hrt_abstime ekf_update_start = hrt_absolute_time();
@@ -2543,6 +2561,47 @@ void EKF2::UpdateMagCalibration(const hrt_abstime &timestamp)
 		}
 	}
 }
+
+
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+void EKF2::UpdateLoadCellSample(ekf2_timestamps_s &ekf2_timestamps)
+{
+	const unsigned last_generation = _load_cell_data_sub.get_last_generation();
+	load_cell_data_s load_cell_data;
+
+	if (_load_cell_data_sub.update(&load_cell_data)) {
+        if (_msg_missed_load_cell_data_perf == nullptr) {
+            _msg_missed_load_cell_data_perf = perf_alloc(PC_COUNT, MODULE_NAME": load_cell_data messages missed");
+
+        } else if (_load_cell_data_sub.get_last_generation() != last_generation + 1) {
+            perf_count(_msg_missed_load_cell_data_perf);
+        }
+
+// Create a load cell sample for EKF
+        loadCellSample lc_data{};
+        lc_data.force = Vector3f(load_cell_data.force_x, load_cell_data.force_y, load_cell_data.force_z);
+		lc_data.torque = Vector3f(load_cell_data.torque_x, load_cell_data.torque_y, load_cell_data.torque_z);
+        lc_data.time_us = load_cell_data.timestamp;
+
+        // Validate the force data
+        if (lc_data.force.isAllFinite() && lc_data.torque.isAllFinite()) {
+            const float lc_noise_var = sq( _param_ekf2_load_cell_noise.get());
+
+         lc_data.force_var = Vector3f(lc_noise_var, lc_noise_var, lc_noise_var);
+		 lc_data.torque_var = Vector3f(lc_noise_var, lc_noise_var, lc_noise_var);
+
+            // Pass data to EKF
+            _ekf.setLoadCellData(lc_data);
+        } else {
+            PX4_WARN("Load cell data invalid");
+        }
+    }
+
+}
+#endif
+
+
 
 int EKF2::custom_command(int argc, char *argv[])
 {

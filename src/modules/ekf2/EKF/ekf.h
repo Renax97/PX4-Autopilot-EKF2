@@ -54,6 +54,16 @@
 #include <uORB/topics/estimator_aid_source2d.h>
 #include <uORB/topics/estimator_aid_source3d.h>
 
+#if defined(CONFIG_EKF2_LOAD_CELL)
+#include <uORB/uORB.h>
+#include <uORB/Subscription.hpp>
+#include <uORB/topics/actuator_motors.h>
+#include <uORB/topics/actuator_outputs.h>
+#include <uORB/topics/vehicle_thrust_setpoint.h>
+#include <deque>
+#endif
+
+
 enum class Likelihood { LOW, MEDIUM, HIGH };
 
 class Ekf final : public EstimatorInterface
@@ -518,6 +528,17 @@ private:
 	void updateHorizontalDeadReckoningstatus();
 	void updateVerticalDeadReckoningStatus();
 
+#if defined(CONFIG_EKF2_LOAD_CELL)
+    uORB::Subscription actuator_motors_sub{ORB_ID(actuator_motors)};
+	uORB::Subscription actuator_outputs_sub{ORB_ID(actuator_outputs)};
+	uORB::Subscription vehicle_thrust_setpoint_sub{ORB_ID(vehicle_thrust_setpoint)};
+	orb_advert_t _wrench_pub{nullptr};
+	std::deque<float> accel_z_buffer; // Buffer circolare per i valori recenti di accel_z
+    int window_size = 10;
+
+#endif
+
+
 	struct StateResetCounts {
 		uint8_t velNE{0};	///< number of horizontal position reset events (allow to wrap if count exceeds 255)
 		uint8_t velD{0};	///< number of vertical velocity reset events (allow to wrap if count exceeds 255)
@@ -590,6 +611,14 @@ private:
 	Vector2f _drag_innov{};		///< multirotor drag measurement innovation (m/sec**2)
 	Vector2f _drag_innov_var{};	///< multirotor drag measurement innovation variance ((m/sec**2)**2)
 #endif // CONFIG_EKF2_DRAG_FUSION
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+	float _load_innov{0.0f};		
+	float _load_innov_var{0.0f};	
+	float mea_force_z_filtered = 0.0f; // Valore filtrato della misura
+	float alpha_load_cell_filter = 0.2f;               // Coefficiente del filtro (0.0 < alpha <= 1.0)
+
+#endif // 
 
 #if defined(CONFIG_EKF2_RANGE_FINDER)
 	estimator_aid_source1d_s _aid_src_rng_hgt{};
@@ -1054,6 +1083,16 @@ private:
 	void controlAuxVelFusion();
 	void stopAuxVelFusion();
 #endif // CONFIG_EKF2_AUXVEL
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+	void controlLoadCellFusion();
+	void fuseLoadCell(const loadCellSample &loadCell_Sample,const float accel_z,const float vel_z_old);
+	float compute_thrust_z();
+	float predict_force_z(const float mass, float total_thrust, const float accel_z);
+	void updateAccelZBuffer(float accel_z); 
+    float filterAccelZ(); 
+	//float estimate_external_force_z(const float mass, float total_thrust,float dt, float K1, float K2,float &r, float &r_dot, const imuSample &imu_delayed);
+#endif
 
 	void checkVerticalAccelerationHealth(const imuSample &imu_delayed);
 	Likelihood estimateInertialNavFallingLikelihood() const;

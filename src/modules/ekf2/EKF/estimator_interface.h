@@ -131,6 +131,10 @@ public:
 	void setAuxVelData(const auxVelSample &auxvel_sample);
 #endif // CONFIG_EKF2_AUXVEL
 
+#if defined(CONFIG_EKF2_LOAD_CELL)
+	void setLoadCellData(const loadCellSample &loadCellData);
+#endif
+
 	void setSystemFlagData(const systemFlagUpdate &system_flags);
 
 	// return a address to the parameters struct
@@ -390,6 +394,14 @@ protected:
 	RingBuffer<auxVelSample> *_auxvel_buffer{nullptr};
 #endif // CONFIG_EKF2_AUXVEL
 	RingBuffer<systemFlagUpdate> *_system_flag_buffer{nullptr};
+	
+	
+#if defined(CONFIG_EKF2_LOAD_CELL)	
+	RingBuffer<loadCellSample> *_load_cell_buffer{nullptr};
+	float prev_state_vel_z{};
+	float _loadCell_test_ratio{0.0f};
+
+#endif
 
 	uint64_t _time_last_gps_buffer_push{0};
 	uint64_t _time_last_mag_buffer_push{0};

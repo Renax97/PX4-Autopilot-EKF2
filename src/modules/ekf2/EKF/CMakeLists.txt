@@ -57,6 +57,10 @@ list(APPEND EKF_SRCS
 	zero_velocity_update.cpp
 )
 
+if(CONFIG_EKF2_LOAD_CELL)
+	list(APPEND EKF_SRCS EKF/load_cell_control.cpp)
+endif()
+
 if(CONFIG_EKF2_AIRSPEED)
 	list(APPEND EKF_SRCS airspeed_fusion.cpp)
 endif()

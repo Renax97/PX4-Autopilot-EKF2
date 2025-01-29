@@ -83,6 +83,7 @@ set(msg_files
 	EstimatorStatus.msg
 	EstimatorStatusFlags.msg
 	Event.msg
+	ExternalWrenchEstimation.msg 
 	FailsafeFlags.msg
 	FailureDetectorStatus.msg
 	FollowTarget.msg
@@ -115,6 +116,7 @@ set(msg_files
 	LandingTargetPose.msg
 	LaunchDetectionStatus.msg
 	LedControl.msg
+	LoadCellData.msg
 	LoggerStatus.msg
 	LogMessage.msg
 	MagnetometerBiasEstimate.msg

@@ -1539,3 +1539,96 @@ PARAM_DEFINE_INT32(EKF2_SYNT_MAG_Z, 0);
  * @decimal 1
  */
 PARAM_DEFINE_FLOAT(EKF2_GSF_TAS, 15.0f);
+
+
+/**
+ * Cella di carico: Posizione X nel body frame
+ *
+ * Specifica la posizione della cella di carico lungo l'asse X nel body frame (relativo al centro di gravità del veicolo).
+ *
+ * @group EKF2
+ * @unit m
+ * @decimal 3
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_POS_X, 0.0f);
+
+/**
+ * Cella di carico: Posizione Y nel body frame
+ *
+ * Specifica la posizione della cella di carico lungo l'asse Y nel body frame (relativo al centro di gravità del veicolo).
+ *
+ * @group EKF2
+ * @unit m
+ * @decimal 3
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_POS_Y, 0.0f);
+
+/**
+ * Cella di carico: Posizione Z nel body frame
+ *
+ * Specifica la posizione della cella di carico lungo l'asse Z nel body frame (relativo al centro di gravità del veicolo).
+ *
+ * @group EKF2
+ * @unit m
+ * @decimal 3
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_POS_Z, 0.0f);
+
+/**
+ * Cella di carico: Ritardo nelle misurazioni
+ *
+ * Ritardo delle misurazioni della cella di carico rispetto ai dati dell'IMU.
+ *
+ * @group EKF2
+ * @unit ms
+ * @min 0
+ * @max 300
+ * @decimal 1
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_DELAY, 0.0f);
+
+/**
+ * Cella di carico: Rumore di misura
+ *
+ * Rumore associato alle misurazioni della cella di carico, espresso come deviazione standard.
+ *
+ * @group EKF2
+ * @unit N
+ * @decimal 2
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_NOISE, 0.05f);
+
+/**
+ * Cella di carico: Gate di innovazione
+ *
+ * Dimensione del gate per il test di consistenza delle innovazioni delle misurazioni della cella di carico.
+ *
+ * @group EKF2
+ * @unit SD
+ * @min 1.0
+ * @max 5.0
+ * @decimal 1
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_GATE, 3.0f);
+
+/**
+ * Cella di carico: Scala
+ *
+ * Fattore di scala per convertire i dati grezzi della cella di carico in unità fisiche.
+ *
+ * @group EKF2
+ * @unit N
+ * @decimal 3
+ */
+PARAM_DEFINE_FLOAT(EKF2_LC_SCALE, 1.0f);
+
+/**
+ * Cella di carico: Abilitazione del controllo
+ *
+ * Parametro intero che abilita o disabilita l'utilizzo delle misurazioni della cella di carico nel filtro.
+ *
+ * @group EKF2
+ * @value 0 Disabilitato
+ * @value 1 Abilitato
+ */
+PARAM_DEFINE_INT32(EKF2_LC_CTRL, 0);
