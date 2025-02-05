@@ -399,7 +399,11 @@ protected:
 #if defined(CONFIG_EKF2_LOAD_CELL)	
 	RingBuffer<loadCellSample> *_load_cell_buffer{nullptr};
 	float prev_state_vel_z{};
+	matrix::SquareMatrix<float, 3> Rk{};
 	float _loadCell_test_ratio{0.0f};
+	Vector3f prev_augstate_accel{0,0,20.4};
+	float prev_thrust{};
+	matrix::SquareMatrix<float, 9> P_aug{};
 
 #endif
 

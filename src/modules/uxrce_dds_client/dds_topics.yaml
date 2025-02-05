@@ -49,6 +49,18 @@ publications:
     
   - topic: /fmu/out/external_wrench_estimation
     type: px4_msgs::msg::ExternalWrenchEstimation
+
+  - topic: /fmu/out/actuator_outputs
+    type: px4_msgs::msg::ActuatorOutputs  
+    
+  - topic: /fmu/out/estimator_states
+    type: px4_msgs::msg::EstimatorStates
+    
+  - topic: /fmu/out/sensor_accel
+    type: px4_msgs::msg::SensorAccel
+    
+  - topic: /fmu/out/vehicle_angular_velocity
+    type: px4_msgs::msg::VehicleAngularVelocity
     
 
 subscriptions:

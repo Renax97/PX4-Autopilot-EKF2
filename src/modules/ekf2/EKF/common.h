@@ -289,6 +289,16 @@ struct stateSample {
 	Vector2f wind_vel{};            ///< horizontal wind velocity in earth frame in m/s
 };
 
+#if defined(CONFIG_EKF2_LOAD_CELL)
+struct augStateSample {
+	Quatf    aug_quat_nominal{};        ///< quaternion defining the rotation from body to earth frame
+	Vector3f aug_vel{};                 ///< NED velocity in earth frame in m/s
+	Vector3f aug_pos{};                 ///< NED position in earth frame in m
+	Vector3f aug_accel{}; 
+	Vector3f aug_ang_vel{}; 
+};
+#endif
+
 struct parameters {
 
 	int32_t filter_update_interval_us{10000}; ///< filter update interval in microseconds

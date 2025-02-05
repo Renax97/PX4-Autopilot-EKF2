@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name="trellis">
-    <static>false</static> <!-- Cambia in true se vuoi che sia immobile -->
+    <static>true</static> <!-- Cambia in true se vuoi che sia immobile -->
     <link name="link">
       <inertial>
   <mass>400.0</mass> <!-- Massa aumentata per stabilità -->
