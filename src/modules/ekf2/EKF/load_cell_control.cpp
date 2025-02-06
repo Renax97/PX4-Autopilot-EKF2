@@ -8,6 +8,7 @@
 #include <uORB/uORB.h>
 #include <uORB/topics/external_wrench_estimation.h>
 
+
 #include <stdexcept>  // Aggiunto per std::runtime_error
 
 
@@ -19,160 +20,67 @@ void Ekf::controlLoadCellFusion()
     if(_load_cell_buffer && !_control_status.flags.fake_pos && _control_status.flags.in_air){
 		loadCellSample loadCell_sample;
 
-		const float accel_z_raw = (_state.vel(2) - prev_state_vel_z) / _dt_ekf_avg;
-		 
+		/*const float accel_z_raw = (_state.vel(2) - prev_state_vel_z) / _dt_ekf_avg;
         updateAccelZBuffer(accel_z_raw);
-
         const float accel_z = filterAccelZ();
-
         const float vel_z_old = prev_state_vel_z;
-        prev_state_vel_z = _state.vel(2);
+        prev_state_vel_z = _state.vel(2);*/
 
+
+		quaternionToRotationMatrix();
+
+		float total_thrust = compute_thrust_z();
+        total_thrust = getDelayedThrust();
+		float f_z = predict_force_z(total_thrust);
+		//PX4_INFO("f_z = %f", (double)f_z);
+		predictAugState(total_thrust,prev_thrust,prev_augstate_accel,f_z);
+		predictAugCovariance();
+		prev_thrust = total_thrust;
+		prev_augstate_accel = augstate.aug_accel;
+        prev_augstate_pos = augstate.aug_pos;
+        prev_augstate_vel = augstate.aug_vel;
+
+
+     
+
+		//if (_load_cell_buffer->pop_first_older_than(_time_delayed_us, &loadCell_sample)) {
+
+		updateLoadCell(loadCell_sample);
+		//}
 		
 
-		if (_load_cell_buffer->pop_first_older_than(_time_delayed_us, &loadCell_sample)) {
-
-		 	fuseLoadCell(loadCell_sample,accel_z,vel_z_old);
-		}
+		
 	}
 }
 
 
 
 
-void Ekf::fuseLoadCell(const loadCellSample &loadCell_Sample,const float accel_z,const float vel_z_old)
-{
-		
-		//PARAMETRI UTILI
 
-		 //const float R_FORCE = fmaxf(_params.load_cell_noise, 0.01f);
-		const float R_FORCE = 0.1f; 
-         //const float mass = _params.mass;
-		//const float mass = 2.081f;
-		const float mass_drone = 2.0643f;
-		const float mass_arm = 0.017f;
-		const float mass = mass_drone + mass_arm; 
-		//const float FORCE_THRESHOLD = 1.0f;
-		const float bias_load_cell = - 0.0196;
+void Ekf::quaternionToRotationMatrix(){
 
-		
-		
-		
+	float q0 = _state.quat_nominal(0);
+	float q1 = _state.quat_nominal(1);
+	float q2 = _state.quat_nominal(2);
+	float q3 = _state.quat_nominal(3);
 
 
 
-		//CALCOLO DEL THRUST
-	    float total_thrust = compute_thrust_z();
-		/*Vector3f thrust_body(0.0f, 0.0f, total_thrust);
-		Vector3f thrust_NED = _state.quat_nominal.rotateVector(thrust_body);
-		total_thrust = thrust_NED(2);*/
+    Rk(0,0) = q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3;
+    Rk(0,1) = 2 * (q1 * q2 - q0 * q3);
+    Rk(0,2) = 2 * (q1 * q3 + q0 * q2);
+
+    Rk(1,0) = 2 * (q1 * q2 + q0 * q3);
+    Rk(1,1)= q0 * q0 - q1 * q1 + q2 * q2 - q3 * q3;
+    Rk(1,2) = 2 * (q2 * q3 - q0 * q1);
+
+    Rk(2,0) = 2 * (q1 * q3 - q0 * q2);
+    Rk(2,1) = 2 * (q2 * q3 + q0 * q1);
+    Rk(2,2) = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3;
 
 
-
-
-
-		/*float dt = _dt_ekf_avg;
-		float K1 = 100.0f;     // Guadagno del filtro
-		float K2 = 10.0f;      // Guadagno di smorzamento
-		// Variabili per mantenere lo stato del filtro
-		float r = 0.0f;       // Stima iniziale della forza esterna
-		float r_dot = 0.0f;   // Derivata iniziale della forza esterna
-		float f_z_ext = estimate_external_force_z(mass, total_thrust,dt, K1, K2, r, r_dot,accel_z);*/
-
-
-		//PREDIZIONE ACCELERAZIONE Z
-		float estimated_force_z = predict_fz(mass,total_thrust,accel_z);
-		
-		float pred_acc = estimated_force_z/mass;
-
-
-		//MISURA ACCELERAZIONE Z
-	    float mea_force_z_raw = -(loadCell_Sample.force(1) - bias_load_cell);
-
-		updateMeasBuffer(mea_force_z_raw);
-
-		float mea_force_z_filtered = filterForceMeas();
-
-
-		//mea_force_z_filtered = alpha_load_cell_filter * mea_force_z + (1.0f - alpha_load_cell_filter) * mea_force_z_filtered;
-
-
-		float mea_acc = mea_force_z_filtered/mass;
-
-		//pred_acc = _state.vel(2);
-
-		//mea_acc = ((mea_acc * _dt_ekf_avg) + _state.vel(2));
-
-
-		//CALCOLO INNOVAZIONE
-        _load_innov = pred_acc - mea_acc;
-		//PX4_INFO("INNOVAZIONE: %.4f", static_cast<double>(_load_innov));
-		
-
-		//CALCOLO VARIANZA INNOVAZIONE E GUADAGNO DI KALMAN
-		 const float H_vz = 0.01f;
-		 const float H_pz = 0.0f;
-		Vector24f H;
-		H.setZero();
-		H(6) = H_vz;  // Aggiorna solo v_z
-		H(9) = H_pz;
-		
-		_load_innov_var = (H.transpose() * P * H)(0, 0) + R_FORCE;
-
-
-		Vector24f Kfusion = P * H / _load_innov_var;
-
-
-	 //UTILIZZO DI SYMFORCE
-	
-	/*
-	const Vector24f state_vector_prev = getStateAtFusionHorizonAsVector();
-	Vector24f Kfusion;
-	matrix::Matrix<float, 1, 24> H;
-
-	sym::ComputeLoadCellZInnovVarAndK(state_vector_prev, P, vel_z_old, R_FORCE, _dt_ekf_avg,total_thrust, mass, FLT_EPSILON, &H, &_load_innov_var, &Kfusion);
-	*/
-
-
-		//ATTIVA LA FUSIONE
-
-	   measurementUpdate(Kfusion, _load_innov_var, _load_innov);
-
-	   /*if (fabs(loadCell_Sample.force(1)) > FORCE_THRESHOLD*100) {
-        measurementUpdate(Kfusion, _load_innov_var, _load_innov);
-		}*/
-
-
-
-	//const float gravity_force = mass*CONSTANTS_ONE_G;
-
-	float thrust_delayed_debug = getDelayedThrust();
-
-	Vector3f thrust_delayed_body(0,0,thrust_delayed_debug);
-	Vector3f thrust_delayed_NED =  _state.quat_nominal.rotateVector(thrust_delayed_body);
-
-
-	//PUBLISHER DI DEBUG
-	struct external_wrench_estimation_s wrench_estimation = {};
-
-	wrench_estimation.timestamp = loadCell_Sample.time_us; // Tempo corrente
-	wrench_estimation.force_x = mea_force_z_filtered;                  // Forza su X (fissata a 0)
-	wrench_estimation.force_y = total_thrust;                  // Forza su Y (fissata a 0)
-	wrench_estimation.force_z = estimated_force_z;     // Forza stimata su Z
-	wrench_estimation.torque_x = _load_innov;                 // Momento torcente su X
-	wrench_estimation.torque_y = accel_z*mass;                 // Momento torcente su Y
-	wrench_estimation.torque_z = thrust_delayed_NED(2);                 // Momento torcente su Z
-
-if (_wrench_pub == nullptr) {
-    
-    _wrench_pub = orb_advertise(ORB_ID(external_wrench_estimation), &wrench_estimation);
-} else {
-
-    orb_publish(ORB_ID(external_wrench_estimation), _wrench_pub, &wrench_estimation);
 }
 
-
-}	
 
 
 
@@ -204,7 +112,7 @@ float Ekf::compute_thrust_z(){
             //PX4_INFO("Motore %d: velocità=%.2f rad/s, thrust=%.2f N", i, (double)motor_speed, (double)motor_thrust);
         }
 
-		total_thrust = - total_thrust;
+		//total_thrust = - total_thrust;
 
 		updateThrustBuffer(total_thrust);
 
@@ -219,7 +127,318 @@ float Ekf::compute_thrust_z(){
 
 
 
-float Ekf::predict_fz(const float mass, float total_thrust, const float accel_z){
+
+
+
+float Ekf::predict_force_z(float total_thrust){
+
+
+	const float mass_drone = 2.0643f;
+	const float mass_arm = 0.017f;
+	const float mass = mass_drone + mass_arm; 
+	
+
+	Vector3f e3(0,0,1);
+	Vector3f ak = augstate.aug_accel;
+
+    total_thrust = getDelayedThrust();
+
+	matrix::Matrix<float, 3, 1> temp = (mass*(ak+CONSTANTS_ONE_G)) - (mass*CONSTANTS_ONE_G*e3 - total_thrust*Rk*e3);
+
+	float fz = (e3.transpose()*Rk.transpose() * temp)(0,0);
+
+	return fz;
+
+}
+
+
+
+void Ekf::predictAugState(float total_thrust,float prec_thrust,Vector3f prev_accel, float f_z){
+
+
+	const float mass_drone = 2.0643f;
+	const float mass_arm = 0.017f;
+	const float mass = mass_drone + mass_arm; 
+
+	float Tprev = prec_thrust/mass;
+    total_thrust = getDelayedThrust();
+	float T = total_thrust/mass;
+
+	Vector3f ang_vel = retrieveAngularVelocity();
+
+    
+    augstate.aug_vel = prev_augstate_vel + _dt_ekf_avg*prev_augstate_accel;
+	augstate.aug_pos = prev_augstate_pos + _dt_ekf_avg*prev_augstate_vel;
+    
+    
+
+    PX4_INFO("pos_z = %f", (double)augstate.aug_pos(2));
+
+    PX4_INFO("vel_z = %f", (double) augstate.aug_vel(2));
+	
+	augstate.aug_quat_nominal = _state.quat_nominal;
+	augstate.aug_ang_vel = ang_vel;
+
+	matrix::SquareMatrix<float, 3> Sw;
+	Vector3f e3(0,0,1);
+
+
+    Sw(0,0) = 0.0f;
+    Sw(0,1) = - ang_vel(2);
+    Sw(0,2) =  ang_vel(1);
+
+    Sw(1,0) = ang_vel(2);
+    Sw(1,1) = 0.0f;
+    Sw(1,2) = -ang_vel(0);
+
+    Sw(2,0) = - ang_vel(1);
+    Sw(2,1) = ang_vel(0);
+    Sw(2,2) = 0.0f;
+
+	Vector3f temp1 = ((- T + Tprev)/_dt_ekf_avg) * Rk*e3;
+	Vector3f temp2 = - T*Rk*Sw*e3;
+	Vector3f temp3 = f_z/mass * Rk * Sw * e3; 
+
+
+	augstate.aug_accel = prev_accel + _dt_ekf_avg*(temp1+temp2+temp3);
+    
+    
+
+ 
+    
+
+    //PX4_INFO("temp1 = %f", (double)temp1(2));
+    //PX4_INFO("temp2 = %f", (double)temp2(2));
+    //PX4_INFO("temp3  = %f", (double)temp3(2));
+
+	//PX4_INFO("accel z = %f", (double)augstate.aug_accel(2));
+
+
+}
+
+
+
+void Ekf::predictAugCovariance(){
+
+
+
+matrix::SquareMatrix<float, 9> Fk{};
+
+
+matrix::Matrix3f I;
+I.setIdentity();  
+
+
+    Fk.slice<3,3>(0,0) = I;   
+    Fk.slice<3,3>(0,3) = _dt_ekf_avg * I; 
+    Fk.slice<3,3>(3,3) = I;    
+    Fk.slice<3,3>(3,6) = _dt_ekf_avg * I; 
+    Fk.slice<3,3>(6,6) = I;   
+
+
+P_aug = Fk * P_aug * Fk.transpose();
+
+
+}
+
+
+void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
+
+
+
+	//PARAMETRI UTILI
+
+		 //const float R_FORCE = fmaxf(_params.load_cell_noise, 0.01f);
+		const float R_FORCE = 0.1f; 
+         //const float mass = _params.mass;
+		//const float mass = 2.081f;
+		const float mass_drone = 2.0643f;
+		const float mass_arm = 0.017f;
+		const float mass = mass_drone + mass_arm; 
+		//const float FORCE_THRESHOLD = 1.0f;
+		const float bias_load_cell = - 0.0196;
+
+		
+		//MISURA ACCELERAZIONE Z
+	    float mea_force_z_raw = -(loadCell_Sample.force(1) - bias_load_cell);
+		updateMeasBuffer(mea_force_z_raw);
+		float mea_force_z_filtered = filterForceMeas();
+		float mea_acc = mea_force_z_filtered/mass;
+
+
+
+		matrix::Vector<float, 9> H;
+		Vector3f e3(0,0,1);
+		Vector3f accel_component = (e3.transpose()*Rk.transpose()*mass).transpose();
+		H(6) = accel_component(0);  // Aggiorna solo v_z
+		H(7) = accel_component(1);
+		H(8) = accel_component(2);
+		
+		_load_innov_var = (H.transpose() * P_aug * H)(0, 0) + R_FORCE;
+
+
+		matrix::Vector<float, 9> Kfusion; 
+		Kfusion = P_aug * H / _load_innov_var;
+
+		
+
+		Vector3f H_pos = H.slice<3,1>(0,0);
+		Vector3f H_vel = H.slice<3,1>(3,0);
+		Vector3f H_acc = H.slice<3,1>(6,0);
+		Vector3f K_pos = Kfusion.slice<3,1>(0,0);
+		Vector3f K_vel = Kfusion.slice<3,1>(3,0);
+		Vector3f K_acc = Kfusion.slice<3,1>(6,0);
+
+
+		augstate.aug_pos = augstate.aug_pos + K_pos*(mea_acc - H_pos*augstate.aug_pos);
+		augstate.aug_vel = augstate.aug_vel + K_vel*(mea_acc - H_vel*augstate.aug_vel);
+		augstate.aug_accel = augstate.aug_accel + K_acc*(mea_acc - H_acc*augstate.aug_accel);
+
+
+
+		matrix::Matrix<float, 9, 9> I;
+		I.setIdentity(); 
+
+		P_aug = (I - Kfusion*H) * P_aug;
+
+        Vector24f Kfusion_{};
+        Kfusion_.slice<3,1>(4,0) = K_pos;
+        Kfusion_.slice<3,1>(6,0) = K_vel;
+
+
+
+	 
+
+
+		//ATTIVA LA FUSIONE
+
+	   //measurementUpdate(Kfusion, _load_innov_var, _load_innov);
+    //augstate.aug_accel(2) = augstate.aug_accel(2) + 9.8f;
+	   
+
+	//PUBLISHER DI DEBUG
+	struct external_wrench_estimation_s wrench_estimation = {};
+
+
+	wrench_estimation.timestamp = loadCell_Sample.time_us; 
+	wrench_estimation.force_x = augstate.aug_accel(0);
+	wrench_estimation.force_y = augstate.aug_pos(2);
+	wrench_estimation.force_z = augstate.aug_accel(1);     
+	wrench_estimation.torque_x =  augstate.aug_pos(1);                 
+	wrench_estimation.torque_y = augstate.aug_accel(2);                 
+	wrench_estimation.torque_z = augstate.aug_vel(2);                 
+
+if (_wrench_pub == nullptr) {
+    
+    _wrench_pub = orb_advertise(ORB_ID(external_wrench_estimation), &wrench_estimation);
+} else {
+
+    orb_publish(ORB_ID(external_wrench_estimation), _wrench_pub, &wrench_estimation);
+}
+
+}
+
+
+
+
+Vector3f Ekf:: retrieveAngularVelocity(){
+
+
+    vehicle_angular_velocity_s vehicle_angular_velocity_data;
+    Vector3f angular_velocity(0.0f, 0.0f, 0.0f);  // Inizializzazione a 0
+
+    if (vehicle_angular_velocity_sub.update(&vehicle_angular_velocity_data)) {
+        // Assegna i valori correttamente
+        angular_velocity(0) = vehicle_angular_velocity_data.xyz[0];
+        angular_velocity(1) = vehicle_angular_velocity_data.xyz[1];
+        angular_velocity(2) = vehicle_angular_velocity_data.xyz[2];
+    }
+
+    return angular_velocity;
+}
+
+
+	
+
+void Ekf::updateThrustBuffer(float thrust) {
+    thrust_buffer.push_back(thrust);
+
+    // Mantieni solo gli ultimi N campioni per introdurre il ritardo
+    if (thrust_buffer.size() > thrust_delay_steps) {
+        thrust_buffer.pop_front();  // Rimuove il valore più vecchio
+    }
+}
+
+
+
+float Ekf::getDelayedThrust() {
+    if (thrust_buffer.size() < thrust_delay_steps) {
+        return thrust_buffer.front();  // Se il buffer non è ancora pieno, usa il valore più vecchio
+    } else {
+        return thrust_buffer[0];  // Prende il valore ritardato
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+float Ekf::predict_force_z(const float mass, float total_thrust, const float accel_z){
 
 
 	const float gravity_force = mass*CONSTANTS_ONE_G;
@@ -250,7 +469,7 @@ float Ekf::predict_fz(const float mass, float total_thrust, const float accel_z)
 
 		return estim_force_z;
 
-}
+}*/
 
 
 
@@ -319,22 +538,6 @@ float Ekf::filterAccelZ() {
 }
 
 
-void Ekf::updateThrustBuffer(float thrust) {
-    thrust_buffer.push_back(thrust);
-
-    // Mantieni solo gli ultimi N campioni per introdurre il ritardo
-    if (thrust_buffer.size() > thrust_delay_steps) {
-        thrust_buffer.pop_front();  // Rimuove il valore più vecchio
-    }
-}
-
-float Ekf::getDelayedThrust() {
-    if (thrust_buffer.size() < thrust_delay_steps) {
-        return thrust_buffer.front();  // Se il buffer non è ancora pieno, usa il valore più vecchio
-    } else {
-        return thrust_buffer[0];  // Prende il valore ritardato
-    }
-}
 
 
 

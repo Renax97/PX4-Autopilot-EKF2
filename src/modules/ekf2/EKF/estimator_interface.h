@@ -402,6 +402,8 @@ protected:
 	matrix::SquareMatrix<float, 3> Rk{};
 	float _loadCell_test_ratio{0.0f};
 	Vector3f prev_augstate_accel{0,0,20.4};
+	Vector3f prev_augstate_pos{0,0,0};
+	Vector3f prev_augstate_vel{0,0,0};
 	float prev_thrust{};
 	matrix::SquareMatrix<float, 9> P_aug{};
 
