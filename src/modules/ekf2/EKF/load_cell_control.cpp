@@ -29,16 +29,14 @@ void Ekf::controlLoadCellFusion()
 
 		quaternionToRotationMatrix();
 
-		float total_thrust = compute_thrust_z();
-        total_thrust = getDelayedThrust();
+		compute_thrust_z();
+        
+        float total_thrust = getDelayedThrust();
 		float f_z = predict_force_z(total_thrust);
-		//PX4_INFO("f_z = %f", (double)f_z);
-		predictAugState(total_thrust,prev_thrust,prev_augstate_accel,f_z);
+		PX4_INFO("f_z = %f", (double)f_z);
+		predictAugState(total_thrust,f_z);
 		predictAugCovariance();
-		prev_thrust = total_thrust;
-		prev_augstate_accel = augstate.aug_accel;
-        prev_augstate_pos = augstate.aug_pos;
-        prev_augstate_vel = augstate.aug_vel;
+		
 
 
      
@@ -47,6 +45,12 @@ void Ekf::controlLoadCellFusion()
 
 		updateLoadCell(loadCell_sample);
 		//}
+
+
+        prev_thrust = total_thrust;
+		prev_augstate_accel = augstate.aug_accel;
+        prev_augstate_pos = augstate.aug_pos;
+        prev_augstate_vel = augstate.aug_vel;
 		
 
 		
@@ -85,7 +89,7 @@ void Ekf::quaternionToRotationMatrix(){
 
 
 
-float Ekf::compute_thrust_z(){
+void Ekf::compute_thrust_z(){
 
 	const float motor_constant = 8.54858e-6; // N·s^2
     //const float max_rot_velocity = 1000.0;    // rad/s
@@ -120,9 +124,6 @@ float Ekf::compute_thrust_z(){
         PX4_WARN("Nessun dato disponibile da actuator_outputs");
     }
 
-
-	return total_thrust;
-
 }
 
 
@@ -141,9 +142,9 @@ float Ekf::predict_force_z(float total_thrust){
 	Vector3f e3(0,0,1);
 	Vector3f ak = augstate.aug_accel;
 
-    total_thrust = getDelayedThrust();
+    //total_thrust = getDelayedThrust();
 
-	matrix::Matrix<float, 3, 1> temp = (mass*(ak+CONSTANTS_ONE_G)) - (mass*CONSTANTS_ONE_G*e3 - total_thrust*Rk*e3);
+	matrix::Matrix<float, 3, 1> temp = (mass*(ak)) - (mass*CONSTANTS_ONE_G*e3 - total_thrust*Rk*e3);
 
 	float fz = (e3.transpose()*Rk.transpose() * temp)(0,0);
 
@@ -153,34 +154,35 @@ float Ekf::predict_force_z(float total_thrust){
 
 
 
-void Ekf::predictAugState(float total_thrust,float prec_thrust,Vector3f prev_accel, float f_z){
+void Ekf::predictAugState(float total_thrust, float f_z){
 
 
 	const float mass_drone = 2.0643f;
 	const float mass_arm = 0.017f;
 	const float mass = mass_drone + mass_arm; 
 
-	float Tprev = prec_thrust/mass;
-    total_thrust = getDelayedThrust();
+	float Tprev = prev_thrust/mass;
+    //total_thrust = getDelayedThrust();
 	float T = total_thrust/mass;
 
 	Vector3f ang_vel = retrieveAngularVelocity();
+    Vector3f e3(0,0,1);
 
     
-    augstate.aug_vel = prev_augstate_vel + _dt_ekf_avg*prev_augstate_accel;
+    augstate.aug_vel = prev_augstate_vel + _dt_ekf_avg*(prev_augstate_accel + CONSTANTS_ONE_G*e3);
 	augstate.aug_pos = prev_augstate_pos + _dt_ekf_avg*prev_augstate_vel;
     
     
 
-    PX4_INFO("pos_z = %f", (double)augstate.aug_pos(2));
+    //PX4_INFO("pos_z = %f", (double)augstate.aug_pos(2));
 
-    PX4_INFO("vel_z = %f", (double) augstate.aug_vel(2));
+    //PX4_INFO("vel_z = %f", (double) augstate.aug_vel(2));
 	
 	augstate.aug_quat_nominal = _state.quat_nominal;
 	augstate.aug_ang_vel = ang_vel;
 
 	matrix::SquareMatrix<float, 3> Sw;
-	Vector3f e3(0,0,1);
+	
 
 
     Sw(0,0) = 0.0f;
@@ -196,16 +198,16 @@ void Ekf::predictAugState(float total_thrust,float prec_thrust,Vector3f prev_acc
     Sw(2,2) = 0.0f;
 
 	Vector3f temp1 = ((- T + Tprev)/_dt_ekf_avg) * Rk*e3;
-	Vector3f temp2 = - T*Rk*Sw*e3;
+	Vector3f temp2 =  - T*Rk*Sw*e3;
 	Vector3f temp3 = f_z/mass * Rk * Sw * e3; 
 
 
-	augstate.aug_accel = prev_accel + _dt_ekf_avg*(temp1+temp2+temp3);
+	augstate.aug_accel = (prev_augstate_accel + _dt_ekf_avg*(temp1+temp2+temp3));
+   
+
     
     
 
- 
-    
 
     //PX4_INFO("temp1 = %f", (double)temp1(2));
     //PX4_INFO("temp2 = %f", (double)temp2(2));
@@ -307,8 +309,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
 
-	 
-
+	
 
 		//ATTIVA LA FUSIONE
 

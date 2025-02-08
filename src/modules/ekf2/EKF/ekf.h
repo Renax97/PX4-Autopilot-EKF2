@@ -540,7 +540,7 @@ private:
 	std::deque<float> accel_z_buffer; // Buffer circolare per i valori recenti di accel_z
     int window_size_accel_buffer = 10;
 	std::deque<float> thrust_buffer; // Buffer circolare per ritardare il thrust
-    size_t thrust_delay_steps = 18;
+    size_t thrust_delay_steps = 15;
 
 #endif
 
@@ -1093,7 +1093,7 @@ private:
 #if defined(CONFIG_EKF2_LOAD_CELL)
 	void controlLoadCellFusion();
 	void fuseLoadCell(const loadCellSample &loadCell_Sample,const float accel_z,const float vel_z_old);
-	float compute_thrust_z();
+	void compute_thrust_z();
 	float predict_force_z(float total_thrust);
 	float predict_fz(const float mass, float total_thrust, const float accel_z);
 	void updateMeasBuffer(float mea_force_z_raw); 
@@ -1104,7 +1104,7 @@ private:
 	float getDelayedThrust();
 	float estimate_external_force_z(const float mass, float total_thrust,float dt, float K1, float K2,float &r, float &r_dot, float accel_z);
 	void quaternionToRotationMatrix();
-	void predictAugState(float total_thrust,float prev_thrust, Vector3f prev_augstate_accel, float f_z);
+	void predictAugState(float total_thrust, float f_z);
 	void predictAugCovariance();
 	Vector3f retrieveAngularVelocity();
 	void updateLoadCell(const loadCellSample &loadCell_Sample);
