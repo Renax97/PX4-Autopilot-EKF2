@@ -400,12 +400,21 @@ protected:
 	RingBuffer<loadCellSample> *_load_cell_buffer{nullptr};
 	float prev_state_vel_z{};
 	matrix::SquareMatrix<float, 3> Rk{};
+	matrix::SquareMatrix<float, 3> Rk_prev{};
 	float _loadCell_test_ratio{0.0f};
-	Vector3f prev_augstate_accel{0,0,0};
-	Vector3f prev_augstate_pos{0,0,0};
-	Vector3f prev_augstate_vel{0,0,0};
+	Vector3f prev_augstate_accel{0.0f,0.0f,0.0f};
+	Vector3f prev_augstate_pos{0.0f,0.0f,0.0f};
+	Vector3f prev_augstate_vel{0.0f,0.0f,0.0f};
 	float prev_thrust{};
-	matrix::SquareMatrix<float, 9> P_aug{};
+	Vector3f ang_vel{};
+	matrix::SquareMatrix<float, 9> P_aug{([]{
+		matrix::SquareMatrix<float, 9> mat;
+		mat.setIdentity();  // Inizializza con la matrice identità
+		mat *= 1.0f;        // Moltiplica ogni valore della diagonale per 0.1
+		return mat;
+	})()};
+
+	float f_z = 0;
 
 #endif
 

@@ -61,7 +61,7 @@ publications:
     
   - topic: /fmu/out/vehicle_angular_velocity
     type: px4_msgs::msg::VehicleAngularVelocity
-    
+       
 
 subscriptions:
 
@@ -106,6 +106,14 @@ subscriptions:
     
   - topic: /fmu/in/load_cell_data
     type: px4_msgs::msg::LoadCellData
+    
+  - topic: /fmu/in/sensor_gnss_relative
+    type: px4_msgs::msg::SensorGnssRelative
+    
+  - topic: /fmu/in/trajectory_waypoint
+    type: px4_msgs::msg::TrajectoryWaypoint
+    
+    
     
  
     

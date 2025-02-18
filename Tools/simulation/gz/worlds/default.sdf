@@ -75,9 +75,6 @@
       <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
     </scene>
-    
-    
-    
    <plugin name="gz::sim::systems::ApplyLinkWrench" filename="gz-sim7-apply-link-wrench-system">
    </plugin>
 
@@ -107,6 +104,10 @@
     <uri>model://trellis</uri>
     <pose>5 5 0.05 0 0 0</pose> 
     </include>
+    
+    
+    
+    
   
     
     
@@ -158,9 +159,51 @@
   <self_collide>false</self_collide>
 </model>
 
-    
-    
-    
+
+
+  <model name="block">
+      <static>false</static> <!-- Se true, il blocco è fermo; se false, può muoversi -->
+    <pose>5 3 0.5 0 0 0</pose> <!-- Posizione iniziale: (x, y, z) e orientazione (rpy) -->
+    <link name="block_link">
+  
+      <!-- Inerzia del blocco -->
+      <inertial>
+        <mass>5.0</mass> <!-- Massa del blocco -->
+        <inertia>
+          <ixx>0.1</ixx> <iyy>0.1</iyy> <izz>0.1</izz>
+          <ixy>0.0</ixy> <ixz>0.0</ixz> <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- Collisione -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>1 1 0.2</size> <!-- Dimensioni del blocco: lunghezza, larghezza, altezza -->
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+
+      <!-- Visualizzazione del blocco -->
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>1 1 0.2</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.2 0.2 1</ambient> <!-- Colore rosso -->
+        </material>
+      </visual>
+    </link>
+    </model>
+ 
+
     <light name='sunUTC' type='directional'>
       <pose>0 0 500 0 -0 0</pose>
       <cast_shadows>true</cast_shadows>
@@ -180,5 +223,112 @@
         <falloff>0</falloff>
       </spot>
     </light>
+
+
+
+
+<include>
+  <uri>file://cable.sdf</uri>
+  <pose>2 0 0 0 0 0</pose>
+</include>
+
+
+
+
+  <joint name='segment_end_sphere_to_end_link' type='fixed'>
+      <parent>flexible_cable::end_sphere</parent>
+      <child>end_link_model::end_link</child>
+</joint>
+
+
+
+
+  <model name="static_cylinder">
+    <static>true</static> <!-- Rende il cilindro statico -->
+    <link name="link">
+      <pose>2 0.8 0 0 0 0</pose> <!-- Il cilindro parte dal suolo, con centro a 2m per avere 4m di altezza -->
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius> <!-- Raggio di 1 metro -->
+            <length>4.0</length> <!-- Altezza di 4 metri -->
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>4.0</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+
+
+
+
+    <model name="end_link_model">
+  <static>true</static>
+    <link name='end_link'>
+     <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='end_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.02</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='end_link_visual'>
+        <pose>2 0.8 2 1.57 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Gray</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 0 0 1</diffuse>
+          <ambient>1 0 0 1</ambient>
+        </material>
+      </visual>
+      <self_collide>true</self_collide>
+    </link>
+     </model>
+
+
+
+
   </world>
 </sdf>

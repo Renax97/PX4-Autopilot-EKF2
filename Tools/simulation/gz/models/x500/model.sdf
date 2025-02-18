@@ -627,7 +627,7 @@
     <visual name='visual'>
         <geometry>
             <box>
-                <size>0.02 0.005 0.01</size>
+                <size>0.1 0.005 0.02</size>
             </box>
         </geometry>
         <material>
@@ -639,7 +639,7 @@
     <collision name='collisionlink3'>
         <geometry>
             <box>
-                <size>0.02 0.005 0.005</size>
+                <size>0.1 0.005 0.02</size>
             </box>
         </geometry>
     </collision>  
@@ -674,8 +674,22 @@
 </joint>
 
 
+      <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+    </plugin>
 
-  
+    <!-->
+    <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>true</publish_link_pose>
+      <publish_collision_pose>false</publish_collision_pose>
+      <publish_visual_pose>false</publish_visual_pose>
+      <publish_nested_model_pose>false</publish_nested_model_pose>
+      </plugin>
+   <!-->
     
    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
@@ -743,5 +757,4 @@
     </plugin>
   </model>
 </sdf>
-
 

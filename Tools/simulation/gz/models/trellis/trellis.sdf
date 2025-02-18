@@ -4,7 +4,7 @@
     <static>true</static> <!-- Cambia in true se vuoi che sia immobile -->
     <link name="link">
       <inertial>
-  <mass>400.0</mass> <!-- Massa aumentata per stabilità -->
+  <mass>0.5</mass> <!-- Massa aumentata per stabilità -->
   <inertia>
     <ixx>0.2</ixx> <!-- Aggiornare i valori in base alle dimensioni -->
     <ixy>0</ixy>
