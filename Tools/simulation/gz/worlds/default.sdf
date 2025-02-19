@@ -80,7 +80,7 @@
 
     
     
-    
+    <!-->
   
   <include>
    <uri>model://PotatoChipChair</uri>
@@ -105,7 +105,7 @@
     <pose>5 5 0.05 0 0 0</pose> 
     </include>
     
-    
+    <!-->
     
     
   
@@ -140,7 +140,7 @@
         </mesh>
       </geometry>
     </visual>
-    <pose>0 0 0 0 -0 0</pose>
+    <pose>0 0 0 0 0 0</pose>
     <inertial>
       <pose>0 0 0 0 -0 0</pose>
       <mass>1</mass>
@@ -160,26 +160,26 @@
 </model>
 
 
-
+ <!-->
   <model name="block">
-      <static>false</static> <!-- Se true, il blocco è fermo; se false, può muoversi -->
-    <pose>5 3 0.5 0 0 0</pose> <!-- Posizione iniziale: (x, y, z) e orientazione (rpy) -->
+      <static>false</static> 
+    <pose>5 3 0.5 0 0 0</pose> 
     <link name="block_link">
   
-      <!-- Inerzia del blocco -->
+    
       <inertial>
-        <mass>5.0</mass> <!-- Massa del blocco -->
+        <mass>5.0</mass> 
         <inertia>
           <ixx>0.1</ixx> <iyy>0.1</iyy> <izz>0.1</izz>
           <ixy>0.0</ixy> <ixz>0.0</ixz> <iyz>0.0</iyz>
         </inertia>
       </inertial>
 
-      <!-- Collisione -->
+      
       <collision name="collision">
         <geometry>
           <box>
-            <size>1 1 0.2</size> <!-- Dimensioni del blocco: lunghezza, larghezza, altezza -->
+            <size>1 1 0.2</size> 
           </box>
         </geometry>
         <surface>
@@ -189,7 +189,7 @@
         </surface>
       </collision>
 
-      <!-- Visualizzazione del blocco -->
+      
       <visual name="visual">
         <geometry>
           <box>
@@ -197,12 +197,12 @@
           </box>
         </geometry>
         <material>
-          <ambient>0.8 0.2 0.2 1</ambient> <!-- Colore rosso -->
+          <ambient>0.8 0.2 0.2 1</ambient> 
         </material>
       </visual>
     </link>
     </model>
- 
+  <!-->
 
     <light name='sunUTC' type='directional'>
       <pose>0 0 500 0 -0 0</pose>
@@ -228,49 +228,33 @@
 
 
 <include>
-  <uri>file://cable.sdf</uri>
-  <pose>2 0 0 0 0 0</pose>
+  <uri>file:///home/renato/PX4-Autopilot-EKF2/Tools/simulation/gz/worlds/cable.sdf</uri>
+  <pose>-2 0 0 0 0 0</pose>
 </include>
 
 
 
 
-  <joint name='segment_end_sphere_to_end_link' type='fixed'>
-      <parent>flexible_cable::end_sphere</parent>
+<joint name='segment_end_sphere_to_end_link' type='revolute'>
+      <pose relative_to='cable::end_sphere'>0 0 -0.016 0 0 0</pose>
+      <parent>cable::end_sphere</parent>
       <child>end_link_model::end_link</child>
-</joint>
-
-
-
-
-  <model name="static_cylinder">
-    <static>true</static> <!-- Rende il cilindro statico -->
-    <link name="link">
-      <pose>2 0.8 0 0 0 0</pose> <!-- Il cilindro parte dal suolo, con centro a 2m per avere 4m di altezza -->
-      <collision name="collision">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius> <!-- Raggio di 1 metro -->
-            <length>4.0</length> <!-- Altezza di 4 metri -->
-          </cylinder>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <cylinder>
-            <radius>0.05</radius>
-            <length>4.0</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <ambient>0.7 0.7 0.7 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-          <specular>0.3 0.3 0.3 1</specular>
-        </material>
-      </visual>
-    </link>
-  </model>
-
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower> -0.014 </lower>
+          <upper> 0.014 </upper>
+          <effort>80</effort>
+          <velocity>3</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.10000000000000001</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>300</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
 
 
 
@@ -308,7 +292,7 @@
         </surface>
       </collision>
       <visual name='end_link_visual'>
-        <pose>2 0.8 2 1.57 0 0</pose>
+        <pose>-2 0.8 2 1.57 0 0</pose>
         <geometry>
           <box>
             <size>0.040000000000000001 0.040000000000000001 0.02</size>
@@ -326,6 +310,80 @@
       <self_collide>true</self_collide>
     </link>
      </model>
+
+
+
+
+  <joint name='segment_end_link_to_static_cylinder' type='fixed'>
+      <parent>end_link_model::end_link</parent>
+      <child>static_cylinder::link</child>
+</joint>
+
+
+
+
+  <model name="static_cylinder">
+    <static>true</static> 
+    <link name="link">
+      <pose>-2 0.8 0.99 0 0 0</pose> 
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius> 
+            <length>1.98</length> 
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>1.98</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+
+
+
+  <model name="static_cylinder_2">
+    <static>true</static> 
+    <link name="link_2">
+      <pose>-2 0 0.99 0 0 0</pose> 
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius> 
+            <length>1.98</length> 
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>1.98</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+
+
+
 
 
 

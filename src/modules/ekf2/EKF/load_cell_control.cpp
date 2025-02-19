@@ -76,22 +76,22 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     // Posizione del cavo in NED (es. -2 metri)
    // float cable_radius = 0.02;
-    float z_cable = -4.0f; //+ 0.02f; // 0.02 è il raggio del cavo
+    float z_cable = -2.0f; //+ 0.02f; // 0.02 è il raggio del cavo
     //float v_z_cable = 0.0f; // Il cavo è fisso
 
     // Altezza del punto di contatto del braccio
    // float arm_length = 0.315f;
-   float arm_length = 0.16f + 0.15f + 0.005f;
+   float arm_length = 0.16f + 0.15f;
     float z_contact = _state.pos(2) + arm_length; 
     //float z_contact = _state.pos(2);
 
     // Calcolo della penetrazione delta
     //float delta = (z_cable - cable_radius - z_contact); 
 
+    float delta = 0;
+
     if(mea_force_z_raw > FORCE_THRESHOLD){
-    float delta = -(z_cable - z_contact);
-    }else{
-        delta = 0;
+     delta = (z_cable - z_contact);
     }
    
 
@@ -133,10 +133,12 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	H(9) = H_pz;
 
 
-     //_load_innov = F_predicted - mea_force_z_raw;
-    const Vector24f state_vector_prev = getStateAtFusionHorizonAsVector();
+     
+    //const Vector24f state_vector_prev = getStateAtFusionHorizonAsVector();
 
-    _load_innov = H*state_vector_prev - mea_force_z_raw;
+    //_load_innov = H*state_vector_prev - mea_force_z_raw;
+
+    _load_innov = F_predicted - mea_force_z_filtered;
 
     _load_innov_var = (H.transpose() * P * H)(0, 0) + R_FORCE;
 
@@ -147,7 +149,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
         if(mea_force_z_raw > FORCE_THRESHOLD){
-         measurementUpdate(Kfusion, _load_innov_var, _load_innov);
+         //measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
         }
          

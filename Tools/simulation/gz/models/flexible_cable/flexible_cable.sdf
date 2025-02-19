@@ -1,0 +1,6778 @@
+<sdf version='1.6'>
+<model name='flexible_cable'>
+<joint name='fixed_to_world' type='fixed'>
+<pose relative_to='__model__'>0 0 2 1.5700000000000001 0 0</pose>
+<parent>world</parent>
+<child>base_link</child>
+</joint>
+<link name='base_link'>
+<pose relative_to='fixed_to_world'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.10000000000000001</mass>
+<inertia>
+<ixx>0.01</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.01</iyy>
+<iyz>0</iyz>
+<izz>0.01</izz>
+</inertia>
+</inertial>
+<collision name='base_link_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<box>
+<size>0.040000000000000001 0.040000000000000001 0.02</size>
+</box>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='base_link_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<box>
+<size>0.040000000000000001 0.040000000000000001 0.02</size>
+</box>
+</geometry>
+<material>
+
+<diffuse>1 0 0 1</diffuse>
+<ambient>1 0 0 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='base_link_to_segment_1_sphere' type='revolute'>
+<pose relative_to='base_link'>0 0 -0.016 0 0 0</pose>
+<parent>base_link</parent>
+<child>segment_1_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_1_sphere'>
+<pose relative_to='base_link_to_segment_1_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_1_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_1_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_1_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_1_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_1_sphere</parent>
+<child>segment_1_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_1_cylinder'>
+<pose relative_to='segment_1_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_1_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_1_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_1_cylinder_to_segment_2_sphere' type='revolute'>
+<pose relative_to='segment_1_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_1_cylinder</parent>
+<child>segment_2_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_2_sphere'>
+<pose relative_to='segment_1_cylinder_to_segment_2_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_2_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_2_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_2_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_2_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_2_sphere</parent>
+<child>segment_2_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_2_cylinder'>
+<pose relative_to='segment_2_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_2_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_2_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_2_cylinder_to_segment_3_sphere' type='revolute'>
+<pose relative_to='segment_2_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_2_cylinder</parent>
+<child>segment_3_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_3_sphere'>
+<pose relative_to='segment_2_cylinder_to_segment_3_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_3_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_3_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_3_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_3_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_3_sphere</parent>
+<child>segment_3_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_3_cylinder'>
+<pose relative_to='segment_3_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_3_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_3_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_3_cylinder_to_segment_4_sphere' type='revolute'>
+<pose relative_to='segment_3_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_3_cylinder</parent>
+<child>segment_4_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_4_sphere'>
+<pose relative_to='segment_3_cylinder_to_segment_4_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_4_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_4_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_4_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_4_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_4_sphere</parent>
+<child>segment_4_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_4_cylinder'>
+<pose relative_to='segment_4_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_4_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_4_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_4_cylinder_to_segment_5_sphere' type='revolute'>
+<pose relative_to='segment_4_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_4_cylinder</parent>
+<child>segment_5_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_5_sphere'>
+<pose relative_to='segment_4_cylinder_to_segment_5_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_5_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_5_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_5_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_5_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_5_sphere</parent>
+<child>segment_5_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_5_cylinder'>
+<pose relative_to='segment_5_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_5_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_5_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_5_cylinder_to_segment_6_sphere' type='revolute'>
+<pose relative_to='segment_5_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_5_cylinder</parent>
+<child>segment_6_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_6_sphere'>
+<pose relative_to='segment_5_cylinder_to_segment_6_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_6_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_6_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_6_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_6_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_6_sphere</parent>
+<child>segment_6_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_6_cylinder'>
+<pose relative_to='segment_6_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_6_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_6_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_6_cylinder_to_segment_7_sphere' type='revolute'>
+<pose relative_to='segment_6_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_6_cylinder</parent>
+<child>segment_7_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_7_sphere'>
+<pose relative_to='segment_6_cylinder_to_segment_7_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_7_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_7_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_7_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_7_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_7_sphere</parent>
+<child>segment_7_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_7_cylinder'>
+<pose relative_to='segment_7_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_7_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_7_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_7_cylinder_to_segment_8_sphere' type='revolute'>
+<pose relative_to='segment_7_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_7_cylinder</parent>
+<child>segment_8_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_8_sphere'>
+<pose relative_to='segment_7_cylinder_to_segment_8_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_8_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_8_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_8_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_8_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_8_sphere</parent>
+<child>segment_8_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_8_cylinder'>
+<pose relative_to='segment_8_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_8_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_8_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_8_cylinder_to_segment_9_sphere' type='revolute'>
+<pose relative_to='segment_8_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_8_cylinder</parent>
+<child>segment_9_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_9_sphere'>
+<pose relative_to='segment_8_cylinder_to_segment_9_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_9_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_9_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_9_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_9_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_9_sphere</parent>
+<child>segment_9_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_9_cylinder'>
+<pose relative_to='segment_9_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_9_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_9_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_9_cylinder_to_segment_10_sphere' type='revolute'>
+<pose relative_to='segment_9_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_9_cylinder</parent>
+<child>segment_10_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_10_sphere'>
+<pose relative_to='segment_9_cylinder_to_segment_10_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_10_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_10_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_10_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_10_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_10_sphere</parent>
+<child>segment_10_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_10_cylinder'>
+<pose relative_to='segment_10_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_10_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_10_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_10_cylinder_to_segment_11_sphere' type='revolute'>
+<pose relative_to='segment_10_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_10_cylinder</parent>
+<child>segment_11_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_11_sphere'>
+<pose relative_to='segment_10_cylinder_to_segment_11_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_11_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_11_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_11_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_11_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_11_sphere</parent>
+<child>segment_11_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_11_cylinder'>
+<pose relative_to='segment_11_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_11_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_11_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_11_cylinder_to_segment_12_sphere' type='revolute'>
+<pose relative_to='segment_11_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_11_cylinder</parent>
+<child>segment_12_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_12_sphere'>
+<pose relative_to='segment_11_cylinder_to_segment_12_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_12_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_12_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_12_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_12_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_12_sphere</parent>
+<child>segment_12_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_12_cylinder'>
+<pose relative_to='segment_12_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_12_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_12_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_12_cylinder_to_segment_13_sphere' type='revolute'>
+<pose relative_to='segment_12_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_12_cylinder</parent>
+<child>segment_13_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_13_sphere'>
+<pose relative_to='segment_12_cylinder_to_segment_13_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_13_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_13_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_13_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_13_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_13_sphere</parent>
+<child>segment_13_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_13_cylinder'>
+<pose relative_to='segment_13_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_13_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_13_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_13_cylinder_to_segment_14_sphere' type='revolute'>
+<pose relative_to='segment_13_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_13_cylinder</parent>
+<child>segment_14_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_14_sphere'>
+<pose relative_to='segment_13_cylinder_to_segment_14_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_14_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_14_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_14_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_14_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_14_sphere</parent>
+<child>segment_14_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_14_cylinder'>
+<pose relative_to='segment_14_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_14_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_14_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_14_cylinder_to_segment_15_sphere' type='revolute'>
+<pose relative_to='segment_14_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_14_cylinder</parent>
+<child>segment_15_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_15_sphere'>
+<pose relative_to='segment_14_cylinder_to_segment_15_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_15_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_15_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_15_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_15_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_15_sphere</parent>
+<child>segment_15_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_15_cylinder'>
+<pose relative_to='segment_15_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_15_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_15_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_15_cylinder_to_segment_16_sphere' type='revolute'>
+<pose relative_to='segment_15_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_15_cylinder</parent>
+<child>segment_16_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_16_sphere'>
+<pose relative_to='segment_15_cylinder_to_segment_16_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_16_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_16_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_16_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_16_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_16_sphere</parent>
+<child>segment_16_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_16_cylinder'>
+<pose relative_to='segment_16_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_16_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_16_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_16_cylinder_to_segment_17_sphere' type='revolute'>
+<pose relative_to='segment_16_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_16_cylinder</parent>
+<child>segment_17_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_17_sphere'>
+<pose relative_to='segment_16_cylinder_to_segment_17_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_17_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_17_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_17_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_17_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_17_sphere</parent>
+<child>segment_17_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_17_cylinder'>
+<pose relative_to='segment_17_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_17_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_17_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_17_cylinder_to_segment_18_sphere' type='revolute'>
+<pose relative_to='segment_17_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_17_cylinder</parent>
+<child>segment_18_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_18_sphere'>
+<pose relative_to='segment_17_cylinder_to_segment_18_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_18_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_18_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_18_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_18_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_18_sphere</parent>
+<child>segment_18_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_18_cylinder'>
+<pose relative_to='segment_18_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_18_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_18_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_18_cylinder_to_segment_19_sphere' type='revolute'>
+<pose relative_to='segment_18_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_18_cylinder</parent>
+<child>segment_19_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_19_sphere'>
+<pose relative_to='segment_18_cylinder_to_segment_19_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_19_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_19_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_19_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_19_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_19_sphere</parent>
+<child>segment_19_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_19_cylinder'>
+<pose relative_to='segment_19_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_19_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_19_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_19_cylinder_to_segment_20_sphere' type='revolute'>
+<pose relative_to='segment_19_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_19_cylinder</parent>
+<child>segment_20_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_20_sphere'>
+<pose relative_to='segment_19_cylinder_to_segment_20_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_20_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_20_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_20_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_20_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_20_sphere</parent>
+<child>segment_20_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_20_cylinder'>
+<pose relative_to='segment_20_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_20_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_20_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_20_cylinder_to_segment_21_sphere' type='revolute'>
+<pose relative_to='segment_20_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_20_cylinder</parent>
+<child>segment_21_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_21_sphere'>
+<pose relative_to='segment_20_cylinder_to_segment_21_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_21_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_21_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_21_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_21_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_21_sphere</parent>
+<child>segment_21_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_21_cylinder'>
+<pose relative_to='segment_21_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_21_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_21_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_21_cylinder_to_segment_22_sphere' type='revolute'>
+<pose relative_to='segment_21_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_21_cylinder</parent>
+<child>segment_22_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_22_sphere'>
+<pose relative_to='segment_21_cylinder_to_segment_22_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_22_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_22_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_22_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_22_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_22_sphere</parent>
+<child>segment_22_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_22_cylinder'>
+<pose relative_to='segment_22_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_22_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_22_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_22_cylinder_to_segment_23_sphere' type='revolute'>
+<pose relative_to='segment_22_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_22_cylinder</parent>
+<child>segment_23_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_23_sphere'>
+<pose relative_to='segment_22_cylinder_to_segment_23_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_23_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_23_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_23_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_23_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_23_sphere</parent>
+<child>segment_23_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_23_cylinder'>
+<pose relative_to='segment_23_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_23_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_23_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_23_cylinder_to_segment_24_sphere' type='revolute'>
+<pose relative_to='segment_23_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_23_cylinder</parent>
+<child>segment_24_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_24_sphere'>
+<pose relative_to='segment_23_cylinder_to_segment_24_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_24_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_24_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_24_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_24_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_24_sphere</parent>
+<child>segment_24_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_24_cylinder'>
+<pose relative_to='segment_24_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_24_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_24_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_24_cylinder_to_segment_25_sphere' type='revolute'>
+<pose relative_to='segment_24_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_24_cylinder</parent>
+<child>segment_25_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_25_sphere'>
+<pose relative_to='segment_24_cylinder_to_segment_25_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_25_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_25_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_25_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_25_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_25_sphere</parent>
+<child>segment_25_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_25_cylinder'>
+<pose relative_to='segment_25_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_25_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_25_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_25_cylinder_to_segment_26_sphere' type='revolute'>
+<pose relative_to='segment_25_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_25_cylinder</parent>
+<child>segment_26_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_26_sphere'>
+<pose relative_to='segment_25_cylinder_to_segment_26_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_26_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_26_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_26_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_26_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_26_sphere</parent>
+<child>segment_26_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_26_cylinder'>
+<pose relative_to='segment_26_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_26_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_26_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_26_cylinder_to_segment_27_sphere' type='revolute'>
+<pose relative_to='segment_26_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_26_cylinder</parent>
+<child>segment_27_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_27_sphere'>
+<pose relative_to='segment_26_cylinder_to_segment_27_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_27_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_27_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_27_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_27_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_27_sphere</parent>
+<child>segment_27_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_27_cylinder'>
+<pose relative_to='segment_27_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_27_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_27_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_27_cylinder_to_segment_28_sphere' type='revolute'>
+<pose relative_to='segment_27_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_27_cylinder</parent>
+<child>segment_28_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_28_sphere'>
+<pose relative_to='segment_27_cylinder_to_segment_28_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_28_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_28_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_28_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_28_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_28_sphere</parent>
+<child>segment_28_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_28_cylinder'>
+<pose relative_to='segment_28_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_28_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_28_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_28_cylinder_to_segment_29_sphere' type='revolute'>
+<pose relative_to='segment_28_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_28_cylinder</parent>
+<child>segment_29_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_29_sphere'>
+<pose relative_to='segment_28_cylinder_to_segment_29_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_29_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_29_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_29_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_29_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_29_sphere</parent>
+<child>segment_29_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_29_cylinder'>
+<pose relative_to='segment_29_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_29_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_29_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_29_cylinder_to_segment_30_sphere' type='revolute'>
+<pose relative_to='segment_29_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_29_cylinder</parent>
+<child>segment_30_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_30_sphere'>
+<pose relative_to='segment_29_cylinder_to_segment_30_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_30_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_30_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_30_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_30_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_30_sphere</parent>
+<child>segment_30_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_30_cylinder'>
+<pose relative_to='segment_30_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_30_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_30_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_30_cylinder_to_segment_31_sphere' type='revolute'>
+<pose relative_to='segment_30_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_30_cylinder</parent>
+<child>segment_31_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_31_sphere'>
+<pose relative_to='segment_30_cylinder_to_segment_31_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_31_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_31_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_31_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_31_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_31_sphere</parent>
+<child>segment_31_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_31_cylinder'>
+<pose relative_to='segment_31_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_31_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_31_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_31_cylinder_to_segment_32_sphere' type='revolute'>
+<pose relative_to='segment_31_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_31_cylinder</parent>
+<child>segment_32_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_32_sphere'>
+<pose relative_to='segment_31_cylinder_to_segment_32_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_32_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_32_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_32_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_32_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_32_sphere</parent>
+<child>segment_32_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_32_cylinder'>
+<pose relative_to='segment_32_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_32_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_32_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_32_cylinder_to_segment_33_sphere' type='revolute'>
+<pose relative_to='segment_32_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_32_cylinder</parent>
+<child>segment_33_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_33_sphere'>
+<pose relative_to='segment_32_cylinder_to_segment_33_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_33_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_33_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_33_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_33_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_33_sphere</parent>
+<child>segment_33_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_33_cylinder'>
+<pose relative_to='segment_33_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_33_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_33_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_33_cylinder_to_segment_34_sphere' type='revolute'>
+<pose relative_to='segment_33_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_33_cylinder</parent>
+<child>segment_34_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_34_sphere'>
+<pose relative_to='segment_33_cylinder_to_segment_34_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_34_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_34_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_34_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_34_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_34_sphere</parent>
+<child>segment_34_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_34_cylinder'>
+<pose relative_to='segment_34_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_34_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_34_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_34_cylinder_to_segment_35_sphere' type='revolute'>
+<pose relative_to='segment_34_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_34_cylinder</parent>
+<child>segment_35_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_35_sphere'>
+<pose relative_to='segment_34_cylinder_to_segment_35_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_35_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_35_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_35_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_35_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_35_sphere</parent>
+<child>segment_35_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_35_cylinder'>
+<pose relative_to='segment_35_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_35_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_35_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_35_cylinder_to_segment_36_sphere' type='revolute'>
+<pose relative_to='segment_35_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_35_cylinder</parent>
+<child>segment_36_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_36_sphere'>
+<pose relative_to='segment_35_cylinder_to_segment_36_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_36_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_36_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_36_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_36_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_36_sphere</parent>
+<child>segment_36_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_36_cylinder'>
+<pose relative_to='segment_36_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_36_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_36_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_36_cylinder_to_segment_37_sphere' type='revolute'>
+<pose relative_to='segment_36_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_36_cylinder</parent>
+<child>segment_37_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_37_sphere'>
+<pose relative_to='segment_36_cylinder_to_segment_37_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_37_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_37_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_37_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_37_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_37_sphere</parent>
+<child>segment_37_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_37_cylinder'>
+<pose relative_to='segment_37_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_37_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_37_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_37_cylinder_to_segment_38_sphere' type='revolute'>
+<pose relative_to='segment_37_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_37_cylinder</parent>
+<child>segment_38_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_38_sphere'>
+<pose relative_to='segment_37_cylinder_to_segment_38_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_38_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_38_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_38_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_38_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_38_sphere</parent>
+<child>segment_38_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_38_cylinder'>
+<pose relative_to='segment_38_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_38_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_38_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_38_cylinder_to_segment_39_sphere' type='revolute'>
+<pose relative_to='segment_38_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_38_cylinder</parent>
+<child>segment_39_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_39_sphere'>
+<pose relative_to='segment_38_cylinder_to_segment_39_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_39_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_39_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_39_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_39_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_39_sphere</parent>
+<child>segment_39_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_39_cylinder'>
+<pose relative_to='segment_39_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_39_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_39_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_39_cylinder_to_segment_40_sphere' type='revolute'>
+<pose relative_to='segment_39_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_39_cylinder</parent>
+<child>segment_40_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_40_sphere'>
+<pose relative_to='segment_39_cylinder_to_segment_40_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_40_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_40_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_40_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_40_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_40_sphere</parent>
+<child>segment_40_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_40_cylinder'>
+<pose relative_to='segment_40_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_40_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_40_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_40_cylinder_to_segment_41_sphere' type='revolute'>
+<pose relative_to='segment_40_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_40_cylinder</parent>
+<child>segment_41_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_41_sphere'>
+<pose relative_to='segment_40_cylinder_to_segment_41_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_41_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_41_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_41_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_41_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_41_sphere</parent>
+<child>segment_41_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_41_cylinder'>
+<pose relative_to='segment_41_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_41_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_41_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_41_cylinder_to_segment_42_sphere' type='revolute'>
+<pose relative_to='segment_41_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_41_cylinder</parent>
+<child>segment_42_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_42_sphere'>
+<pose relative_to='segment_41_cylinder_to_segment_42_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_42_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_42_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_42_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_42_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_42_sphere</parent>
+<child>segment_42_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_42_cylinder'>
+<pose relative_to='segment_42_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_42_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_42_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_42_cylinder_to_segment_43_sphere' type='revolute'>
+<pose relative_to='segment_42_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_42_cylinder</parent>
+<child>segment_43_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_43_sphere'>
+<pose relative_to='segment_42_cylinder_to_segment_43_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_43_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_43_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_43_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_43_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_43_sphere</parent>
+<child>segment_43_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_43_cylinder'>
+<pose relative_to='segment_43_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_43_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_43_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_43_cylinder_to_segment_44_sphere' type='revolute'>
+<pose relative_to='segment_43_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_43_cylinder</parent>
+<child>segment_44_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_44_sphere'>
+<pose relative_to='segment_43_cylinder_to_segment_44_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_44_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_44_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_44_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_44_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_44_sphere</parent>
+<child>segment_44_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_44_cylinder'>
+<pose relative_to='segment_44_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_44_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_44_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_44_cylinder_to_segment_45_sphere' type='revolute'>
+<pose relative_to='segment_44_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_44_cylinder</parent>
+<child>segment_45_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_45_sphere'>
+<pose relative_to='segment_44_cylinder_to_segment_45_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_45_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_45_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_45_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_45_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_45_sphere</parent>
+<child>segment_45_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_45_cylinder'>
+<pose relative_to='segment_45_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_45_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_45_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_45_cylinder_to_segment_46_sphere' type='revolute'>
+<pose relative_to='segment_45_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_45_cylinder</parent>
+<child>segment_46_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_46_sphere'>
+<pose relative_to='segment_45_cylinder_to_segment_46_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_46_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_46_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_46_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_46_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_46_sphere</parent>
+<child>segment_46_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_46_cylinder'>
+<pose relative_to='segment_46_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_46_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_46_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_46_cylinder_to_segment_47_sphere' type='revolute'>
+<pose relative_to='segment_46_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_46_cylinder</parent>
+<child>segment_47_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_47_sphere'>
+<pose relative_to='segment_46_cylinder_to_segment_47_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_47_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_47_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_47_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_47_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_47_sphere</parent>
+<child>segment_47_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_47_cylinder'>
+<pose relative_to='segment_47_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_47_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_47_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_47_cylinder_to_segment_48_sphere' type='revolute'>
+<pose relative_to='segment_47_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_47_cylinder</parent>
+<child>segment_48_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_48_sphere'>
+<pose relative_to='segment_47_cylinder_to_segment_48_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_48_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_48_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_48_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_48_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_48_sphere</parent>
+<child>segment_48_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_48_cylinder'>
+<pose relative_to='segment_48_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_48_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_48_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_48_cylinder_to_segment_49_sphere' type='revolute'>
+<pose relative_to='segment_48_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_48_cylinder</parent>
+<child>segment_49_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_49_sphere'>
+<pose relative_to='segment_48_cylinder_to_segment_49_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_49_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_49_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_49_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_49_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_49_sphere</parent>
+<child>segment_49_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_49_cylinder'>
+<pose relative_to='segment_49_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_49_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_49_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_49_cylinder_to_segment_50_sphere' type='revolute'>
+<pose relative_to='segment_49_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_49_cylinder</parent>
+<child>segment_50_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_50_sphere'>
+<pose relative_to='segment_49_cylinder_to_segment_50_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='segment_50_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_50_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='segment_50_sphere_to_cylinder' type='revolute'>
+<pose relative_to='segment_50_sphere'>0 0 0 0 0 0</pose>
+<parent>segment_50_sphere</parent>
+<child>segment_50_cylinder</child>
+<axis>
+<xyz>1 0 0</xyz>
+<limit>
+<lower> -0.014 </lower>
+<upper> 0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='segment_50_cylinder'>
+<pose relative_to='segment_50_sphere_to_cylinder'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<mass>0.01</mass>
+<inertia>
+<ixx>0.001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.001</iyy>
+<iyz>0</iyz>
+<izz>0.001</izz>
+</inertia>
+</inertial>
+<collision name='segment_50_cylinder_collision'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='segment_50_cylinder_visual'>
+<pose>0 0 -0.0080000000000000002 0 0 0</pose>
+<geometry>
+<cylinder>
+<length>0.01</length>
+<radius>0.0030000000000000001</radius>
+</cylinder>
+</geometry>
+<material>
+
+<diffuse>0 0 1 1</diffuse>
+<ambient>0 0 1 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+<joint name='joint_end_sphere' type='revolute'>
+<pose relative_to='segment_50_cylinder'>0 0 -0.016 0 0 0</pose>
+<parent>segment_50_cylinder</parent>
+<child>end_sphere</child>
+<axis>
+<xyz>0 1 0</xyz>
+<limit>
+<lower>-0.014 </lower>
+<upper>0.014 </upper>
+<effort>80</effort>
+<velocity>3</velocity>
+</limit>
+<dynamics>
+<damping>0.10000000000000001</damping>
+<friction>0</friction>
+<spring_reference>0</spring_reference>
+<spring_stiffness>100</spring_stiffness>
+</dynamics>
+</axis>
+</joint>
+<link name='end_sphere'>
+<pose relative_to='joint_end_sphere'>0 0 0 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.0050000000000000001</mass>
+<inertia>
+<ixx>0.0001</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.0001</iyy>
+<iyz>0</iyz>
+<izz>0.0001</izz>
+</inertia>
+</inertial>
+<collision name='end_sphere_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+</collision>
+<visual name='end_sphere_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<sphere>
+<radius>0.0030000000000000001</radius>
+</sphere>
+</geometry>
+<material>
+<diffuse>0.625 0.625 0.625 1</diffuse>
+<ambient>0.625 0.625 0.625 1</ambient>
+</material>
+</visual>
+</link>
+
+
+<!-->
+<joint name='segment_end_sphere_to_end_link' type='fixed'>
+<parent>end_sphere</parent>
+<child>end_link</child>
+</joint>
+
+
+<link name='end_link'>
+<static>true</static>
+<pose relative_to='end_sphere'>0 0 -0.016 0 0 0</pose>
+<inertial>
+<pose>0 0 0 0 0 0</pose>
+<mass>0.10000000000000001</mass>
+<inertia>
+<ixx>0.01</ixx>
+<ixy>0</ixy>
+<ixz>0</ixz>
+<iyy>0.01</iyy>
+<iyz>0</iyz>
+<izz>0.01</izz>
+</inertia>
+</inertial>
+<collision name='end_link_collision'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<box>
+<size>0.040000000000000001 0.040000000000000001 0.02</size>
+</box>
+</geometry>
+<surface>
+<contact>
+<ode/>
+</contact>
+<friction>
+<ode/>
+</friction>
+</surface>
+</collision>
+<visual name='end_link_visual'>
+<pose>0 0 0 0 0 0</pose>
+<geometry>
+<box>
+<size>0.040000000000000001 0.040000000000000001 0.02</size>
+</box>
+</geometry>
+<material>
+
+<diffuse>1 0 0 1</diffuse>
+<ambient>1 0 0 1</ambient>
+</material>
+</visual>
+<self_collide>true</self_collide>
+</link>
+
+
+
+
+
+<plugin name='CableVelControlPlugin' filename='/home/renato/ws_sensor_combined/build/gazebo_cable/libcable_vel_control_plugin.so'>
+<link_name>end_sphere</link_name>
+</plugin>
+<self_collide>true</self_collide>
+
+<!-->
+
+
+</model>
+
+</sdf>

@@ -1,5 +1,5 @@
 <sdf version='1.10'>
-  <model name='flexible_cable'>
+  <model name='cable'>
     <joint name='fixed_to_world' type='fixed'>
       <pose relative_to='__model__'>0 0 2 1.5700000000000001 0 0</pose>
       <parent>world</parent>
@@ -7070,11 +7070,13 @@
 
 
 
+
     
-     <plugin name='CableVelControlPlugin' filename='/home/renato/ws_sensor_combined/build/gazebo_cable/libcable_vel_control_plugin.so'>
-      <link_name>end_sphere</link_name>
-    </plugin>
-    <self_collide>true</self_collide>
+    
+    
+    
+    
+    
   </model>
 
 
