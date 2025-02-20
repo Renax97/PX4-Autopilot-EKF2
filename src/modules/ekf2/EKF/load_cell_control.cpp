@@ -69,20 +69,30 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     //MISURA ACCELERAZIONE Z
 	float mea_force_z_raw = -(loadCell_Sample.force(1) + bias_load_cell);
-	updateMeasBuffer(mea_force_z_raw);
-	float mea_force_z_filtered = filterForceMeas();
+	//updateMeasBuffer(mea_force_z_raw);
+	//float mea_force_z_filtered = filterForceMeas();
 	//float mea_acc = mea_force_z_filtered/mass;
+
+    float alpha = 0.1;
+	float mea_force_z_filtered = alpha * mea_force_z_raw + (1.0f - alpha) * mea_force_z_filtered_old;
+    mea_force_z_filtered_old = mea_force_z_filtered;
+
+
+
+
 
 
     // Posizione del cavo in NED (es. -2 metri)
    // float cable_radius = 0.02;
-    float z_cable = -2.0f; //+ 0.02f; // 0.02 è il raggio del cavo
+    float z_cable = -2.0f + 0.003f;  // 0.003 è il raggio del cavo
     //float v_z_cable = 0.0f; // Il cavo è fisso
+    
 
     // Altezza del punto di contatto del braccio
    // float arm_length = 0.315f;
    float arm_length = 0.16f + 0.15f;
-    float z_contact = _state.pos(2) + arm_length; 
+   float base_link_height = 0.24f;
+    float z_contact = _state.pos(2) + arm_length + base_link_height; 
     //float z_contact = _state.pos(2);
 
     // Calcolo della penetrazione delta
@@ -92,6 +102,10 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     if(mea_force_z_raw > FORCE_THRESHOLD){
      delta = (z_cable - z_contact);
+    }
+
+     if(delta > 0.1f){
+     delta = 0;
     }
    
 

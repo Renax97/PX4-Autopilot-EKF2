@@ -230,6 +230,15 @@
 <include>
   <uri>file:///home/renato/PX4-Autopilot-EKF2/Tools/simulation/gz/worlds/cable.sdf</uri>
   <pose>-2 0 0 0 0 0</pose>
+    <plugin
+        filename="gz-sim7-pose-publisher-system"
+        name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <publish_collision_pose>false</publish_collision_pose>
+        <publish_visual_pose>false</publish_visual_pose>
+        <publish_nested_model_pose>false</publish_nested_model_pose>
+        <!--><topic>model/x500_0/pose_publisher</topic><!-->
+      </plugin>
 </include>
 
 
@@ -348,6 +357,19 @@
         </material>
       </visual>
     </link>
+
+
+     <plugin
+        filename="gz-sim7-pose-publisher-system"
+        name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <publish_collision_pose>false</publish_collision_pose>
+        <publish_visual_pose>false</publish_visual_pose>
+        <publish_nested_model_pose>false</publish_nested_model_pose>
+        <!--><topic>model/x500_0/pose_publisher</topic><!-->
+      </plugin>
+
+
   </model>
 
 
@@ -380,6 +402,40 @@
       </visual>
     </link>
   </model>
+
+
+
+
+
+  <model name="palo">
+    <static>true</static> 
+    <link name="palo_link_2">
+      <pose>2 0 1 0 0 0</pose> 
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius> 
+            <length>2</length> 
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>2</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.7 0.7 0.7 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+
 
 
 

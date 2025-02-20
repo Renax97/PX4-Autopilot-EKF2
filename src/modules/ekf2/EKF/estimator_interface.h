@@ -415,6 +415,7 @@ protected:
 	})()};
 
 	float f_z = 0;
+	float mea_force_z_filtered_old = 0;
 
 #endif
 
