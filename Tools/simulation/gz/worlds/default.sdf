@@ -410,12 +410,12 @@
   <model name="palo">
     <static>true</static> 
     <link name="palo_link_2">
-      <pose>2 0 1 0 0 0</pose> 
+      <pose>-2 1 1 0 0 0</pose> 
       <collision name="collision">
         <geometry>
           <cylinder>
             <radius>0.05</radius> 
-            <length>2</length> 
+            <length>3</length> 
           </cylinder>
         </geometry>
       </collision>

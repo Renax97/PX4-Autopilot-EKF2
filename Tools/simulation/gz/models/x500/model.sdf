@@ -613,10 +613,10 @@
     </axis>
 </joint>
 
-
+<model name='x500_arm_link3'>
 <link name='arm_link3'>
 <gravity>true</gravity>
-    <pose relative_to="arm_link2"> -0.03 0 -0.075 1.5707 0 0</pose>
+        <pose>-0.15 0 -0.175 1.5707 1.5707 0</pose>
     <inertial>
         <mass>0.002</mass>
         <inertia>
@@ -658,6 +658,26 @@
     </sensor>
 </link>
 
+ <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+    </plugin>
+
+
+  <plugin
+        filename="gz-sim7-pose-publisher-system"
+        name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <publish_model_pose>true</publish_model_pose>
+        <publish_collision_pose>true</publish_collision_pose>
+        <publish_visual_pose>true</publish_visual_pose>
+        <publish_nested_model_pose>false</publish_nested_model_pose>
+         <frame_id>world</frame_id>
+      </plugin>
+
+</model>
+
    
 
 
@@ -679,7 +699,7 @@
 <joint name='link2_link3_joint' type='revolute'>
     <pose relative_to="arm_link2">0 0 -0.075 0 0 0</pose>
     <parent>arm_link2</parent>
-    <child>arm_link3</child>
+    <child>x500_arm_link3::arm_link3</child>
     <axis>
         <xyz>0 1 0</xyz> <!-- Rotazione lungo Y -->
         <limit>
@@ -725,21 +745,23 @@
   <plugin
         filename="gz-sim7-pose-publisher-system"
         name="gz::sim::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
-        <publish_collision_pose>false</publish_collision_pose>
-        <publish_visual_pose>false</publish_visual_pose>
-        <publish_nested_model_pose>false</publish_nested_model_pose>
-        <!--><topic>model/x500_0/pose_publisher</topic><!-->
+    <publish_link_pose>true</publish_link_pose>
+    <publish_model_pose>true</publish_model_pose>  <!-- PUBBLICA LA POSA ASSOLUTA DEL MODELLO -->
+    <publish_collision_pose>true</publish_collision_pose>
+    <publish_visual_pose>true</publish_visual_pose>
+    <publish_nested_model_pose>false</publish_nested_model_pose>
+    <update_frequency>30</update_frequency>
       </plugin>
 
 
 
-
+<!--
       <plugin
       filename="gz-sim-odometry-publisher-system"
       name="gz::sim::systems::OdometryPublisher">
       <dimensions>3</dimensions>
     </plugin>
+    <!-->
 
     <!-->
     <plugin

@@ -55,7 +55,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
     // Parametri del contatto elastico
-    const float k_n = 300.0f; // Rigidezza del contatto (N/m)
+    const float k_n = 500.0f; // Rigidezza del contatto (N/m)
     //const float c_n = 50.0f;    // Smorzamento (Ns/m)
     //const float mass = 1.5f;    // Massa del drone (kg)
     const float R_FORCE = 0.1f; 
@@ -102,41 +102,27 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     if(mea_force_z_raw > FORCE_THRESHOLD){
      delta = (z_cable - z_contact);
+     delta = 0.02f;
+
     }
 
      if(delta > 0.1f){
      delta = 0;
     }
-   
 
-  
+   
+   
 
     // Calcolo della velocità relativa
     //float delta_dot = _state.vel(2) - v_z_cable;
 
-    // if (mea_force_z_raw > 2){
-
-    //     mea_force_z_raw = -10;
-
-
-
-    // }
+   
 
     // Calcolo della forza elastica prevista
     float F_predicted = k_n * delta;
 
 
 
-    // if(mea_force_z_raw > 1){
-    //     mea_force_z_raw = -5;
-    // }
-
-
-   
-
-
-
-    
 
 
     const float H_vz = 0.0f;
@@ -163,7 +149,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
         if(mea_force_z_raw > FORCE_THRESHOLD){
-         //measurementUpdate(Kfusion, _load_innov_var, _load_innov);
+         measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
         }
          
