@@ -56,13 +56,13 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     // Parametri del contatto elastico
     
-    const float R_FORCE = 0.1f; 
+    const float R_FORCE = 0.4f; 
     //const float mass = _params.mass;
 	//const float mass = 2.081f;
 	//const float mass_drone = 2.0643f;
 	//const float mass_arm = 0.017f;
 	//const float mass = mass_drone + mass_arm; 
-	const float FORCE_THRESHOLD = 0.01f;
+	const float FORCE_THRESHOLD = 0.00000001f;
 	//const float bias_load_cell = - 0.0196;
 
     //MISURA ACCELERAZIONE Z
@@ -81,8 +81,11 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
     float mea_force_z_filtered = alpha * mea_force_z_raw + (1.0f - alpha) * mea_force_z_filtered_old;
     mea_force_z_filtered_old = mea_force_z_filtered;
 
+    Vector3f F_e_body (mea_force_x_filtered, mea_force_y_filtered, mea_force_z_filtered);
+    Vector3f F_e = _state.quat_nominal.rotateVector(F_e_body);
 
-    Vector3f F_e (mea_force_x_filtered, mea_force_y_filtered, mea_force_z_filtered);
+
+    //Vector3f F_e (mea_force_x_filtered, mea_force_y_filtered, mea_force_z_filtered);
     Vector3f v_parallel;
 
     float dot_vF = prev_augstate_vel(0) * F_e(0) + prev_augstate_vel(1) * F_e(1) + prev_augstate_vel(2) * F_e(2);
