@@ -526,7 +526,7 @@
     <link name='arm_link1'>
     <pose>0 0 -0.125 0 0 0</pose>
     <inertial>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
          <inertia>
             <ixx>3.8464910483993325e-07</ixx>
             <iyy>2.6115851691700804e-05</iyy>
@@ -569,7 +569,7 @@
 <link name='arm_link2'>
     <pose relative_to="arm_link1">-0.075 0 -0.08 0 1.5707 0</pose>
     <inertial>
-        <mass>0.005</mass>
+        <mass>0.002</mass>
          <inertia>
             <ixx>3.8464910483993325e-07</ixx>
             <iyy>2.6115851691700804e-05</iyy>
@@ -613,12 +613,11 @@
     </axis>
 </joint>
 
-<model name='x500_arm_link3'>
+
 <link name='arm_link3'>
-<gravity>true</gravity>
         <pose>-0.15 0 -0.175 1.5707 1.5707 0</pose>
     <inertial>
-        <mass>0.002</mass>
+        <mass>0.001</mass>
         <inertia>
             <ixx>1.0e-08</ixx>
             <iyy>1.0e-08</iyy>
@@ -645,9 +644,11 @@
         </geometry>
     </collision>  
     
+    
+    <!-->
      <sensor name="contact_sensor" type="contact">
         <always_on>true</always_on>
-        <update_rate>50</update_rate> <!-- Frequenza di aggiornamento -->
+        <update_rate>50</update_rate> 
         <contact>
             <collision>collisionlink3</collision>
         </contact>
@@ -656,27 +657,13 @@
             <frameName>arm_link3</frameName>
         </plugin>
     </sensor>
+     <!-->
+     
 </link>
 
- <plugin
-      filename="gz-sim-odometry-publisher-system"
-      name="gz::sim::systems::OdometryPublisher">
-      <dimensions>3</dimensions>
-    </plugin>
 
 
-  <plugin
-        filename="gz-sim7-pose-publisher-system"
-        name="gz::sim::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
-        <publish_model_pose>true</publish_model_pose>
-        <publish_collision_pose>true</publish_collision_pose>
-        <publish_visual_pose>true</publish_visual_pose>
-        <publish_nested_model_pose>false</publish_nested_model_pose>
-         <frame_id>world</frame_id>
-      </plugin>
 
-</model>
 
    
 
@@ -699,7 +686,7 @@
 <joint name='link2_link3_joint' type='revolute'>
     <pose relative_to="arm_link2">0 0 -0.075 0 0 0</pose>
     <parent>arm_link2</parent>
-    <child>x500_arm_link3::arm_link3</child>
+    <child>arm_link3</child>
     <axis>
         <xyz>0 1 0</xyz> <!-- Rotazione lungo Y -->
         <limit>
@@ -736,7 +723,6 @@
  name="gz::sim::systems::JointController">
  <joint_name>link2_link3_joint</joint_name>
  <initial_velocity>10.0</initial_velocity>
- <topic>model/x500_0/joint3/controller</topic>
 </plugin>
 
 

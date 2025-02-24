@@ -415,7 +415,11 @@ protected:
 	})()};
 
 	float f_z = 0;
+	float mea_force_x_filtered_old = 0;
+	float mea_force_y_filtered_old = 0;
 	float mea_force_z_filtered_old = 0;
+	bool contact_already_happened = false;
+	float z_cable = 0;
 
 #endif
 

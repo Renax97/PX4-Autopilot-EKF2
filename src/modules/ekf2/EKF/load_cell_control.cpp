@@ -38,7 +38,7 @@ void Ekf::controlLoadCellFusion()
 		}
 
 
-      
+      prev_augstate_vel = _state.vel;
 		
 		
 	}
@@ -55,82 +55,67 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
     // Parametri del contatto elastico
-    const float k_n = 500.0f; // Rigidezza del contatto (N/m)
-    //const float c_n = 50.0f;    // Smorzamento (Ns/m)
-    //const float mass = 1.5f;    // Massa del drone (kg)
+    
     const float R_FORCE = 0.1f; 
     //const float mass = _params.mass;
 	//const float mass = 2.081f;
 	//const float mass_drone = 2.0643f;
 	//const float mass_arm = 0.017f;
 	//const float mass = mass_drone + mass_arm; 
-	const float FORCE_THRESHOLD = 1.0f;
-	const float bias_load_cell = - 0.0196;
+	const float FORCE_THRESHOLD = 0.01f;
+	//const float bias_load_cell = - 0.0196;
 
     //MISURA ACCELERAZIONE Z
-	float mea_force_z_raw = -(loadCell_Sample.force(1) + bias_load_cell);
+	float mea_force_x_raw = -(loadCell_Sample.force(2));
+    float mea_force_y_raw = (loadCell_Sample.force(0));
+    float mea_force_z_raw = -(loadCell_Sample.force(1));
 	//updateMeasBuffer(mea_force_z_raw);
 	//float mea_force_z_filtered = filterForceMeas();
 	//float mea_acc = mea_force_z_filtered/mass;
 
-    float alpha = 0.1;
-	float mea_force_z_filtered = alpha * mea_force_z_raw + (1.0f - alpha) * mea_force_z_filtered_old;
+    float alpha = 0.05;
+	float mea_force_x_filtered = alpha * mea_force_x_raw + (1.0f - alpha) * mea_force_x_filtered_old;
+    mea_force_x_filtered_old = mea_force_x_filtered;
+    float mea_force_y_filtered = alpha * mea_force_y_raw + (1.0f - alpha) * mea_force_y_filtered_old;
+    mea_force_y_filtered_old = mea_force_y_filtered;
+    float mea_force_z_filtered = alpha * mea_force_z_raw + (1.0f - alpha) * mea_force_z_filtered_old;
     mea_force_z_filtered_old = mea_force_z_filtered;
 
 
+    Vector3f F_e (mea_force_x_filtered, mea_force_y_filtered, mea_force_z_filtered);
+    Vector3f v_parallel;
+
+    float dot_vF = prev_augstate_vel(0) * F_e(0) + prev_augstate_vel(1) * F_e(1) + prev_augstate_vel(2) * F_e(2);
+
+    float norm_F_squared = F_e(0)* F_e(0) + F_e(1) * F_e(1) + F_e(2) * F_e(2);
+
+    if(norm_F_squared < FORCE_THRESHOLD){
+
+        v_parallel = prev_augstate_vel;
+
+    }else{
+
+        float projection_coefficient = dot_vF / norm_F_squared;
+         for (int i = 0; i < 3; i++) {
+        v_parallel(i) = prev_augstate_vel(i) - projection_coefficient * F_e(i);
+    }
+    }
+
+    float load_innov_x = _state.vel(0) - v_parallel(0);
+    float load_innov_y = _state.vel(1) - v_parallel(1);
+    float load_innov_z = _state.vel(2) - v_parallel(2);
 
 
 
-
-    // Posizione del cavo in NED (es. -2 metri)
-   // float cable_radius = 0.02;
-    float z_cable = -2.0f + 0.003f;  // 0.003 è il raggio del cavo
-    //float v_z_cable = 0.0f; // Il cavo è fisso
     
-
-    // Altezza del punto di contatto del braccio
-   // float arm_length = 0.315f;
-   float arm_length = 0.16f + 0.15f;
-   float base_link_height = 0.24f;
-    float z_contact = _state.pos(2) + arm_length + base_link_height; 
-    //float z_contact = _state.pos(2);
-
-    // Calcolo della penetrazione delta
-    //float delta = (z_cable - cable_radius - z_contact); 
-
-    float delta = 0;
-
-    if(mea_force_z_raw > FORCE_THRESHOLD){
-     delta = (z_cable - z_contact);
-     delta = 0.02f;
-
-    }
-
-     if(delta > 0.1f){
-     delta = 0;
-    }
-
-   
-   
-
-    // Calcolo della velocità relativa
-    //float delta_dot = _state.vel(2) - v_z_cable;
-
-   
-
-    // Calcolo della forza elastica prevista
-    float F_predicted = k_n * delta;
-
-
-
-
-
-    const float H_vz = 0.0f;
-	const float H_pz =k_n;
-	Vector24f H;
-	H.setZero();
-	H(6) = H_vz;  // Aggiorna solo v_z
-	H(9) = H_pz;
+	
+    Vector24f Hx;
+    Vector24f Hy;
+    Vector24f Hz;
+	
+	Hx(4) = 1.0f;  // Aggiorna solo v_z
+	Hy(5) = 1.0f;
+    Hz(6) = 1.0f;
 
 
      
@@ -138,20 +123,26 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     //_load_innov = H*state_vector_prev - mea_force_z_raw;
 
-    _load_innov = F_predicted - mea_force_z_filtered;
+    
 
-    _load_innov_var = (H.transpose() * P * H)(0, 0) + R_FORCE;
-
-
-		Vector24f Kfusion = P * H / _load_innov_var;
-
+    float load_innov_var_x = (Hx.transpose() * P * Hx)(0, 0) + R_FORCE;
+    float load_innov_var_y = (Hy.transpose() * P * Hy)(0, 0) + R_FORCE;
+    float load_innov_var_z = (Hz.transpose() * P * Hz)(0, 0) + R_FORCE;
 
 
+		Vector24f Kfusionx = P * Hx / load_innov_var_x;
+        Vector24f Kfusiony = P * Hy / load_innov_var_y;
+        Vector24f Kfusionz = P * Hz / load_innov_var_z;
 
-        if(mea_force_z_raw > FORCE_THRESHOLD){
-         measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
-        }
+
+
+      
+        measurementUpdate(Kfusionx, load_innov_var_x, load_innov_x);
+        measurementUpdate(Kfusiony, load_innov_var_y, load_innov_y);
+        measurementUpdate(Kfusionz, load_innov_var_z, load_innov_z);
+
+     
          
 
 
@@ -162,12 +153,12 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	struct external_wrench_estimation_s wrench_estimation = {};
 
 	wrench_estimation.timestamp = loadCell_Sample.time_us; // Tempo corrente
-	wrench_estimation.force_x = z_contact;                  // Forza su X (fissata a 0)
-	wrench_estimation.force_y = delta;                  // Forza su Y (fissata a 0)
-	wrench_estimation.force_z = F_predicted;     // Forza stimata su Z
-	wrench_estimation.torque_x = _load_innov;                 // Momento torcente su X
+	wrench_estimation.force_x = load_innov_x;                  // Forza su X (fissata a 0)
+	wrench_estimation.force_y = load_innov_y;                  // Forza su Y (fissata a 0)
+	wrench_estimation.force_z = load_innov_z;     // Forza stimata su Z
+	wrench_estimation.torque_x = 0.0f;                 // Momento torcente su X
 	wrench_estimation.torque_y =mea_force_z_filtered;                 // Momento torcente su Y
-	wrench_estimation.torque_z = Kfusion(6);                 // Momento torcente su Z
+	wrench_estimation.torque_z = 0.0f;                 // Momento torcente su Z
 
 if (_wrench_pub == nullptr) {
     
@@ -182,8 +173,6 @@ if (_wrench_pub == nullptr) {
 
 
 }
-
-
 
 
 
