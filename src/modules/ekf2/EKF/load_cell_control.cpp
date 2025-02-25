@@ -27,10 +27,10 @@ void Ekf::controlLoadCellFusion()
         prev_state_vel_z = _state.vel(2);*/
 
 
-		
 
 
-     
+
+
 
 		if (_load_cell_buffer->pop_first_older_than(_time_delayed_us, &loadCell_sample)) {
 
@@ -38,9 +38,9 @@ void Ekf::controlLoadCellFusion()
 		}
 
 
-      
-		
-		
+
+
+
 	}
 }
 
@@ -55,17 +55,17 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
     // Parametri del contatto elastico
-    const float k_n = 200.0f; // Rigidezza del contatto (N/m)
+    const float k_n = 100.0f; // Rigidezza del contatto (N/m)
     //const float c_n = 50.0f;    // Smorzamento (Ns/m)
     //const float mass = 1.5f;    // Massa del drone (kg)
-    const float R_FORCE = 0.1f; 
+    const float R_FORCE = 0.1f;
     //const float mass = _params.mass;
 	//const float mass = 2.081f;
 	//const float mass_drone = 2.0643f;
 	//const float mass_arm = 0.017f;
-	//const float mass = mass_drone + mass_arm; 
+	//const float mass = mass_drone + mass_arm;
 	const float FORCE_THRESHOLD = 0.05f;
-	const float bias_load_cell = - 0.0196;
+	const float bias_load_cell =  0.078f;
 
     //MISURA ACCELERAZIONE Z
 	float mea_force_z_raw = -(loadCell_Sample.force(1) + bias_load_cell);
@@ -88,20 +88,20 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
     //float v_z_cable = 0.0f; // Il cavo è fisso
 
     //float z_cable = -2.12f;
-    
+
 
     // Altezza del punto di contatto del braccio
    // float arm_length = 0.315f;
    //float arm_length = 0.16f + 0.15f;
    //float base_link_height = 0.24f;
-    //float z_contact = _state.pos(2) + arm_length + base_link_height; 
+    //float z_contact = _state.pos(2) + arm_length + base_link_height;
     float z_contact = _state.pos(2);
 
     // Calcolo della penetrazione delta
-    //float delta = (z_cable - cable_radius - z_contact); 
+    //float delta = (z_cable - cable_radius - z_contact);
 
     float delta = 0;
-    
+
 
     if(mea_force_z_raw > FORCE_THRESHOLD && contact_happened == false){
         z_cable = _state.pos(2);
@@ -109,20 +109,21 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
     }
 
     if(mea_force_z_raw > FORCE_THRESHOLD && contact_happened == true){
-        delta = z_cable - z_contact;
+       delta = std::abs(z_cable - z_contact);
+
     }
 
-     if(delta > 0.1f || delta < - 0.1f){
+     /*if(delta > 0.2f){
      delta = 0.0f;
-    }
+    }*/
 
-   
-   
+
+
 
     // Calcolo della velocità relativa
     //float delta_dot = _state.vel(2) - v_z_cable;
 
-   
+
 
     // Calcolo della forza elastica prevista
     float F_predicted = k_n * delta;
@@ -139,7 +140,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	H(9) = H_pz;
 
 
-     
+
     //const Vector24f state_vector_prev = getStateAtFusionHorizonAsVector();
 
     //_load_innov = H*state_vector_prev - mea_force_z_raw;
@@ -149,16 +150,21 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
     _load_innov_var = (H.transpose() * P * H)(0, 0) + R_FORCE;
 
 
-		Vector24f Kfusion = P * H / _load_innov_var;
+	Vector24f Kfusion = P * H / _load_innov_var;
+
+    if(contact_happened == true){
+        time_of_contact += 0.01f;
+    }
 
 
 
 
-        if(mea_force_z_raw > 1.0f){
+        if(time_of_contact > 0.0f && time_of_contact < 2.0f){
+
          measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
         }
-         
+
 
 
 
@@ -176,7 +182,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	wrench_estimation.torque_z = z_cable;                 // Momento torcente su Z
 
 if (_wrench_pub == nullptr) {
-    
+
     _wrench_pub = orb_advertise(ORB_ID(external_wrench_estimation), &wrench_estimation);
 } else {
 
@@ -273,7 +279,7 @@ float Ekf::predict_force_z(const float mass, float total_thrust, const float acc
 		//UTILIZZO ACCELERAZIONE CALCOLATA DA VELOCITÀ
 
 		float delayed_thrust = getDelayedThrust();
-		
+
 		Vector3f thrust_delayed_body(0,0,delayed_thrust);
 		Vector3f thrust_delayed_NED =  _state.quat_nominal.rotateVector(thrust_delayed_body);
 
@@ -302,7 +308,7 @@ void Ekf::updateMeasBuffer(float mea_force_z_raw){
 
 
 
- 
+
 
 float Ekf::filterForceMeas() {
 
@@ -320,7 +326,7 @@ float Ekf::filterForceMeas() {
     // Restituisci la media
     return sum / meas_z_buffer.size();
 
-	
+
 }
 
 
@@ -370,7 +376,7 @@ float Ekf::estimate_external_force_z(
 ) {
     const float g = 9.81f; // Accelerazione gravitazionale (m/s^2)
 
-	
+
 
     // 2. Calcolo della forza grezza lungo l'asse z
     // Questa è la forza "teorica" che include tutto ciò che non è spiegato dal modello del drone.
@@ -395,7 +401,7 @@ float Ekf::estimate_external_force_z(
 
 	//PX4_INFO("PREDICTED FORCE DIFFERENCE %.4f",static_cast<double>(f_z_raw - r));
 
-	
+
 
     // 5. Ritorna la forza esterna stimata
     return -r;

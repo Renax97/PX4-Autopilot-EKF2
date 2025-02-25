@@ -394,9 +394,9 @@ protected:
 	RingBuffer<auxVelSample> *_auxvel_buffer{nullptr};
 #endif // CONFIG_EKF2_AUXVEL
 	RingBuffer<systemFlagUpdate> *_system_flag_buffer{nullptr};
-	
-	
-#if defined(CONFIG_EKF2_LOAD_CELL)	
+
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
 	RingBuffer<loadCellSample> *_load_cell_buffer{nullptr};
 	float prev_state_vel_z{};
 	matrix::SquareMatrix<float, 3> Rk{};
@@ -418,6 +418,7 @@ protected:
 	float mea_force_z_filtered_old = 0;
 	bool contact_happened = false;
 	float z_cable;
+	float time_of_contact = 0;
 
 #endif
 

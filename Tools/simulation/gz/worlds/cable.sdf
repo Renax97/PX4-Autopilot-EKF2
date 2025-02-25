@@ -66,10 +66,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -77,7 +77,7 @@
       <pose relative_to='base_link_to_segment_1_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -134,10 +134,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -145,7 +145,7 @@
       <pose relative_to='segment_1_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -204,10 +204,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -215,7 +215,7 @@
       <pose relative_to='segment_1_cylinder_to_segment_2_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -272,10 +272,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -283,7 +283,7 @@
       <pose relative_to='segment_2_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -342,10 +342,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -353,7 +353,7 @@
       <pose relative_to='segment_2_cylinder_to_segment_3_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -410,10 +410,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -421,7 +421,7 @@
       <pose relative_to='segment_3_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -480,10 +480,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -491,7 +491,7 @@
       <pose relative_to='segment_3_cylinder_to_segment_4_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -548,10 +548,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -559,7 +559,7 @@
       <pose relative_to='segment_4_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -618,10 +618,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -629,7 +629,7 @@
       <pose relative_to='segment_4_cylinder_to_segment_5_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -686,10 +686,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -697,7 +697,7 @@
       <pose relative_to='segment_5_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -756,10 +756,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -767,7 +767,7 @@
       <pose relative_to='segment_5_cylinder_to_segment_6_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -824,10 +824,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -835,7 +835,7 @@
       <pose relative_to='segment_6_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -894,10 +894,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -905,7 +905,7 @@
       <pose relative_to='segment_6_cylinder_to_segment_7_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -962,10 +962,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -973,7 +973,7 @@
       <pose relative_to='segment_7_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1032,10 +1032,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1043,7 +1043,7 @@
       <pose relative_to='segment_7_cylinder_to_segment_8_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1100,10 +1100,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1111,7 +1111,7 @@
       <pose relative_to='segment_8_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1170,10 +1170,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1181,7 +1181,7 @@
       <pose relative_to='segment_8_cylinder_to_segment_9_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1238,10 +1238,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1249,7 +1249,7 @@
       <pose relative_to='segment_9_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1308,10 +1308,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1319,7 +1319,7 @@
       <pose relative_to='segment_9_cylinder_to_segment_10_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1376,10 +1376,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1387,7 +1387,7 @@
       <pose relative_to='segment_10_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1446,10 +1446,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1457,7 +1457,7 @@
       <pose relative_to='segment_10_cylinder_to_segment_11_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1514,10 +1514,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1525,7 +1525,7 @@
       <pose relative_to='segment_11_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1584,10 +1584,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1595,7 +1595,7 @@
       <pose relative_to='segment_11_cylinder_to_segment_12_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1652,10 +1652,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1663,7 +1663,7 @@
       <pose relative_to='segment_12_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1722,10 +1722,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1733,7 +1733,7 @@
       <pose relative_to='segment_12_cylinder_to_segment_13_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1790,10 +1790,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1801,7 +1801,7 @@
       <pose relative_to='segment_13_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1860,10 +1860,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1871,7 +1871,7 @@
       <pose relative_to='segment_13_cylinder_to_segment_14_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -1928,10 +1928,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -1939,7 +1939,7 @@
       <pose relative_to='segment_14_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -1998,10 +1998,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2009,7 +2009,7 @@
       <pose relative_to='segment_14_cylinder_to_segment_15_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2066,10 +2066,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2077,7 +2077,7 @@
       <pose relative_to='segment_15_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2136,10 +2136,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2147,7 +2147,7 @@
       <pose relative_to='segment_15_cylinder_to_segment_16_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2204,10 +2204,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2215,7 +2215,7 @@
       <pose relative_to='segment_16_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2274,10 +2274,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2285,7 +2285,7 @@
       <pose relative_to='segment_16_cylinder_to_segment_17_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2342,10 +2342,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2353,7 +2353,7 @@
       <pose relative_to='segment_17_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2412,10 +2412,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2423,7 +2423,7 @@
       <pose relative_to='segment_17_cylinder_to_segment_18_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2480,10 +2480,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2491,7 +2491,7 @@
       <pose relative_to='segment_18_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2550,10 +2550,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2561,7 +2561,7 @@
       <pose relative_to='segment_18_cylinder_to_segment_19_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2618,10 +2618,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2629,7 +2629,7 @@
       <pose relative_to='segment_19_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2688,10 +2688,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2699,7 +2699,7 @@
       <pose relative_to='segment_19_cylinder_to_segment_20_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2756,10 +2756,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2767,7 +2767,7 @@
       <pose relative_to='segment_20_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2826,10 +2826,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2837,7 +2837,7 @@
       <pose relative_to='segment_20_cylinder_to_segment_21_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -2894,10 +2894,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2905,7 +2905,7 @@
       <pose relative_to='segment_21_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -2964,10 +2964,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -2975,7 +2975,7 @@
       <pose relative_to='segment_21_cylinder_to_segment_22_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3032,10 +3032,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3043,7 +3043,7 @@
       <pose relative_to='segment_22_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3102,10 +3102,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3113,7 +3113,7 @@
       <pose relative_to='segment_22_cylinder_to_segment_23_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3170,10 +3170,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3181,7 +3181,7 @@
       <pose relative_to='segment_23_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3240,10 +3240,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3251,7 +3251,7 @@
       <pose relative_to='segment_23_cylinder_to_segment_24_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3308,10 +3308,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3319,7 +3319,7 @@
       <pose relative_to='segment_24_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3378,10 +3378,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3389,7 +3389,7 @@
       <pose relative_to='segment_24_cylinder_to_segment_25_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3446,10 +3446,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3457,7 +3457,7 @@
       <pose relative_to='segment_25_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3516,10 +3516,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3527,7 +3527,7 @@
       <pose relative_to='segment_25_cylinder_to_segment_26_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3584,10 +3584,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3595,7 +3595,7 @@
       <pose relative_to='segment_26_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3654,10 +3654,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3665,7 +3665,7 @@
       <pose relative_to='segment_26_cylinder_to_segment_27_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3722,10 +3722,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3733,7 +3733,7 @@
       <pose relative_to='segment_27_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3792,10 +3792,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3803,7 +3803,7 @@
       <pose relative_to='segment_27_cylinder_to_segment_28_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3860,10 +3860,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3871,7 +3871,7 @@
       <pose relative_to='segment_28_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -3930,10 +3930,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -3941,7 +3941,7 @@
       <pose relative_to='segment_28_cylinder_to_segment_29_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -3998,10 +3998,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4009,7 +4009,7 @@
       <pose relative_to='segment_29_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4068,10 +4068,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4079,7 +4079,7 @@
       <pose relative_to='segment_29_cylinder_to_segment_30_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4136,10 +4136,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4147,7 +4147,7 @@
       <pose relative_to='segment_30_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4206,10 +4206,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4217,7 +4217,7 @@
       <pose relative_to='segment_30_cylinder_to_segment_31_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4274,10 +4274,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4285,7 +4285,7 @@
       <pose relative_to='segment_31_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4344,10 +4344,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4355,7 +4355,7 @@
       <pose relative_to='segment_31_cylinder_to_segment_32_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4412,10 +4412,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4423,7 +4423,7 @@
       <pose relative_to='segment_32_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4482,10 +4482,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4493,7 +4493,7 @@
       <pose relative_to='segment_32_cylinder_to_segment_33_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4550,10 +4550,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4561,7 +4561,7 @@
       <pose relative_to='segment_33_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4620,10 +4620,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4631,7 +4631,7 @@
       <pose relative_to='segment_33_cylinder_to_segment_34_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4688,10 +4688,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4699,7 +4699,7 @@
       <pose relative_to='segment_34_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4758,10 +4758,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4769,7 +4769,7 @@
       <pose relative_to='segment_34_cylinder_to_segment_35_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4826,10 +4826,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4837,7 +4837,7 @@
       <pose relative_to='segment_35_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -4896,10 +4896,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4907,7 +4907,7 @@
       <pose relative_to='segment_35_cylinder_to_segment_36_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -4964,10 +4964,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -4975,7 +4975,7 @@
       <pose relative_to='segment_36_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5034,10 +5034,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5045,7 +5045,7 @@
       <pose relative_to='segment_36_cylinder_to_segment_37_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5102,10 +5102,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5113,7 +5113,7 @@
       <pose relative_to='segment_37_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5172,10 +5172,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5183,7 +5183,7 @@
       <pose relative_to='segment_37_cylinder_to_segment_38_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5240,10 +5240,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5251,7 +5251,7 @@
       <pose relative_to='segment_38_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5310,10 +5310,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5321,7 +5321,7 @@
       <pose relative_to='segment_38_cylinder_to_segment_39_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5378,10 +5378,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5389,7 +5389,7 @@
       <pose relative_to='segment_39_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5448,10 +5448,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5459,7 +5459,7 @@
       <pose relative_to='segment_39_cylinder_to_segment_40_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5516,10 +5516,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5527,7 +5527,7 @@
       <pose relative_to='segment_40_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5586,10 +5586,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5597,7 +5597,7 @@
       <pose relative_to='segment_40_cylinder_to_segment_41_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5654,10 +5654,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5665,7 +5665,7 @@
       <pose relative_to='segment_41_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5724,10 +5724,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5735,7 +5735,7 @@
       <pose relative_to='segment_41_cylinder_to_segment_42_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5792,10 +5792,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5803,7 +5803,7 @@
       <pose relative_to='segment_42_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -5862,10 +5862,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5873,7 +5873,7 @@
       <pose relative_to='segment_42_cylinder_to_segment_43_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -5930,10 +5930,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -5941,7 +5941,7 @@
       <pose relative_to='segment_43_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6000,10 +6000,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6011,7 +6011,7 @@
       <pose relative_to='segment_43_cylinder_to_segment_44_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6068,10 +6068,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6079,7 +6079,7 @@
       <pose relative_to='segment_44_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6138,10 +6138,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6149,7 +6149,7 @@
       <pose relative_to='segment_44_cylinder_to_segment_45_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6206,10 +6206,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6217,7 +6217,7 @@
       <pose relative_to='segment_45_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6276,10 +6276,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6287,7 +6287,7 @@
       <pose relative_to='segment_45_cylinder_to_segment_46_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6344,10 +6344,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6355,7 +6355,7 @@
       <pose relative_to='segment_46_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6414,10 +6414,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6425,7 +6425,7 @@
       <pose relative_to='segment_46_cylinder_to_segment_47_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6482,10 +6482,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6493,7 +6493,7 @@
       <pose relative_to='segment_47_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6552,10 +6552,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6563,7 +6563,7 @@
       <pose relative_to='segment_47_cylinder_to_segment_48_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6620,10 +6620,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6631,7 +6631,7 @@
       <pose relative_to='segment_48_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6690,10 +6690,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6701,7 +6701,7 @@
       <pose relative_to='segment_48_cylinder_to_segment_49_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6758,10 +6758,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6769,7 +6769,7 @@
       <pose relative_to='segment_49_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6828,10 +6828,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6839,7 +6839,7 @@
       <pose relative_to='segment_49_cylinder_to_segment_50_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -6896,10 +6896,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6907,7 +6907,7 @@
       <pose relative_to='segment_50_sphere_to_cylinder'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 -0.0080000000000000002 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.002</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
@@ -6966,10 +6966,10 @@
           <velocity>3</velocity>
         </limit>
         <dynamics>
-          <damping>0.210000000000000001</damping>
+          <damping>0.0210000000000000001</damping>
           <friction>0.0</friction>
           <spring_reference>0</spring_reference>
-          <spring_stiffness>400</spring_stiffness>
+          <spring_stiffness>200</spring_stiffness>
         </dynamics>
       </axis>
     </joint>
@@ -6977,7 +6977,7 @@
       <pose relative_to='joint_end_sphere'>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.0050000000000000001</mass>
+        <mass>0.00050000000000000001</mass>
         <inertia>
           <ixx>0.0001</ixx>
           <ixy>0</ixy>
@@ -7010,73 +7010,13 @@
     </link>
 
 
-  <!-->
-   <joint name='segment_end_sphere_to_end_link' type='fixed'>
-      <parent>end_sphere</parent>
-      <child>end_link</child>
-    </joint>
-    
-
-    <link name='end_link'>
-    <static>true</static>
-     <pose relative_to='end_sphere'>0 0 -0.016 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.10000000000000001</mass>
-        <inertia>
-          <ixx>0.01</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.01</iyy>
-          <iyz>0</iyz>
-          <izz>0.01</izz>
-        </inertia>
-      </inertial>
-      <collision name='end_link_collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.040000000000000001 0.040000000000000001 0.02</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='end_link_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.040000000000000001 0.040000000000000001 0.02</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Gray</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <diffuse>1 0 0 1</diffuse>
-          <ambient>1 0 0 1</ambient>
-        </material>
-      </visual>
-      <self_collide>true</self_collide>
-    </link>
-    <!-->
 
 
 
 
-    
-    
-    
-    
-    
-    
+
+
+
   </model>
 
 

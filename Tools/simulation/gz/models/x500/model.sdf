@@ -520,9 +520,9 @@
         </dynamics>
       </axis>
     </joint>
-    
-    
-    
+
+
+
     <link name='arm_link1'>
     <pose>0 0 -0.125 0 0 0</pose>
     <inertial>
@@ -607,8 +607,8 @@
     <axis>
         <xyz expressed_in='__model__'>0 1 0</xyz>
         <limit>
-            <lower>-1.5707</lower>    
-            <upper>1.5707</upper>    
+            <lower>-1.5707</lower>
+            <upper>1.5707</upper>
         </limit>
     </axis>
 </joint>
@@ -618,7 +618,7 @@
 <gravity>true</gravity>
         <pose>-0.15 0 -0.175 1.5707 1.5707 0</pose>
     <inertial>
-        <mass>0.002</mass>
+        <mass>0.008</mass>
         <inertia>
             <ixx>1.0e-08</ixx>
             <iyy>1.0e-08</iyy>
@@ -643,8 +643,8 @@
                 <size>0.08 0.005 0.02</size>
             </box>
         </geometry>
-    </collision>  
-    
+    </collision>
+
      <sensor name="contact_sensor" type="contact">
         <always_on>true</always_on>
         <update_rate>50</update_rate> <!-- Frequenza di aggiornamento -->
@@ -678,7 +678,7 @@
 
 </model>
 
-   
+
 
 
 <!-->
@@ -687,7 +687,7 @@
     <parent>arm_link2</parent>
     <child>arm_link3</child>
     <sensor name="force_torque_sensor" type="force_torque">
-         <pose relative_to="arm_link3">0 0 0 0 0 0</pose> 
+         <pose relative_to="arm_link3">0 0 0 0 0 0</pose>
         <always_on>true</always_on>
         <update_rate>250</update_rate>
         <plugin name="gz::sim::systems::ForceTorque" filename="/usr/lib/x86_64-linux-gnu/gz-sim-7/plugins/libgz-sim7-forcetorque-system.so"/>
@@ -716,13 +716,13 @@
 
 
 
-  
+
     <!-- Sensore di forza per rilevare il contatto -->
     <sensor name="force_torque_sensor" type="force_torque">
-        <pose relative_to="arm_link3">0 0 0 0 0 0</pose> 
+        <pose relative_to="arm_link3">0 0 0 0 0 0</pose>
         <always_on>true</always_on>
         <update_rate>250</update_rate>
-        <plugin name="gz::sim::systems::ForceTorque" 
+        <plugin name="gz::sim::systems::ForceTorque"
                 filename="/usr/lib/x86_64-linux-gnu/gz-sim-7/plugins/libgz-sim7-forcetorque-system.so"/>
     </sensor>
 </joint>
@@ -740,21 +740,38 @@
 
 
 
+    <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+    </plugin>
+    <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>true</publish_link_pose>
+      <publish_collision_pose>false</publish_collision_pose>
+      <publish_visual_pose>false</publish_visual_pose>
+      <publish_nested_model_pose>false</publish_nested_model_pose>
+      </plugin>
 
+
+
+
+<!-->
   <plugin
         filename="gz-sim7-pose-publisher-system"
         name="gz::sim::systems::PosePublisher">
     <publish_link_pose>true</publish_link_pose>
-    <publish_model_pose>true</publish_model_pose>  <!-- PUBBLICA LA POSA ASSOLUTA DEL MODELLO -->
+    <publish_model_pose>true</publish_model_pose>
     <publish_collision_pose>true</publish_collision_pose>
     <publish_visual_pose>true</publish_visual_pose>
     <publish_nested_model_pose>false</publish_nested_model_pose>
     <update_frequency>30</update_frequency>
       </plugin>
+<!-->
 
 
-
-<!--
+<!-->
       <plugin
       filename="gz-sim-odometry-publisher-system"
       name="gz::sim::systems::OdometryPublisher">
@@ -772,7 +789,7 @@
       <publish_nested_model_pose>false</publish_nested_model_pose>
       </plugin>
    <!-->
-    
+
    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
