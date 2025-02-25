@@ -55,7 +55,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
     // Parametri del contatto elastico
-    const float k_n = 500.0f; // Rigidezza del contatto (N/m)
+    const float k_n = 200.0f; // Rigidezza del contatto (N/m)
     //const float c_n = 50.0f;    // Smorzamento (Ns/m)
     //const float mass = 1.5f;    // Massa del drone (kg)
     const float R_FORCE = 0.1f; 
@@ -64,7 +64,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	//const float mass_drone = 2.0643f;
 	//const float mass_arm = 0.017f;
 	//const float mass = mass_drone + mass_arm; 
-	const float FORCE_THRESHOLD = 1.0f;
+	const float FORCE_THRESHOLD = 0.05f;
 	const float bias_load_cell = - 0.0196;
 
     //MISURA ACCELERAZIONE Z
@@ -84,30 +84,36 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     // Posizione del cavo in NED (es. -2 metri)
    // float cable_radius = 0.02;
-    float z_cable = -2.0f + 0.003f;  // 0.003 è il raggio del cavo
+    //float z_cable = -2.0f + 0.003f;  // 0.003 è il raggio del cavo
     //float v_z_cable = 0.0f; // Il cavo è fisso
+
+    //float z_cable = -2.12f;
     
 
     // Altezza del punto di contatto del braccio
    // float arm_length = 0.315f;
-   float arm_length = 0.16f + 0.15f;
-   float base_link_height = 0.24f;
-    float z_contact = _state.pos(2) + arm_length + base_link_height; 
-    //float z_contact = _state.pos(2);
+   //float arm_length = 0.16f + 0.15f;
+   //float base_link_height = 0.24f;
+    //float z_contact = _state.pos(2) + arm_length + base_link_height; 
+    float z_contact = _state.pos(2);
 
     // Calcolo della penetrazione delta
     //float delta = (z_cable - cable_radius - z_contact); 
 
     float delta = 0;
+    
 
-    if(mea_force_z_raw > FORCE_THRESHOLD){
-     delta = (z_cable - z_contact);
-     delta = 0.02f;
-
+    if(mea_force_z_raw > FORCE_THRESHOLD && contact_happened == false){
+        z_cable = _state.pos(2);
+        contact_happened = true;
     }
 
-     if(delta > 0.1f){
-     delta = 0;
+    if(mea_force_z_raw > FORCE_THRESHOLD && contact_happened == true){
+        delta = z_cable - z_contact;
+    }
+
+     if(delta > 0.1f || delta < - 0.1f){
+     delta = 0.0f;
     }
 
    
@@ -148,7 +154,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
 
-        if(mea_force_z_raw > FORCE_THRESHOLD){
+        if(mea_force_z_raw > 1.0f){
          measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
         }
@@ -167,7 +173,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	wrench_estimation.force_z = F_predicted;     // Forza stimata su Z
 	wrench_estimation.torque_x = _load_innov;                 // Momento torcente su X
 	wrench_estimation.torque_y =mea_force_z_filtered;                 // Momento torcente su Y
-	wrench_estimation.torque_z = Kfusion(6);                 // Momento torcente su Z
+	wrench_estimation.torque_z = z_cable;                 // Momento torcente su Z
 
 if (_wrench_pub == nullptr) {
     

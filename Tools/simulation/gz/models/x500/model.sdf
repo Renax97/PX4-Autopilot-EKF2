@@ -706,7 +706,7 @@
             <lower>-1.4</lower>  <!-- Posizione iniziale -->
             <upper>0</upper>  <!-- 90° (in radianti) -->
             <effort>100</effort> <!-- Soglia di forza per far ruotare il giunto -->
-            <velocity>5</velocity>
+            <velocity>2</velocity>
         </limit>
         <dynamics>
             <damping>0.05</damping>
@@ -735,8 +735,7 @@
  filename="gz-sim-joint-controller-system"
  name="gz::sim::systems::JointController">
  <joint_name>link2_link3_joint</joint_name>
- <initial_velocity>10.0</initial_velocity>
- <topic>model/x500_0/joint3/controller</topic>
+ <initial_velocity>1.0</initial_velocity>
 </plugin>
 
 
