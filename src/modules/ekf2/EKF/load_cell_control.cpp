@@ -56,7 +56,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     // Parametri del contatto elastico
     
-    const float R_FORCE = 0.4f; 
+    const float R_FORCE = 0.05f; 
     //const float mass = _params.mass;
 	//const float mass = 2.081f;
 	//const float mass_drone = 2.0643f;
@@ -140,10 +140,20 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
 
-      
+        /*float load_cell_x_test_ratio = sq(load_innov_x  / (sq(5.0f) * load_innov_var_x));
+        float load_cell_y_test_ratio = sq(load_innov_y  / (sq(5.0f) * load_innov_var_y));
+        float load_cell_z_test_ratio = sq(load_innov_z  / (sq(5.0f) * load_innov_var_z));*/
+
+		// if the innovation consistency check fails then don't fuse the sample
+		//if (load_cell_x_test_ratio <= 1.0f) {
         measurementUpdate(Kfusionx, load_innov_var_x, load_innov_x);
+        //}
+        //if (load_cell_y_test_ratio <= 1.0f) {
         measurementUpdate(Kfusiony, load_innov_var_y, load_innov_y);
+        //}
+        //if (load_cell_z_test_ratio <= 1.0f) {
         measurementUpdate(Kfusionz, load_innov_var_z, load_innov_z);
+        //}
 
      
          
@@ -159,9 +169,9 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	wrench_estimation.force_x = load_innov_x;                  // Forza su X (fissata a 0)
 	wrench_estimation.force_y = load_innov_y;                  // Forza su Y (fissata a 0)
 	wrench_estimation.force_z = load_innov_z;     // Forza stimata su Z
-	wrench_estimation.torque_x = 0.0f;                 // Momento torcente su X
-	wrench_estimation.torque_y =mea_force_z_filtered;                 // Momento torcente su Y
-	wrench_estimation.torque_z = 0.0f;                 // Momento torcente su Z
+	wrench_estimation.torque_x = mea_force_x_filtered;                 // Momento torcente su X
+	wrench_estimation.torque_y = mea_force_y_filtered;                 // Momento torcente su Y
+	wrench_estimation.torque_z = mea_force_z_filtered;                 // Momento torcente su Z
 
 if (_wrench_pub == nullptr) {
     
@@ -386,7 +396,6 @@ float Ekf::estimate_external_force_z(
     // 5. Ritorna la forza esterna stimata
     return -r;
 }
-
 
 
 
