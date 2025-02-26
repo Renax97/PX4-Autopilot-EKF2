@@ -541,6 +541,9 @@ private:
     int window_size_accel_buffer = 5;
 	std::deque<float> thrust_buffer; // Buffer circolare per ritardare il thrust
     size_t thrust_delay_steps = 18;
+	std::deque<float> force_buffer; // Buffer circolare per ritardare il thrust
+    size_t force_delay_steps = 18;
+
 
 #endif
 
@@ -1102,6 +1105,8 @@ private:
     float filterAccelZ(); 
 	void updateThrustBuffer(float thrust);
 	float getDelayedThrust();
+	void  updateMeasuredForce(float mea_z_filtered);
+	float getDelayedMeasuredForce();
 	float estimate_external_force_z(const float mass, float total_thrust,float dt, float K1, float K2,float &r, float &r_dot, float accel_z);
 	void quaternionToRotationMatrix();
 	void predictAugState(float total_thrust);

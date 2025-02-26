@@ -55,7 +55,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
     // Parametri del contatto elastico
-    const float k_n = 100.0f; // Rigidezza del contatto (N/m)
+    const float k_n = 1300.0f; // Rigidezza del contatto (N/m)
     //const float c_n = 50.0f;    // Smorzamento (Ns/m)
     //const float mass = 1.5f;    // Massa del drone (kg)
     const float R_FORCE = 0.1f;
@@ -73,7 +73,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	//float mea_force_z_filtered = filterForceMeas();
 	//float mea_acc = mea_force_z_filtered/mass;
 
-    float alpha = 0.1;
+    float alpha = 0.05;
 	float mea_force_z_filtered = alpha * mea_force_z_raw + (1.0f - alpha) * mea_force_z_filtered_old;
     mea_force_z_filtered_old = mea_force_z_filtered;
 
@@ -145,6 +145,10 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
     //_load_innov = H*state_vector_prev - mea_force_z_raw;
 
+    updateMeasuredForce(mea_force_z_filtered);
+
+    float mea_force_z_filtered_delayed = getDelayedMeasuredForce();
+
     _load_innov = F_predicted - mea_force_z_filtered;
 
     _load_innov_var = (H.transpose() * P * H)(0, 0) + R_FORCE;
@@ -159,7 +163,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 
 
 
-        if(time_of_contact > 0.0f && time_of_contact < 2.0f){
+        if(time_of_contact > 0.0f && time_of_contact < 2.0f && mea_force_z_filtered > 10000.0f){
 
          measurementUpdate(Kfusion, _load_innov_var, _load_innov);
 
@@ -179,7 +183,7 @@ void Ekf::updateLoadCell(const loadCellSample &loadCell_Sample){
 	wrench_estimation.force_z = F_predicted;     // Forza stimata su Z
 	wrench_estimation.torque_x = _load_innov;                 // Momento torcente su X
 	wrench_estimation.torque_y =mea_force_z_filtered;                 // Momento torcente su Y
-	wrench_estimation.torque_z = z_cable;                 // Momento torcente su Z
+	wrench_estimation.torque_z = mea_force_z_filtered_delayed;                 // Momento torcente su Z
 
 if (_wrench_pub == nullptr) {
 
@@ -203,6 +207,30 @@ if (_wrench_pub == nullptr) {
 
 
 
+
+
+
+
+
+
+void Ekf::updateMeasuredForce(float mea_z_filtered) {
+    force_buffer.push_back(mea_z_filtered);
+
+    // Mantieni solo gli ultimi N campioni per introdurre il ritardo
+    if (force_buffer.size() > force_delay_steps) {
+        force_buffer.pop_front();  // Rimuove il valore più vecchio
+    }
+}
+
+
+
+float Ekf::getDelayedMeasuredForce() {
+    if (force_buffer.size() < force_delay_steps) {
+        return force_buffer.front();  // Se il buffer non è ancora pieno, usa il valore più vecchio
+    } else {
+        return force_buffer[0];  // Prende il valore ritardato
+    }
+}
 
 
 

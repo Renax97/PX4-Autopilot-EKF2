@@ -613,7 +613,7 @@
     </axis>
 </joint>
 
-<model name='x500_arm_link3'>
+
 <link name='arm_link3'>
 <gravity>true</gravity>
         <pose>-0.15 0 -0.175 1.5707 1.5707 0</pose>
@@ -658,25 +658,7 @@
     </sensor>
 </link>
 
- <plugin
-      filename="gz-sim-odometry-publisher-system"
-      name="gz::sim::systems::OdometryPublisher">
-      <dimensions>3</dimensions>
-    </plugin>
 
-
-  <plugin
-        filename="gz-sim7-pose-publisher-system"
-        name="gz::sim::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
-        <publish_model_pose>true</publish_model_pose>
-        <publish_collision_pose>true</publish_collision_pose>
-        <publish_visual_pose>true</publish_visual_pose>
-        <publish_nested_model_pose>false</publish_nested_model_pose>
-         <frame_id>world</frame_id>
-      </plugin>
-
-</model>
 
 
 
@@ -699,7 +681,7 @@
 <joint name='link2_link3_joint' type='revolute'>
     <pose relative_to="arm_link2">0 0 -0.075 0 0 0</pose>
     <parent>arm_link2</parent>
-    <child>x500_arm_link3::arm_link3</child>
+    <child>arm_link3</child>
     <axis>
         <xyz>0 1 0</xyz> <!-- Rotazione lungo Y -->
         <limit>
