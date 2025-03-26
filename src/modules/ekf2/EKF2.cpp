@@ -193,16 +193,17 @@ EKF2::EKF2(bool multi_mode, const px4::wq_config_t &config, bool replay_mode):
 	_param_ekf2_synthetic_mag_z(_params->synthesize_mag_z),
 	_param_ekf2_gsf_tas_default(_params->EKFGSF_tas_default),
 	
-#if defined(CONFIG_EKF2_LOAD_CELL)
-    	_param_ekf2_load_cell_delay(_params->load_cell_delay),
-    	_param_ekf2_load_cell_noise(_params->load_cell_noise),
-    	_param_ekf2_load_cell_gate(_params->load_cell_gate),
-    	_param_ekf2_load_cell_ctrl(_params->load_cell_ctrl),
-    	_param_ekf2_load_cell_pos_x(_params->load_cell_pos_x),
-    	_param_ekf2_load_cell_pos_y(_params->load_cell_pos_y),
-    	_param_ekf2_load_cell_pos_z(_params->load_cell_pos_z),
-    	_param_ekf2_load_cell_scale(_params->load_cell_scale)
+	#if defined(CONFIG_EKF2_LOAD_CELL)
+	_param_ekf2_load_cell_delay(_params->load_cell_delay),
+	_param_ekf2_load_cell_noise(_params->load_cell_noise),
+	_param_ekf2_load_cell_gate(_params->load_cell_gate),
+	_param_ekf2_load_cell_ctrl(_params->load_cell_ctrl),
+	_param_ekf2_load_cell_pos_x(_params->load_cell_pos_x),
+	_param_ekf2_load_cell_pos_y(_params->load_cell_pos_y),
+	_param_ekf2_load_cell_pos_z(_params->load_cell_pos_z),
+	_param_ekf2_load_cell_scale(_params->load_cell_scale)
 #endif //LOAD CELL PARAMETERS
+
 	
 	
 {

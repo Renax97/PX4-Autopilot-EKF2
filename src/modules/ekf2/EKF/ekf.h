@@ -57,13 +57,8 @@
 #if defined(CONFIG_EKF2_LOAD_CELL)
 #include <uORB/uORB.h>
 #include <uORB/Subscription.hpp>
-#include <uORB/topics/actuator_motors.h>
-#include <uORB/topics/actuator_outputs.h>
-#include <uORB/topics/vehicle_angular_velocity.h>
-#include <uORB/topics/vehicle_thrust_setpoint.h>
 #include <deque>
 #endif
-
 
 enum class Likelihood { LOW, MEDIUM, HIGH };
 
@@ -530,20 +525,8 @@ private:
 	void updateVerticalDeadReckoningStatus();
 
 #if defined(CONFIG_EKF2_LOAD_CELL)
-    uORB::Subscription actuator_motors_sub{ORB_ID(actuator_motors)};
-	uORB::Subscription actuator_outputs_sub{ORB_ID(actuator_outputs)};
-	uORB::Subscription vehicle_thrust_setpoint_sub{ORB_ID(vehicle_thrust_setpoint)};
-	uORB::Subscription vehicle_angular_velocity_sub{ORB_ID(vehicle_angular_velocity)};
 	orb_advert_t _wrench_pub{nullptr};
-	std::deque<float> meas_z_buffer; // Buffer circolare per i valori recenti di accel_z
-	int window_size_meas_buffer = 5;
-	std::deque<float> accel_z_buffer; // Buffer circolare per i valori recenti di accel_z
-    int window_size_accel_buffer = 5;
-	std::deque<float> thrust_buffer; // Buffer circolare per ritardare il thrust
-    size_t thrust_delay_steps = 18;
-
 #endif
-
 
 	struct StateResetCounts {
 		uint8_t velNE{0};	///< number of horizontal position reset events (allow to wrap if count exceeds 255)
@@ -621,10 +604,8 @@ private:
 #if defined(CONFIG_EKF2_LOAD_CELL)
 	float _load_innov{0.0f};		
 	float _load_innov_var{0.0f};	
-	//float mea_force_z_filtered = 0.0f; // Valore filtrato della misura
-	//float alpha_load_cell_filter = 0.2f;               // Coefficiente del filtro (0.0 < alpha <= 1.0)
+#endif 
 
-#endif // 
 
 #if defined(CONFIG_EKF2_RANGE_FINDER)
 	estimator_aid_source1d_s _aid_src_rng_hgt{};
@@ -1090,25 +1071,10 @@ private:
 	void stopAuxVelFusion();
 #endif // CONFIG_EKF2_AUXVEL
 
+
 #if defined(CONFIG_EKF2_LOAD_CELL)
 	void controlLoadCellFusion();
-	void fuseLoadCell(const loadCellSample &loadCell_Sample,const float accel_z,const float vel_z_old);
-	void compute_thrust_z();
-	float predict_force_z(float total_thrust);
-	float predict_fz(const float mass, float total_thrust, const float accel_z);
-	void updateMeasBuffer(float mea_force_z_raw); 
-    float filterForceMeas(); 
-	void updateAccelZBuffer(float accel_z); 
-    float filterAccelZ(); 
-	void updateThrustBuffer(float thrust);
-	float getDelayedThrust();
-	float estimate_external_force_z(const float mass, float total_thrust,float dt, float K1, float K2,float &r, float &r_dot, float accel_z);
-	void quaternionToRotationMatrix();
-	void predictAugState(float total_thrust);
-	void predictAugCovariance();
-	Vector3f retrieveAngularVelocity();
 	void updateLoadCell(const loadCellSample &loadCell_Sample);
-	augStateSample augstate;
 #endif
 
 	void checkVerticalAccelerationHealth(const imuSample &imu_delayed);

@@ -92,7 +92,6 @@ list(APPEND EKF_SRCS
 	EKF/zero_velocity_update.cpp
 )
 
-
 if(CONFIG_EKF2_LOAD_CELL)
 	list(APPEND EKF_SRCS EKF/load_cell_control.cpp)
 endif()

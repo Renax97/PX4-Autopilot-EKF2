@@ -394,34 +394,19 @@ protected:
 	RingBuffer<auxVelSample> *_auxvel_buffer{nullptr};
 #endif // CONFIG_EKF2_AUXVEL
 	RingBuffer<systemFlagUpdate> *_system_flag_buffer{nullptr};
-	
-	
+
 #if defined(CONFIG_EKF2_LOAD_CELL)	
 	RingBuffer<loadCellSample> *_load_cell_buffer{nullptr};
-	float prev_state_vel_z{};
-	matrix::SquareMatrix<float, 3> Rk{};
-	matrix::SquareMatrix<float, 3> Rk_prev{};
 	float _loadCell_test_ratio{0.0f};
-	Vector3f prev_augstate_accel{0.0f,0.0f,0.0f};
-	Vector3f prev_augstate_pos{0.0f,0.0f,0.0f};
-	Vector3f prev_augstate_vel{0.0f,0.0f,0.0f};
-	float prev_thrust{};
-	Vector3f ang_vel{};
-	matrix::SquareMatrix<float, 9> P_aug{([]{
-		matrix::SquareMatrix<float, 9> mat;
-		mat.setIdentity();  // Inizializza con la matrice identità
-		mat *= 1.0f;        // Moltiplica ogni valore della diagonale per 0.1
-		return mat;
-	})()};
-
-	float f_z = 0;
-	float mea_force_x_filtered_old = 0;
-	float mea_force_y_filtered_old = 0;
+	Vector3f prev_vel{0.0f,0.0f,0.0f};
+	//float mea_force_x_filtered_old = 0;
+	//float mea_force_y_filtered_old = 0;
 	float mea_force_z_filtered_old = 0;
-	bool contact_already_happened = false;
-	float z_cable = 0;
-
+	float v_parallel_z = 0.0f;
+	bool contact_happened = false;
+	float time_of_contact = 0.0f;
 #endif
+
 
 	uint64_t _time_last_gps_buffer_push{0};
 	uint64_t _time_last_mag_buffer_push{0};

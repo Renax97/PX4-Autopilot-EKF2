@@ -541,9 +541,9 @@
             </cylinder>
         </geometry>
         <material>
-            <ambient>1.0 0.0 0.0 1</ambient>
-            <diffuse>1.0 0.0 0.0 1</diffuse>
-            <specular>1.0 0.0 0.0 1</specular>
+         <ambient>0.5 0.5 0.5 1</ambient>
+	<diffuse>0.5 0.5 0.5 1</diffuse>
+	<specular>0.5 0.5 0.5 1</specular>
         </material>
     </visual>
     <collision name='collision'>
@@ -584,9 +584,9 @@
             </cylinder>
         </geometry>
         <material>
-            <ambient>1.0 0.0 0.0 1</ambient>
-            <diffuse>1.0 0.0 0.0 1</diffuse>
-            <specular>1.0 0.0 0.0 1</specular>
+            <ambient>0.5 0.5 0.5 1</ambient>
+<diffuse>0.5 0.5 0.5 1</diffuse>
+<specular>0.5 0.5 0.5 1</specular>
         </material>
     </visual>
     <collision name='collision'>
@@ -614,6 +614,10 @@
 </joint>
 
 
+
+
+
+
 <link name='arm_link3'>
         <pose>-0.15 0 -0.175 1.5707 1.5707 0</pose>
     <inertial>
@@ -631,9 +635,10 @@
             </box>
         </geometry>
         <material>
-            <ambient>0.0 0.0 1.0 1</ambient>
-            <diffuse>0.0 0.0 1.0 1</diffuse>
-            <specular>0.0 0.0 1.0 1</specular>
+            <ambient>0.0 0.0 0.0 1</ambient>
+	<diffuse>0.0 0.0 0.0 1</diffuse>
+	<specular>0.0 0.0 0.0 1</specular>
+
         </material>
     </visual>
     <collision name='collisionlink3'>
@@ -645,10 +650,10 @@
     </collision>  
     
     
-    <!-->
+   <!-->
      <sensor name="contact_sensor" type="contact">
         <always_on>true</always_on>
-        <update_rate>50</update_rate> 
+        <update_rate>100</update_rate> 
         <contact>
             <collision>collisionlink3</collision>
         </contact>
@@ -657,7 +662,7 @@
             <frameName>arm_link3</frameName>
         </plugin>
     </sensor>
-     <!-->
+    <!-->
      
 </link>
 
@@ -708,11 +713,40 @@
     <sensor name="force_torque_sensor" type="force_torque">
         <pose relative_to="arm_link3">0 0 0 0 0 0</pose> 
         <always_on>true</always_on>
-        <update_rate>250</update_rate>
+        <update_rate>50</update_rate>
         <plugin name="gz::sim::systems::ForceTorque" 
                 filename="/usr/lib/x86_64-linux-gnu/gz-sim-7/plugins/libgz-sim7-forcetorque-system.so"/>
     </sensor>
 </joint>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -741,13 +775,22 @@
 
 
 
-<!--
-      <plugin
+    <plugin
       filename="gz-sim-odometry-publisher-system"
       name="gz::sim::systems::OdometryPublisher">
       <dimensions>3</dimensions>
+      <update_rate>250</update_rate>
+      <odom_publish_frequency>1000</odom_publish_frequency>
     </plugin>
-    <!-->
+    <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>true</publish_link_pose>
+      <publish_collision_pose>false</publish_collision_pose>
+      <publish_visual_pose>false</publish_visual_pose>
+      <publish_nested_model_pose>false</publish_nested_model_pose>
+      </plugin>
+    
 
     <!-->
     <plugin

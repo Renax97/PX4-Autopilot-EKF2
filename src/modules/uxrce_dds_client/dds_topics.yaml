@@ -56,6 +56,9 @@ publications:
   - topic: /fmu/out/estimator_states
     type: px4_msgs::msg::EstimatorStates
     
+  - topic: /fmu/out/estimator_status
+    type: px4_msgs::msg::EstimatorStatus
+    
   - topic: /fmu/out/sensor_accel
     type: px4_msgs::msg::SensorAccel
     

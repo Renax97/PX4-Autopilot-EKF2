@@ -293,8 +293,10 @@ void OutputPredictor::correctOutputStates(const uint64_t time_delayed_us,
 	*/
 
 	// Complementary filter gains
-	const float vel_gain = _dt_correct_states_avg / math::constrain(_vel_tau, _dt_correct_states_avg, 10.f);
+	//const float vel_gain = _dt_correct_states_avg / 0.25f;
+	const float vel_gain = _dt_correct_states_avg / (math::constrain(_vel_tau, _dt_correct_states_avg, 10.f));
 	const float pos_gain = _dt_correct_states_avg / math::constrain(_pos_tau, _dt_correct_states_avg, 10.f);
+	
 
 	// calculate down velocity and position tracking errors
 	const float vert_vel_err = (vel_state(2) - output_vert_delayed.vert_vel);

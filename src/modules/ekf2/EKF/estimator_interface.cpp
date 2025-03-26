@@ -529,6 +529,7 @@ void EstimatorInterface::setDragData(const imuSample &imu)
 #endif // CONFIG_EKF2_DRAG_FUSION
 
 
+
 #if defined(CONFIG_EKF2_LOAD_CELL)
 void EstimatorInterface::setLoadCellData(const loadCellSample &loadCell_Sample)
 {
@@ -548,7 +549,8 @@ void EstimatorInterface::setLoadCellData(const loadCellSample &loadCell_Sample)
     }
 
     const int64_t time_us = loadCell_Sample.time_us
-                - static_cast<int64_t>(_params.load_cell_delay * 1000)
+                //- static_cast<int64_t>(_params.load_cell_delay * 1000)
+		- static_cast<int64_t>(10 * 1000)
                 - static_cast<int64_t>(_dt_ekf_avg * 5e5f);
 
     if (time_us >= static_cast<int64_t>(_load_cell_buffer->get_newest().time_us + _min_obs_interval_us)) {
@@ -563,7 +565,6 @@ void EstimatorInterface::setLoadCellData(const loadCellSample &loadCell_Sample)
     }
 }
 #endif
-
 
 
 

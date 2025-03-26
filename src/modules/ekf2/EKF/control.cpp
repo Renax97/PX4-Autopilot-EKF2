@@ -105,7 +105,6 @@ void Ekf::controlFusionModes(const imuSample &imu_delayed)
 	// control use of observations for aiding
 	controlMagFusion();
 
-
 #if defined(CONFIG_EKF2_OPTICAL_FLOW)
 	controlOpticalFlowFusion(imu_delayed);
 #endif // CONFIG_EKF2_OPTICAL_FLOW

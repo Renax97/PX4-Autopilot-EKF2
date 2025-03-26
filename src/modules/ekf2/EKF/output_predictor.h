@@ -186,7 +186,7 @@ private:
 	matrix::Vector3f _imu_pos_body{};                ///< xyz position of IMU in body frame (m)
 
 	// output complementary filter tuning
-	float _vel_tau{0.25f};                   ///< velocity state correction time constant (1/sec)
+	float _vel_tau{0.5f};                   ///< velocity state correction time constant (1/sec)
 	float _pos_tau{0.25f};                   ///< position state correction time constant (1/sec)
 };
 

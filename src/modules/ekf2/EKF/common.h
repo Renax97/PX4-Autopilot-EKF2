@@ -227,18 +227,6 @@ struct flowSample {
 	uint8_t     quality{};     ///< quality indicator between 0 and 255
 };
 
-
-
-#if defined(CONFIG_EKF2_LOAD_CELL)
-struct loadCellSample {
-	uint64_t    time_us{};     
-	Vector3f    force{}; 
-	Vector3f    torque{};
-	Vector3f    force_var{}; 
-	Vector3f    torque_var{};
-};
-#endif
-
 #if defined(CONFIG_EKF2_EXTERNAL_VISION)
 struct extVisionSample {
 	uint64_t    time_us{};     ///< timestamp of the measurement (uSec)
@@ -254,6 +242,17 @@ struct extVisionSample {
 	int8_t     quality{};     ///< quality indicator between 0 and 100
 };
 #endif // CONFIG_EKF2_EXTERNAL_VISION
+
+
+#if defined(CONFIG_EKF2_LOAD_CELL)
+	struct loadCellSample {
+	uint64_t    time_us{};     
+	Vector3f    force{}; 
+	Vector3f    torque{};
+	Vector3f    force_var{}; 
+	Vector3f    torque_var{};
+};
+#endif
 
 #if defined(CONFIG_EKF2_DRAG_FUSION)
 struct dragSample {
@@ -288,16 +287,6 @@ struct stateSample {
 	Vector3f mag_B{};               ///< magnetometer bias estimate in body frame in gauss
 	Vector2f wind_vel{};            ///< horizontal wind velocity in earth frame in m/s
 };
-
-#if defined(CONFIG_EKF2_LOAD_CELL)
-struct augStateSample {
-	Quatf    aug_quat_nominal{};        ///< quaternion defining the rotation from body to earth frame
-	Vector3f aug_vel{};                 ///< NED velocity in earth frame in m/s
-	Vector3f aug_pos{};                 ///< NED position in earth frame in m
-	Vector3f aug_accel{}; 
-	Vector3f aug_ang_vel{}; 
-};
-#endif
 
 struct parameters {
 
@@ -505,7 +494,6 @@ struct parameters {
 	const float auxvel_noise{0.5f};         ///< minimum observation noise, uses reported noise if greater (m/s)
 	const float auxvel_gate{5.0f};          ///< velocity fusion innovation consistency gate size (STD)
 #endif // CONFIG_EKF2_AUXVEL
-
 
 #if defined(CONFIG_EKF2_LOAD_CELL)
     float load_cell_pos_x{0.0f};   ///< Posizione lungo l'asse X

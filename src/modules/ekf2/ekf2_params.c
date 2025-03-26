@@ -86,7 +86,7 @@ PARAM_DEFINE_FLOAT(EKF2_MAG_DELAY, 0);
  * @reboot_required true
  * @decimal 1
  */
-PARAM_DEFINE_FLOAT(EKF2_BARO_DELAY, 0);
+PARAM_DEFINE_FLOAT(EKF2_BARO_DELAY, 40);
 
 /**
  * GPS measurement delay relative to IMU measurements
@@ -98,7 +98,7 @@ PARAM_DEFINE_FLOAT(EKF2_BARO_DELAY, 0);
  * @reboot_required true
  * @decimal 1
  */
-PARAM_DEFINE_FLOAT(EKF2_GPS_DELAY, 110);
+PARAM_DEFINE_FLOAT(EKF2_GPS_DELAY, 0);
 
 /**
  * Optical flow measurement delay relative to IMU measurements
@@ -285,7 +285,7 @@ PARAM_DEFINE_FLOAT(EKF2_GYR_NOISE, 1.5e-2f);
  * @unit m/s^2
  * @decimal 2
  */
-PARAM_DEFINE_FLOAT(EKF2_ACC_NOISE, 3.5e-1f);
+PARAM_DEFINE_FLOAT(EKF2_ACC_NOISE, 4.5e-1f);
 
 /**
  * Process noise for IMU rate gyro bias prediction.
@@ -654,7 +654,7 @@ PARAM_DEFINE_INT32(EKF2_AID_MASK, 0);
  * @value 3 Vision
  * @reboot_required true
  */
-PARAM_DEFINE_INT32(EKF2_HGT_REF, 1);
+PARAM_DEFINE_INT32(EKF2_HGT_REF, 0);
 
 /**
  * Barometric sensor height aiding

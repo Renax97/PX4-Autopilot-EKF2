@@ -764,8 +764,8 @@ private:
 		
 //INCLUSIONE PARAMETRI CELLA DI CARICO
 #if defined(CONFIG_EKF2_LOAD_CELL)
-        	(ParamExtFloat<px4::params::EKF2_LC_DELAY>) _param_ekf2_load_cell_delay,
-        	(ParamExtFloat<px4::params::EKF2_LC_NOISE>) _param_ekf2_load_cell_noise,
+        (ParamExtFloat<px4::params::EKF2_LC_DELAY>) _param_ekf2_load_cell_delay,
+        (ParamExtFloat<px4::params::EKF2_LC_NOISE>) _param_ekf2_load_cell_noise,
 		(ParamExtFloat<px4::params::EKF2_LC_GATE>) _param_ekf2_load_cell_gate,
 		(ParamExtInt<px4::params::EKF2_LC_CTRL>) _param_ekf2_load_cell_ctrl,
 		(ParamExtFloat<px4::params::EKF2_LC_POS_X>) _param_ekf2_load_cell_pos_x,
